@@ -97,7 +97,7 @@ public class playermovement1 : MonoBehaviour
        anim.SetFloat("magnitude" , Mathf.Abs(horizontalmovement));
        anim.SetBool("jump" , !isgrounded());
 
-       if (horizontalmovement > 0 && facingright)
+       if (horizontalmovement > 0 && !facingright)
        {
            flip();
        }
