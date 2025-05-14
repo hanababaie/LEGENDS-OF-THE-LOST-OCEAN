@@ -93,7 +93,7 @@ public class playermovement2 : MonoBehaviour
            flip();
        }
 
-       if (horizontalmovement < 0 && facingright)
+       if (horizontalmovement < 0 && !facingright)
        {
            flip();
        }
