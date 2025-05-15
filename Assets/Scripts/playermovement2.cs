@@ -26,8 +26,11 @@ public class playermovement2 : MonoBehaviour
     public int maxjump = 2;
     private int jumpremaining;
     
-    // public ParticleSystem underneath;
     
+    
+    
+    private bool isclimbing;
+    public float climbspeed = 5f;
     
     float horizontal;
     
@@ -97,6 +100,12 @@ public class playermovement2 : MonoBehaviour
        {
            flip();
        }
+       
+       if (isclimbing)
+       {
+           float vertical = Input.GetAxis("Vertical");
+           rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
+       }
 
      
     }
@@ -137,7 +146,23 @@ public class playermovement2 : MonoBehaviour
     //hurt and attack and die need anim
 
     
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("latter"))
+        {
+            rb.gravityScale = 0f;
+            isclimbing = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("latter"))
+        {
+            isclimbing = false;
+            rb.gravityScale = 10f;
+        }
+    } 
 
 
    

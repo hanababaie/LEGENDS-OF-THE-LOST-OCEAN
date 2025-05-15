@@ -67,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -81,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -384,7 +384,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tropics_entities (16 x 16)_0: -768234536410337086
+      Tropics_entities (16 x 16)_1: 1278627490152989477
+      Tropics_entities (16 x 16)_10: -7929009622148525126
+      Tropics_entities (16 x 16)_2: -8591564945142080606
+      Tropics_entities (16 x 16)_3: 808587544178781701
+      Tropics_entities (16 x 16)_4: -6144717249680659681
+      Tropics_entities (16 x 16)_5: -8095344990927549359
+      Tropics_entities (16 x 16)_6: 6023601190790498133
+      Tropics_entities (16 x 16)_7: 2214257346866131166
+      Tropics_entities (16 x 16)_8: 4720048639599742247
+      Tropics_entities (16 x 16)_9: 3817733128199561193
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
