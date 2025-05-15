@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: seamovement
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -855298285791758126, guid: 42f1174e3cbd35a4780432e473884b17, type: 3}
+  - {fileID: 6937817954938267909, guid: 3056fe8cea896c64ba881c218f46c05d, type: 3}
+  - {fileID: -6470460504253458178, guid: 409565219de133a418819de1c59372a6, type: 3}
+  - {fileID: -4178046375966092550, guid: ec774fc752e9ede4ab8cf1cd8183ec57, type: 3}
+  - {fileID: 4130640169021434097, guid: 1d06e1c8b3f588b42880a8313510d214, type: 3}
+  - {fileID: 3465286685962602723, guid: 690dccc320244b04ab6a8b70de25ae98, type: 3}
+  m_MinSpeed: 10
+  m_MaxSpeed: 10
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0

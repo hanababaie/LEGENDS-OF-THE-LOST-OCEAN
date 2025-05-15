@@ -33,6 +33,9 @@ public class playermovement1 : MonoBehaviour
     bool isDashing;
     bool canDash = true;
     TrailRenderer trail;
+
+    private bool isclimbing;
+    public float climbspeed = 5f;
     
     private Animator anim;
 
@@ -107,16 +110,19 @@ public class playermovement1 : MonoBehaviour
            flip();
        }
 
-       
+       if (isclimbing)
+       {
+           float vertical = Input.GetAxis("Vertical");
+           rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
+       }
+
+
+
     }
 
     
 
-    private void OnDrawGizmosSelected()
-    {
-       Gizmos.color = Color.green;
-       Gizmos.DrawWireCube(groundCheckpos.position, groundChecksize);
-    }
+    
 
     private bool isgrounded()
     {
@@ -155,6 +161,23 @@ public class playermovement1 : MonoBehaviour
         facingright = !facingright;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("latter"))
+        {
+            rb.gravityScale = 0f;
+            isclimbing = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("latter"))
+        {
+            isclimbing = false;
+            rb.gravityScale = 10f;
+        }
+    }
 
 
 

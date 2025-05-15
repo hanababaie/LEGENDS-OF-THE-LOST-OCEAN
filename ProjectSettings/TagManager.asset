@@ -7,6 +7,8 @@ TagManager:
   - player1
   - player2
   - Ground
+  - obstecle
+  - latter
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Water
   - UI
   - ground
-  - 
+  - background
   - 
   - 
   - 
