@@ -10,9 +10,12 @@ TagManager:
   - obstecle
   - latter
   - water
+<<<<<<< HEAD
   - box
   - key
   - ship
+=======
+>>>>>>> 541bd0ffc254ebd0d786d116c2c4dc164cb93d90
   layers:
   - Default
   - TransparentFX
