@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: status
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 7216363179119990828, guid: 3a773b7f28fae8e4096b8e81782bb06d, type: 3}
+  - {fileID: -3855335942589784336, guid: 9af40af3a98724840a28e83975eeabab, type: 3}
+  - {fileID: 310105688197066079, guid: 298a200b53792824d9ea72b2cb84a07d, type: 3}
+  - {fileID: 4009294888835969255, guid: 8a736f1d65180b8479e7937925c026c9, type: 3}
+  - {fileID: 4070251399995292340, guid: 1c8b6b6772826c84e8ff17566e987be8, type: 3}
+  - {fileID: 5353863813361848326, guid: 42611e742594dfc48b13603a390a8c15, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0

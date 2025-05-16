@@ -9,6 +9,10 @@ TagManager:
   - Ground
   - obstecle
   - latter
+  - water
+  - box
+  - key
+  - ship
   layers:
   - Default
   - TransparentFX
