@@ -3,19 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - player1
-  - player2
-  - Ground
-  - obstecle
-  - latter
-  - water
-<<<<<<< HEAD
-  - box
-  - key
-  - ship
-=======
->>>>>>> 541bd0ffc254ebd0d786d116c2c4dc164cb93d90
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -23,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - ground
-  - background
+  - 
+  - 
   - 
   - 
   - 
