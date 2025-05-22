@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - player2
+  - box
+  - player1
+  - ship
+  - latter
+  - Ground
+  - key
+  - water
+  - obstecle
   layers:
   - Default
   - TransparentFX
@@ -12,8 +21,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
+  - ground
+  - enemylayers
   - 
   - 
   - 
