@@ -59,13 +59,13 @@ public class playermovement2 : MonoBehaviour
         {
             if (context.performed)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpforce);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
                 jumpremaining -= 1;
                 anim.SetBool("jump", true);
             }
             else if (context.canceled)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
                 jumpremaining -= 1;
             }
         }
@@ -75,19 +75,19 @@ public class playermovement2 : MonoBehaviour
     {
         if (isDead) return;
 
-        rb.velocity = new Vector2(horizontalmovement * movespeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
         groundcheck();
 
         anim.SetFloat("speed", Mathf.Abs(horizontalmovement));
         anim.SetBool("jump", !isgrounded());
 
-        if (horizontalmovement > 0 && !facingright) flip();
-        if (horizontalmovement < 0 && facingright) flip();
+        if (horizontalmovement < 0 && !facingright) flip();
+        if (horizontalmovement >  0 && facingright) flip();
 
         if (isclimbing)
         {
             float vertical = Input.GetAxis("Vertical");
-            rb.velocity = new Vector2(rb.velocity.x, vertical * movespeed);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
         }
     }
 
@@ -171,7 +171,7 @@ public class playermovement2 : MonoBehaviour
     {
         isDead = true;
         anim.SetTrigger("die");
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Static; // غیر فعال کردن فیزیک
 
         // اگر بخوای UI یا صحنه restart شه، اون رو هم اینجا اضافه کن

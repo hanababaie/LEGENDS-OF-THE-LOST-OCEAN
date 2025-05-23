@@ -156,7 +156,7 @@ public class playermovement1 : MonoBehaviour
         this.enabled = false;
 
         // توقف حرکت
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
 
         // اختیاری: حذف کلاهبرداری یا فیزیک اضافی
         rb.bodyType = RigidbodyType2D.Static;

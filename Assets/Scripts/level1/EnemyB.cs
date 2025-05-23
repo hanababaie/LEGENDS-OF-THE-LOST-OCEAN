@@ -51,6 +51,6 @@ public class EnemyB : EnemyController
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Vector2 direction = (currentTarget.transform.position - firePoint.position).normalized;
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+        bullet.GetComponent<Rigidbody2D>().linearVelocity = direction * 10f;
     }
 }
