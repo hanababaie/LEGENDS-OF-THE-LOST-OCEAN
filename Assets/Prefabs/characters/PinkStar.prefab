@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8177174315975812427}
   - component: {fileID: 7244628689713483800}
   - component: {fileID: 8317978363609584539}
-  m_Layer: 0
+  - component: {fileID: 3225615428800188433}
+  m_Layer: 8
   m_Name: PinkStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,3 +198,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3225615428800188433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259192393293854567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6e19c33766ddd4f8e9460aad31a318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  detectionRange: 10
+  attackRange: 1.5
+  maxHealth: 3
