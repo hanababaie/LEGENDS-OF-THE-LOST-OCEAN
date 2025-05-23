@@ -45,11 +45,14 @@ public class playermovement1 : MonoBehaviour
     public Transform attackpoint;
     public float attackrange = 1f;
     public LayerMask enemylayers;
+    public int maxHealth = 10;
+    private int currentHealth;
 
     private void Start()
     {
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
+        currentHealth = maxHealth;
         
     }
 
@@ -150,6 +153,13 @@ public class playermovement1 : MonoBehaviour
     public void die()
     {
         anim.SetTrigger("die");
+        this.enabled = false;
+
+        // توقف حرکت
+        rb.velocity = Vector2.zero;
+
+        // اختیاری: حذف کلاهبرداری یا فیزیک اضافی
+        rb.bodyType = RigidbodyType2D.Static;
     }
     
     public void onattack(InputAction.CallbackContext context)
@@ -162,6 +172,7 @@ public class playermovement1 : MonoBehaviour
             Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackpoint.position, attackrange, enemylayers);
             foreach (Collider2D enemy in hitenemies)
             {
+                enemy.GetComponent<EnemyController>()?.TakeDamage(1);
                 Debug.Log("we hit enemy");
             }
         }
@@ -203,6 +214,17 @@ public class playermovement1 : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int amount)
+    {
+        if (currentHealth <= 0) return;
 
+        currentHealth -= amount;
+        hurt();
+
+        if (currentHealth <= 0)
+        {
+            die();
+        }
+    }
 
 }

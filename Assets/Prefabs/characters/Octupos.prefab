@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6753991965834622955}
   - component: {fileID: 6972410089606322778}
   - component: {fileID: 8234718509686417383}
+  - component: {fileID: -4015593521112028087}
   m_Layer: 8
   m_Name: Octupos
   m_TagString: Untagged
@@ -198,7 +199,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6e19c33766ddd4f8e9460aad31a318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  detectionRange: 10
-  attackRange: 1.5
   maxHealth: 3
+--- !u!114 &-4015593521112028087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345854425268234688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3431060553235d64a848d221bae2c749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  shootCooldown: 2
+  detectionRadius: 8
+  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}

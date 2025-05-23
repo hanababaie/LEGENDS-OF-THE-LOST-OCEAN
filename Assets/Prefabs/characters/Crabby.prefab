@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3352919661631136871}
   - component: {fileID: 1631871414432223463}
   - component: {fileID: -166756816769557174}
+  - component: {fileID: -6232130562814489492}
   m_Layer: 8
   m_Name: Crabby
   m_TagString: Untagged
@@ -217,3 +218,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6e19c33766ddd4f8e9460aad31a318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 3
+--- !u!114 &-6232130562814489492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462927768393439212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fab7df0cc332242a35f55163979094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  moveSpeed: 2
+  damageToPlayer: 1
+  patrolDistance: 20
