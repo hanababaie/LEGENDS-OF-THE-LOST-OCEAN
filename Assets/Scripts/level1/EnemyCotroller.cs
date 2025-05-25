@@ -38,8 +38,10 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        GetComponent<lootbag>().spawndropitem(transform.position);
         EnemyManager.instance?.UnregisterEnemy(this);
         Destroy(gameObject);
+        
     }
 
     public void SetHealth(int health)

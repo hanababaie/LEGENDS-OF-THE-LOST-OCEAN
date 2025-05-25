@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 1631871414432223463}
   - component: {fileID: -166756816769557174}
   - component: {fileID: -6232130562814489492}
+  - component: {fileID: -7671797517444705947}
   m_Layer: 8
   m_Name: Crabby
   m_TagString: Untagged
@@ -311,6 +312,23 @@ MonoBehaviour:
   moveSpeed: 2
   damageToPlayer: 1
   patrolDistance: 20
+--- !u!114 &-7671797517444705947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462927768393439212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2b0912281765240a7bc0ce5a404f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropitemprefab: {fileID: 1229844465707745011, guid: dcbe5b7f6dca3cc478880e2df89cf30d, type: 3}
+  lootlist:
+  - {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+  - {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+  - {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
 --- !u!1 &6611109267266722555
 GameObject:
   m_ObjectHideFlags: 0

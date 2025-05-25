@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 6972410089606322778}
   - component: {fileID: 8234718509686417383}
   - component: {fileID: -4015593521112028087}
+  - component: {fileID: 3424988332286589413}
   m_Layer: 8
   m_Name: Octupos
   m_TagString: Untagged
@@ -293,6 +294,23 @@ MonoBehaviour:
   detectionRadius: 8
   bulletPrefab: {fileID: 0}
   firePoint: {fileID: 0}
+--- !u!114 &3424988332286589413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345854425268234688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2b0912281765240a7bc0ce5a404f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropitemprefab: {fileID: 1229844465707745011, guid: dcbe5b7f6dca3cc478880e2df89cf30d, type: 3}
+  lootlist:
+  - {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+  - {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+  - {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
 --- !u!1 &8516796317179766057
 GameObject:
   m_ObjectHideFlags: 0

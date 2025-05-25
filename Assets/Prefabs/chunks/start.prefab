@@ -1406,7 +1406,7 @@ GameObject:
   - component: {fileID: 6140228508197435940}
   - component: {fileID: 619857030562343443}
   - component: {fileID: 4129229668277150003}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: water
   m_TagString: water
   m_Icon: {fileID: 0}
@@ -1674,7 +1674,7 @@ Tilemap:
       - {fileID: 1249374028, guid: 8fa175d0324e4d744b799513d7f30fde, type: 3}
       - {fileID: 1031350162, guid: 8fa175d0324e4d744b799513d7f30fde, type: 3}
       - {fileID: 1716969409, guid: 8fa175d0324e4d744b799513d7f30fde, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -23, y: -7, z: 0}
@@ -2237,7 +2237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7765857096725215544}
   - component: {fileID: 4137801408899450205}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
