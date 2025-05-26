@@ -11,6 +11,11 @@ public class EnemyA : EnemyController
     private float rightX;
     private bool movingRight = true;
     private Animator anim;
+    
+    
+   //دو خط زیر واسه شناسایی پلیر و حمله است
+    public float detectionRange = 5f;
+    private Transform targetPlayer;
 
     void Start()
     {
@@ -22,6 +27,30 @@ public class EnemyA : EnemyController
 
     void Update()
     {
+        FindTargetPlayer();
+
+        if (targetPlayer != null && Vector2.Distance(transform.position, targetPlayer.position) <= detectionRange)
+        {
+            // انیمیشن حمله و حرکت به سمت پلیر
+            anim.SetBool("attack", true);
+            anim.SetBool("isMoving", false);
+
+            Vector3 direction = (targetPlayer.position - transform.position).normalized;
+            transform.position += direction * moveSpeed * Time.deltaTime;
+
+            // چرخش درست به سمت هدف
+            if ((direction.x > 0 && transform.localScale.x < 0) || (direction.x < 0 && transform.localScale.x > 0))
+            {
+                Flip();
+            }
+
+            return; // متوقف کردن گشت‌زنی
+        }
+        else
+        {
+            anim.SetBool("attack", false);
+            anim.SetBool("isMoving", true);
+        }
         anim.SetBool("isMoving", true);
 
         Vector3 pos = transform.position;
@@ -57,15 +86,49 @@ public class EnemyA : EnemyController
         transform.localScale = scale;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("player1"))
+        GameObject other = collision.gameObject;
+    
+        if (other.CompareTag("player1"))
         {
-            collision.GetComponent<playermovement1>()?.TakeDamage(damageToPlayer);
+            other.GetComponent<playermovement1>()?.TakeDamage(damageToPlayer);
         }
-        else if (collision.CompareTag("player2"))
+        else if (other.CompareTag("player2"))
         {
-            collision.GetComponent<playermovement2>()?.TakeDamage(damageToPlayer);
+            other.GetComponent<playermovement2>()?.TakeDamage(damageToPlayer);
         }
     }
+
+    
+    void FindTargetPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("player1");
+        GameObject player2 = GameObject.FindGameObjectWithTag("player2");
+
+        float minDist = Mathf.Infinity;
+        Transform closest = null;
+
+        foreach (GameObject p in players)
+        {
+            float dist = Vector2.Distance(transform.position, p.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = p.transform;
+            }
+        }
+
+        if (player2 != null)
+        {
+            float dist2 = Vector2.Distance(transform.position, player2.transform.position);
+            if (dist2 < minDist)
+            {
+                closest = player2.transform;
+            }
+        }
+
+        targetPlayer = closest;
+    }
+
 }

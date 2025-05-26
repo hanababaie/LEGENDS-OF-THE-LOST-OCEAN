@@ -312,6 +312,7 @@ MonoBehaviour:
   moveSpeed: 2
   damageToPlayer: 1
   patrolDistance: 20
+  detectionRange: 5
 --- !u!114 &-7671797517444705947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 30
   m_TargetDisplay: 0
 --- !u!114 &8582160661665958604
 MonoBehaviour:

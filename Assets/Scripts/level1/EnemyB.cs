@@ -22,6 +22,16 @@ public class EnemyB : EnemyController
         if (currentTarget != null)
         {
             shootTimer += Time.deltaTime;
+            GetComponent<Animator>().SetTrigger("attack");
+            // چرخش به سمت پلیر
+            Vector3 scale = transform.localScale;
+            if ((currentTarget.transform.position.x > transform.position.x && scale.x < 0) ||
+                (currentTarget.transform.position.x < transform.position.x && scale.x > 0))
+            {
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
+
             if (shootTimer >= shootCooldown)
             {
                 Shoot();
@@ -51,6 +61,11 @@ public class EnemyB : EnemyController
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Vector2 direction = (currentTarget.transform.position - firePoint.position).normalized;
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = direction * 10f;
+
+        EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
+        if (bulletScript != null)
+        {
+            bulletScript.SetDirection(direction);
+        }
     }
 }

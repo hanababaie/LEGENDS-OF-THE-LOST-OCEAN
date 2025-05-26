@@ -4,13 +4,14 @@ public class EnemyController : MonoBehaviour
 {
     public int maxHealth = 3;
     private int currentHealth;
+    private Animator anim;
 
     private EnemyHealthUI healthUI;
 
     void Start()
     {
         currentHealth = maxHealth;
-
+        anim = GetComponent<Animator>(); 
         // گرفتن کامپوننت UI سلامت دشمن
         healthUI = GetComponentInChildren<EnemyHealthUI>();
         healthUI?.UpdateHealthBar(1f); // مقدار اولیه: 100٪
@@ -28,7 +29,7 @@ public class EnemyController : MonoBehaviour
             float healthPercent = (float)currentHealth / maxHealth;
             healthUI.UpdateHealthBar(healthPercent);
         }
-
+        anim.SetTrigger("hit");
         // بررسی مرگ
         if (currentHealth <= 0)
         {
@@ -40,6 +41,7 @@ public class EnemyController : MonoBehaviour
     {
         GetComponent<lootbag>().spawndropitem(transform.position);
         EnemyManager.instance?.UnregisterEnemy(this);
+        anim.SetTrigger("die");
         Destroy(gameObject);
         
     }

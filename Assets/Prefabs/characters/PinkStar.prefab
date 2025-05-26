@@ -61,7 +61,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 30
   m_TargetDisplay: 0
 --- !u!114 &3603673212742318539
 MonoBehaviour:
@@ -351,6 +351,7 @@ MonoBehaviour:
   moveSpeed: 2
   damageToPlayer: 1
   patrolDistance: 3
+  detectionRange: 5
 --- !u!114 &-8854365127938326652
 MonoBehaviour:
   m_ObjectHideFlags: 0
