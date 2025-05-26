@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f992cb0be786064491f02756e2b816f, type: 3}
-  m_Name: coins
+  m_Name: morecoins
   m_EditorClassIdentifier: 
-  lootsprite: {fileID: 8351310047346322849, guid: 71c7ddb873acc38498c1b1ad97cbdfde, type: 3}
-  lootname: coin
-  dropchance: 100
+  lootsprite: {fileID: -6992485916031732992, guid: 3e28a45dab21b534db0f4ddc5c512102, type: 3}
+  lootname: Gold
+  dropchance: 70

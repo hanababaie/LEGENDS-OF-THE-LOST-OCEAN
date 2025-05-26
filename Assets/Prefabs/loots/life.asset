@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f992cb0be786064491f02756e2b816f, type: 3}
-  m_Name: coins
+  m_Name: life
   m_EditorClassIdentifier: 
-  lootsprite: {fileID: 8351310047346322849, guid: 71c7ddb873acc38498c1b1ad97cbdfde, type: 3}
-  lootname: coin
-  dropchance: 100
+  lootsprite: {fileID: -277015814135607660, guid: 48c6bb0568c25704a91b57d978b59a2f, type: 3}
+  lootname: New Life
+  dropchance: 30
