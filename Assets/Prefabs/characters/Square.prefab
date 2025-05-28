@@ -175,4 +175,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1d47a859fa1ab47880c063391f39ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemdroped: {fileID: 1229844465707745011}
+  loot: {fileID: 0}
+  itemdrop: {fileID: 1229844465707745011}

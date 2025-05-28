@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8306658892294666355}
   - component: {fileID: 21434218928591820}
   m_Layer: 0
-  m_Name: bullet 1
+  m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363656916886568770}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6955429, y: 0.7184846, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7184846, w: 0.6955429}
   m_LocalPosition: {x: 99.22613, y: 224, z: -1.7795534}
   m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 88.141}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 88.141}
 --- !u!212 &6150062604685619612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 40
+  direction: 1
 --- !u!95 &21434218928591820
 Animator:
   serializedVersion: 7

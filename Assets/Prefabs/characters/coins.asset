@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: coins
   m_EditorClassIdentifier: 
   lootsprite: {fileID: 8351310047346322849, guid: 71c7ddb873acc38498c1b1ad97cbdfde, type: 3}
-  lootname: coin
-  dropchance: 100
+  lootname: coins
+  dropchance: 60

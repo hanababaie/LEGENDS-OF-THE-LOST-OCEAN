@@ -1,7 +1,11 @@
+using System.Threading;
+using System.Text;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class playermovement1 : MonoBehaviour
@@ -10,23 +14,23 @@ public class playermovement1 : MonoBehaviour
     public float horizontalmovement;
     public float movespeed = 20;
     public bool facingright = true;
-    
-    
+
+
     public float jumpforce = 10f;
-    
-    
+
+
     private Vector2 movement;
-    
-    
+
+
     public Transform groundCheckpos;
-    public Vector2 groundChecksize = new Vector2(0.5f , 0.05f);
+    public Vector2 groundChecksize = new Vector2(0.5f, 0.05f);
     public LayerMask ground;
-    
-    
-    
+
+
+
     float horizontal;
-    
-    
+
+
     public float dashspeed = 50f;
     public float dashtime = 0.2f;
     public float dashcoldown = 8f;
@@ -36,29 +40,98 @@ public class playermovement1 : MonoBehaviour
 
     private bool isclimbing;
     public float climbspeed = 5f;
-    
-   
-    
+
+
+
     private Animator anim;
-    
-    
+
+
     public Transform attackpoint;
     public float attackrange = 1f;
     public LayerMask enemylayers;
-    public int maxHealth = 10;
+
+
+    public int maxHealth = 4; //10 is too much
     private int currentHealth;
+
+    public int maxlives = 3;
+
+    public int currentlives;
+    public Image[] lifeimages;
+    public Color activeColor = Color.white;
+    public Color inactiveColor = new Color(1, 1, 1, 0.3f);
+
+    public healthbar bar;
+
+    public int coins = 0;
+    
+    
+    public TextMeshProUGUI cointext;
+    
+    public bool haskey = false;
+    public bool atship = false;
+    public GameObject keyicon;
+
+    bool inwater = false;
+    private float watertime = 0;
+
+    public void addcoin(int value)
+    {
+        coins += value;
+        cointext.text = coins.ToString("000");
+    }
+
+    public void addhealth(int value)
+    {
+        currentHealth += value;
+        bar.Sethealth(currentHealth);
+    }
+
+    public void addlives(int value)
+    {
+        currentlives += value;
+        updatevives();
+    }
+
+    public void addspeed(float value)
+    {
+        speed(value);
+    }
+
+    IEnumerator speed(float value)
+    {
+        movespeed += value;
+        yield return new WaitForSeconds(10);
+        movespeed -= value;
+    }
+    
+    public void addpower(float value)
+    {
+        power(value); 
+    }
+
+    IEnumerator power(float value)
+    {
+        movespeed += value;
+        yield return new WaitForSeconds(10);
+        movespeed -= value;
+    }
 
     private void Start()
     {
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
-        
+        currentlives = maxlives;
+        bar.Setmaxhealth(maxHealth);
+        bar.Sethealth(currentHealth);
+        updatevives();
+
     }
 
     public void onmove(InputAction.CallbackContext context)
     {
-       horizontalmovement = context.ReadValue<Vector2>().x; 
+        horizontalmovement = context.ReadValue<Vector2>().x;
     }
 
     public void onjump(InputAction.CallbackContext context)
@@ -68,7 +141,7 @@ public class playermovement1 : MonoBehaviour
             if (context.performed)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
-                anim.SetBool("jump" , true);
+                anim.SetBool("jump", true);
             }
             else if (context.canceled)
             {
@@ -100,39 +173,49 @@ public class playermovement1 : MonoBehaviour
     //     canDash = false;
     //     isDashing = true;
     // }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-       rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y); 
-       
-       anim.SetFloat("magnitude" , Mathf.Abs(horizontalmovement));
-       anim.SetBool("jump" , !isgrounded());
+        rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
 
-       if (horizontalmovement > 0 && !facingright)
-       {
-           flip();
-       }
+        anim.SetFloat("magnitude", Mathf.Abs(horizontalmovement));
+        anim.SetBool("jump", !isgrounded());
 
-       if (horizontalmovement < 0 && facingright)
-       {
-           flip();
-       }
+        if (horizontalmovement > 0 && !facingright)
+        {
+            flip();
+        }
 
-       if (isclimbing)
-       {
-           float vertical = Input.GetAxis("Vertical");
-           rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
-       }
+        if (horizontalmovement < 0 && facingright)
+        {
+            flip();
+        }
+
+        if (isclimbing)
+        {
+            float vertical = Input.GetAxis("Vertical");
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
+        }
+        if (inwater)
+        {
+            watertime += Time.deltaTime;
+
+            if (watertime >= 5)
+            {
+                TakeDamage(1);
+                watertime = 0;
+            }
+        }
 
 
 
     }
 
-    
 
-    
+
+
 
     private bool isgrounded()
     {
@@ -161,7 +244,7 @@ public class playermovement1 : MonoBehaviour
         // اختیاری: حذف کلاهبرداری یا فیزیک اضافی
         rb.bodyType = RigidbodyType2D.Static;
     }
-    
+
     public void onattack(InputAction.CallbackContext context)
     {
         Debug.Log("Attack Input Received");
@@ -203,8 +286,25 @@ public class playermovement1 : MonoBehaviour
             rb.gravityScale = 0f;
             isclimbing = true;
         }
+        if (collision.CompareTag("water"))
+        {
+            inwater = true;
+            watertime = 0;
+        }
+        if (collision.CompareTag("key"))
+                 {
+                     haskey = true;
+                    keyicon.SetActive(true);
+                     Destroy(collision.gameObject);
+                 }
+        
+                 if (collision.CompareTag("ship"))
+                 {
+                     atship = true;
+                     sencemanager.Instance.ready();
+                 }
     }
-
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("latter"))
@@ -212,6 +312,13 @@ public class playermovement1 : MonoBehaviour
             isclimbing = false;
             rb.gravityScale = 10f;
         }
+
+        if (collision.CompareTag("water"))
+        {
+            inwater = false;
+            watertime = 0;
+        }
+       
     }
 
     public void TakeDamage(int amount)
@@ -219,12 +326,40 @@ public class playermovement1 : MonoBehaviour
         if (currentHealth <= 0) return;
 
         currentHealth -= amount;
+        bar.Sethealth(currentHealth);
         hurt();
 
         if (currentHealth <= 0)
         {
-            die();
+            currentlives -= 1;
+            updatevives();
+            if (currentlives <= 0)
+            {
+                die();
+            }
+            else
+            {
+                currentHealth = maxHealth;
+                bar.Sethealth(currentHealth);
+            }
+        }
+
+    }
+    
+    private void updatevives()
+{
+    for (int i = 0; i < lifeimages.Length; i++)
+    {
+        if (i < currentlives)
+        {
+            lifeimages[i].color = activeColor; 
+        }
+        else
+        {
+            lifeimages[i].color = inactiveColor; 
         }
     }
+}
+ 
 
 }

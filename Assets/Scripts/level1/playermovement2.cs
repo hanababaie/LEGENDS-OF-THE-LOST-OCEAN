@@ -1,7 +1,10 @@
+using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class playermovement2 : MonoBehaviour
 {
@@ -31,18 +34,90 @@ public class playermovement2 : MonoBehaviour
     TrailRenderer trail;
 
     public GameObject bulletref;
+    public Transform FirePoint;
 
     private Animator anim;
     public int maxHealth = 5;
     private int currentHealth;
     private bool isDead = false;
 
+    public healthbar bar;
+
+    public int maxlives = 3;
+    public int currentlives;
+
+    public Image[] lifeimages;
+    public Color activeColor = Color.white;
+    public Color inactiveColor = new Color(1, 1, 1, 0.3f);
+    
+    public int coins = 0;
+    
+    
+    public TextMeshProUGUI cointext;
+
+    private bool inwater;
+    private float watertime;
+
+    public bool haskey = false;
+    public bool atship = false;
+    public GameObject keyicon;
+
+
+    public void addcoin(int value)
+    {
+        coins += value;
+        cointext.text = coins.ToString("000");
+    }
+
+    public void addhealth(int value)
+    {
+        currentHealth += value;
+        bar.Sethealth(currentHealth);
+    }
+
+    public void addlives(int value)
+    {
+        currentlives += value;
+        updatelives();
+    }
+
+    public void addspeed(float value)
+    {
+        speed(value);
+    }
+
+    IEnumerator speed(float value)
+    {
+        movespeed += value;
+        yield return new WaitForSeconds(10);
+        movespeed -= value;
+    }
+
+    public void addpower(float value)
+    {
+      power(value); 
+    }
+
+    IEnumerator power(float value)
+    {
+        movespeed += value;
+        yield return new WaitForSeconds(10);
+        movespeed -= value;
+    }
+    
+
+
     private void Start()
     {
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
+        
         bulletref = Resources.Load<GameObject>("Bullet");
         currentHealth = maxHealth;
+        bar.Setmaxhealth(maxHealth);
+        bar.Sethealth(currentHealth);
+        currentlives = maxlives;
+        updatelives();
     }
 
     public void onmove(InputAction.CallbackContext context)
@@ -125,6 +200,25 @@ public class playermovement2 : MonoBehaviour
             rb.gravityScale = 0f;
             isclimbing = true;
         }
+        if (collision.CompareTag("water"))
+        {
+            inwater = true;
+            watertime = 0;
+        }
+        if (collision.CompareTag("key"))
+            {
+                     haskey = true;
+                     keyicon.SetActive(true);
+                     Destroy(collision.gameObject);
+            }
+
+        if (collision.CompareTag("ship"))
+        {
+            atship = true;
+            sencemanager.Instance.ready();  
+        }
+
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -134,32 +228,79 @@ public class playermovement2 : MonoBehaviour
             isclimbing = false;
             rb.gravityScale = 10f;
         }
+
+        if (collision.CompareTag("water"))
+        {
+            inwater = false;
+            watertime = 0;
+        }
+
+        
     }
 
     public void onattack(InputAction.CallbackContext context)
+{
+    if (context.performed)
     {
-        if (context.performed && !isDead)
-        {
-            anim.SetTrigger("attack");
-            
-            GameObject bullet = Instantiate(bulletref);
-            bullet.transform.position = new Vector3(transform.position.x + (facingright ? 1f : -1f), transform.position.y, transform.position.z);
-            bullet.transform.localScale = new Vector3(facingright ? 1 : -1, 1, 1); // جهت گلوله
-        }
+        anim.SetTrigger("attack");
+
+        // Instantiate bullet at fire point
+        GameObject bullet = Instantiate(bulletref, FirePoint.position, Quaternion.identity);
+        
+        // Set direction based on player scale
+        float direction = transform.localScale.x >= 0 ? 1f : -1f;
+
+        // Set direction value in bullet script
+        bullet.GetComponent<bullet>().direction = direction;
+
+        // Flip bullet sprite if needed
+        Vector3 bulletScale = bullet.transform.localScale;
+        bulletScale.x = Mathf.Abs(bulletScale.x) * direction;
+        bullet.transform.localScale = bulletScale;
+
+        // Prevent collision with player
+        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
+}
+
 
     public void TakeDamage(int amount)
     {
         if (isDead) return;
 
         currentHealth -= amount;
+        bar.Sethealth(currentHealth);
         hurt();
 
         if (currentHealth <= 0)
         {
-            die();
+            currentlives--;
+            updatelives();
+            if (currentlives <= 0)
+            {
+                die();
+            }
+            else
+            {
+                currentHealth = maxHealth;
+                bar.Sethealth(currentHealth);
+            }
         }
     }
+    private void updatelives()
+{
+    for (int i = 0; i < lifeimages.Length; i++)
+    {
+        if (i < currentlives)
+        {
+            lifeimages[i].color = activeColor; // جون داره، رنگ روشن
+        }
+        else
+        {
+            lifeimages[i].color = inactiveColor; // جون از دست رفته، رنگ کمرنگ
+        }
+    }
+}
 
     private void hurt()
     {

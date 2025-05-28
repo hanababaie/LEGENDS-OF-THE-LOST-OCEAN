@@ -1,23 +1,18 @@
-using UnityEditor.Timeline.Actions;
-using UnityEngine;
 
+using UnityEngine;
 public class bullet : MonoBehaviour
 {
     public float bulletSpeed = 20f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float direction = 1f;
     private Rigidbody2D rb;
-    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Invoke("destroy" , 1f);
-        
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        rb.linearVelocity = new Vector2(bulletSpeed, 0);
+        rb.linearVelocity = new Vector2(bulletSpeed * direction, 0f);
+        float angle = direction > 0 ? -90f : 90f;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle); 
+        Invoke("destroy", 2f);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -33,3 +28,4 @@ public class bullet : MonoBehaviour
         Destroy(gameObject);
     }
 }
+

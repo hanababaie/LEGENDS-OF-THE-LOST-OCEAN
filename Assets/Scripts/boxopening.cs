@@ -51,10 +51,10 @@ public class boxopening : MonoBehaviour
         
         if (item == null)
         {
-            Debug.LogWarning("هیچ آیتمی انتخاب نشد! احتمالاً dropchanceها تنظیم نیستن.");
+          ;
             yield break;
         }
-        
+       
         boxUI.SetActive(true);
        
         Imagebox.sprite = item.lootsprite;
