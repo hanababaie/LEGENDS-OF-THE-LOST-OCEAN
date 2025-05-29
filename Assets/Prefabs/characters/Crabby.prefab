@@ -314,7 +314,7 @@ MonoBehaviour:
   damage: 1
   speed: 2
   patrolRange: 5
-  maxHealth: 100
+  maxHealth: 5
   healthUI: {fileID: 4697028481448666792}
 --- !u!1 &6611109267266722555
 GameObject:

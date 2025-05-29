@@ -6,7 +6,7 @@ public class Enemypatrolling : MonoBehaviour
     public float speed = 2f;
     public float patrolRange = 5f;
 
-    public int maxHealth = 100;
+    public int maxHealth = 5;
     private int currentHealth;
 
     public EnemyHealthUI healthUI; // ریفرنس به UI سلامت
@@ -71,7 +71,7 @@ public class Enemypatrolling : MonoBehaviour
             if (pm1 != null)
             {
                 pm1.TakeDamage(damage);
-                TakeDamage(25); // مثال: با هر برخورد 25 تا از جانش کم شود
+              
                 return;
             }
 
@@ -79,7 +79,7 @@ public class Enemypatrolling : MonoBehaviour
             if (pm2 != null)
             {
                 pm2.TakeDamage(damage);
-                TakeDamage(25);
+             
             }
         }
     }
