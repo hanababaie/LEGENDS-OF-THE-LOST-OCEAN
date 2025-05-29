@@ -311,9 +311,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34d5e5ade6ae52419d3ed30431bc442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth1: {fileID: 0}
-  playerHealth2: {fileID: 0}
   damage: 1
+  speed: 2
+  patrolRange: 5
+  maxHealth: 100
+  healthUI: {fileID: 4697028481448666792}
 --- !u!1 &6611109267266722555
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,17 +6,30 @@ public class Enemypatrolling : MonoBehaviour
     public float speed = 2f;
     public float patrolRange = 5f;
 
+    public int maxHealth = 100;
+    private int currentHealth;
+
+    public EnemyHealthUI healthUI; // ریفرنس به UI سلامت
+    private Animator animator;
+
     private Vector2 startPoint;
     private bool movingRight = true;
+    private bool isDead = false;
 
     void Start()
     {
         startPoint = transform.position;
+        currentHealth = maxHealth;
+
+        animator = GetComponent<Animator>();
+        if (healthUI != null)
+            healthUI.UpdateHealthBar(1f);
     }
 
     void Update()
     {
-        Patrol();
+        if (!isDead)
+            Patrol();
     }
 
     void Patrol()
@@ -50,12 +63,15 @@ public class Enemypatrolling : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (isDead) return;
+
         if (collision.gameObject.CompareTag("Player"))
         {
             playermovement1 pm1 = collision.gameObject.GetComponent<playermovement1>();
             if (pm1 != null)
             {
                 pm1.TakeDamage(damage);
+                TakeDamage(25); // مثال: با هر برخورد 25 تا از جانش کم شود
                 return;
             }
 
@@ -63,7 +79,36 @@ public class Enemypatrolling : MonoBehaviour
             if (pm2 != null)
             {
                 pm2.TakeDamage(damage);
+                TakeDamage(25);
             }
         }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        if (isDead) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (healthUI != null)
+            healthUI.UpdateHealthBar((float)currentHealth / maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        if (animator != null)
+        {
+            animator.SetTrigger("die");
+        }
+
+        // بعد از چند ثانیه نابود شود
+        Destroy(gameObject, 1.5f);
     }
 }
