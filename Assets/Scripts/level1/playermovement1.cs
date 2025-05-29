@@ -52,7 +52,7 @@ public class playermovement1 : MonoBehaviour
 
 
     public int maxHealth = 4; //10 is too much
-    private int currentHealth;
+    public int currentHealth;
 
     public int maxlives = 3;
 

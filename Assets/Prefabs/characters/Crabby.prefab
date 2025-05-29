@@ -88,9 +88,8 @@ GameObject:
   - component: {fileID: 4739789274906282919}
   - component: {fileID: 3352919661631136871}
   - component: {fileID: 1631871414432223463}
-  - component: {fileID: -166756816769557174}
-  - component: {fileID: -6232130562814489492}
   - component: {fileID: -7671797517444705947}
+  - component: {fileID: -9025119241697237848}
   m_Layer: 8
   m_Name: Crabby
   m_TagString: Untagged
@@ -283,36 +282,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-166756816769557174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462927768393439212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6e19c33766ddd4f8e9460aad31a318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
---- !u!114 &-6232130562814489492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462927768393439212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47fab7df0cc332242a35f55163979094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  moveSpeed: 2
-  damageToPlayer: 1
-  patrolDistance: 20
-  detectionRange: 5
 --- !u!114 &-7671797517444705947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +299,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
   - {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
   - {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
+--- !u!114 &-9025119241697237848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462927768393439212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34d5e5ade6ae52419d3ed30431bc442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth1: {fileID: 0}
+  playerHealth2: {fileID: 0}
+  damage: 1
 --- !u!1 &6611109267266722555
 GameObject:
   m_ObjectHideFlags: 0

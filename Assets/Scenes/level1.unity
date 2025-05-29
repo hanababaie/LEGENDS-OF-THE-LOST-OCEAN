@@ -7495,6 +7495,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1096207205}
     - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: currentHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: enemylayers.m_Bits
       value: 256
       objectReference: {fileID: 0}

@@ -134,9 +134,8 @@ GameObject:
   - component: {fileID: 8177174315975812427}
   - component: {fileID: 7244628689713483800}
   - component: {fileID: 8317978363609584539}
-  - component: {fileID: 3225615428800188433}
-  - component: {fileID: -5701750817301920400}
   - component: {fileID: -8854365127938326652}
+  - component: {fileID: 1639955933288117261}
   m_Layer: 8
   m_Name: PinkStar
   m_TagString: Untagged
@@ -322,36 +321,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3225615428800188433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2259192393293854567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6e19c33766ddd4f8e9460aad31a318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
---- !u!114 &-5701750817301920400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2259192393293854567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47fab7df0cc332242a35f55163979094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  moveSpeed: 2
-  damageToPlayer: 1
-  patrolDistance: 3
-  detectionRange: 5
 --- !u!114 &-8854365127938326652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +338,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
   - {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
   - {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
+--- !u!114 &1639955933288117261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259192393293854567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34d5e5ade6ae52419d3ed30431bc442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
+  damage: 1
 --- !u!1 &4493995519090382800
 GameObject:
   m_ObjectHideFlags: 0
