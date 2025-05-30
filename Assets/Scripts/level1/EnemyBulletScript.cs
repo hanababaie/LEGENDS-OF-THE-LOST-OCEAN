@@ -9,7 +9,7 @@ public class EnemyBulletScript : MonoBehaviour
     public void SetDirection(Vector2 dir)
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = dir.normalized * force;
+        rb.linearVelocity = dir.normalized * force;
 
         float rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot);
