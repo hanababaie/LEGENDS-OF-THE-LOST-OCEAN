@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 6510895187457474520}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.193, y: -0.042, z: 3.759068}
+  m_LocalPosition: {x: -0.193, y: -0.0359, z: 3.759068}
   m_LocalScale: {x: 0.01388889, y: 0.013157894, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,10 +118,9 @@ GameObject:
   - component: {fileID: 1969931052344681817}
   - component: {fileID: 6753991965834622955}
   - component: {fileID: 6972410089606322778}
-  - component: {fileID: 8234718509686417383}
-  - component: {fileID: -4015593521112028087}
   - component: {fileID: 3424988332286589413}
   - component: {fileID: -3960596857840701372}
+  - component: {fileID: 3571309658033904082}
   m_Layer: 8
   m_Name: Seashell
   m_TagString: enemy
@@ -189,7 +188,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 70
   m_Sprite: {fileID: -855298285791758126, guid: 784314434d0d4d3499c02d41e8100726, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -209,7 +208,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7345854425268234688}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -250,36 +249,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8234718509686417383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7345854425268234688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6e19c33766ddd4f8e9460aad31a318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
---- !u!114 &-4015593521112028087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7345854425268234688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3431060553235d64a848d221bae2c749, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  shootCooldown: 2
-  detectionRadius: 8
-  bulletPrefab: {fileID: 7664240046129986066, guid: ccae98a50ce877a4abc4a35ae541440a, type: 3}
-  firePoint: {fileID: 4808831934172152275}
 --- !u!114 &3424988332286589413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +320,22 @@ PolygonCollider2D:
       - {x: 0.17, y: 0.07}
       - {x: 0.13, y: 0.11}
   m_UseDelaunayMesh: 0
+--- !u!114 &3571309658033904082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345854425268234688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e9c39066c01944e97654cd63229b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  bullet: {fileID: 7664240046129986066, guid: ccae98a50ce877a4abc4a35ae541440a, type: 3}
+  bulletPos: {fileID: 4808831934172152275}
+  healthUI: {fileID: 3785451189252603342}
 --- !u!1 &8516796317179766057
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +397,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 70
   m_TargetDisplay: 0
 --- !u!114 &3261368927872162229
 MonoBehaviour:

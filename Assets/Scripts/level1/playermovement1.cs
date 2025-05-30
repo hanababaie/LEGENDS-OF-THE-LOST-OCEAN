@@ -256,6 +256,7 @@ public class playermovement1 : MonoBehaviour
             foreach (Collider2D enemy in hitenemies)
             {
                 enemy.GetComponent<Enemypatrolling>()?.TakeDamage(1);
+                enemy.GetComponent<EnemyShooting>()?.TakeDamage(1);
                 Debug.Log("we hit enemy");
             }
         }

@@ -20,10 +20,14 @@ public class bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("enemy"))
         {
             
-            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-            if (enemy != null)
+            EnemyShooting  enemy= collision.gameObject.GetComponent<EnemyShooting>();
+            Enemypatrolling enemyp = collision.gameObject.GetComponent<Enemypatrolling>();
+            
+            
+            if (enemy != null && enemyp.isActiveAndEnabled)
             {
                 enemy.TakeDamage(2);
+                enemyp.TakeDamage(2);
             }
             destroy();
         }

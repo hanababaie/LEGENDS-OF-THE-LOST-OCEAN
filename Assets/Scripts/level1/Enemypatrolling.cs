@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemypatrolling : MonoBehaviour
 {
-    public int damage = 1;
+    public int damage = 5;
     public float speed = 2f;
     public float patrolRange = 5f;
 
@@ -72,7 +72,7 @@ public class Enemypatrolling : MonoBehaviour
             {
                 pm1.TakeDamage(damage);
               
-                return;
+                
             }
 
             playermovement2 pm2 = collision.gameObject.GetComponent<playermovement2>();
