@@ -303,6 +303,11 @@ public class playermovement1 : MonoBehaviour
                      atship = true;
                      sencemanager.Instance.ready();
                  }
+
+                 if (collision.CompareTag("obstecle"))
+                 {
+                     TakeDamage(1);
+                 }
     }
     
     private void OnTriggerExit2D(Collider2D collision)

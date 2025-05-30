@@ -8,6 +8,8 @@ public class sencemanager : MonoBehaviour
     public playermovement1 player1;
     public playermovement2 player2;
 
+    private bool isGameOver = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -16,9 +18,16 @@ public class sencemanager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void Update()
+    private void Update()
     {
+        if (isGameOver) return;
+
         ready();
+
+        if (player1.currentlives <= 0 || player2.currentlives <= 0)
+        {
+            GameOver();
+        }
     }
 
     public void ready()
@@ -29,9 +38,19 @@ public class sencemanager : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        if (isGameOver) return;
+
+        isGameOver = true;
+
+        Debug.Log("Game Over!");
+
+        SceneManager.LoadScene("gameover"); 
+    }
+
     public void LoadNextLevel()
     {
-        
         SceneManager.LoadScene("level2");
     }
 }

@@ -217,6 +217,11 @@ public class playermovement2 : MonoBehaviour
             atship = true;
             sencemanager.Instance.ready();  
         }
+        
+        if (collision.CompareTag("obstecle"))
+        {
+            TakeDamage(1);
+        }
 
         
     }

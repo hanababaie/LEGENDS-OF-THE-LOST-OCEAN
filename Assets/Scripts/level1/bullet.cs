@@ -17,7 +17,17 @@ public class bullet : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("ground") || collision.gameObject.CompareTag("enemy"))
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            
+            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(2);
+            }
+            destroy();
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
         {
             destroy();
         }

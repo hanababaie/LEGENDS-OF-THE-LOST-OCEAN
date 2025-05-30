@@ -14,6 +14,7 @@ TagManager:
   - water
   - obstecle
   - EnemySpawn
+  - enemy
   layers:
   - Default
   - TransparentFX

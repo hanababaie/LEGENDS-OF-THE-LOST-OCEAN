@@ -20,6 +20,8 @@ public class boxopening : MonoBehaviour
     private Image Imagebox;
     private TextMeshProUGUI Textbox;
 
+    public GameObject player;
+
     public void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -33,6 +35,7 @@ public class boxopening : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isopened)
         {
+            player = other.gameObject;
             isopened = true;
             Debug.Log("opened");
             StartCoroutine(openbox());
@@ -54,21 +57,30 @@ public class boxopening : MonoBehaviour
           ;
             yield break;
         }
-       
+ 
         boxUI.SetActive(true);
        
         Imagebox.sprite = item.lootsprite;
         Textbox.text = item.lootname;
+        
+        GameObject lootObject = new GameObject("TempLoot");
+        var take = lootObject.AddComponent<takingitems>();
+        take.loot = item;
+        take.OnTriggerEnter2D(player.GetComponent<Collider2D>());
+
+        Destroy(lootObject);
+ 
+        
+        
         Debug.Log("item: " + item);
         Debug.Log("Sprite: " + item.lootsprite);
         Debug.Log("Name: " + item.lootname);
 
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(3f);
 
         boxUI.SetActive(false);
-      
-        Destroy(gameObject);
+       Destroy(gameObject); 
     }
 
     lootsystem getrandom()
