@@ -5,19 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a6685d7-e92a-4e57-8c0f-c456ed0e2135" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.main-game-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.main-game-project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk4.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk5.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/chunks/chunk5.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/chunks/finalchunck.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/chunks/finalchunck.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/chunks/start.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/chunks/start.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/Enemypatrolling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/Enemypatrolling.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/PlayerHealthUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/PlayerHealthUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/playermovement1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/playermovement1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/tilemap/tiles.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/tilemap/tiles.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Gemini_Generated_Image_d03xxd03xxd03xxd.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Gemini_Generated_Image_d03xxd03xxd03xxd.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Crabby.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Crabby.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/PinkStar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/PinkStar.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Seashell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Seashell.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Square.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Square.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyBulletScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyBulletScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/background/Gemini_Generated_Image_tcj3zjtcj3zjtcj3.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/background/Gemini_Generated_Image_tcj3zjtcj3zjtcj3.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/backgroundlevel2/Gemini_Generated_Image_d03xxd03xxd03xxd.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/backgroundlevel2/Gemini_Generated_Image_d03xxd03xxd03xxd.jpg.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +109,7 @@
       <workItem from="1748270037739" duration="9113000" />
       <workItem from="1748507829974" duration="688000" />
       <workItem from="1748514625312" duration="2259000" />
+      <workItem from="1748668632486" duration="403000" />
     </task>
     <servers />
   </component>

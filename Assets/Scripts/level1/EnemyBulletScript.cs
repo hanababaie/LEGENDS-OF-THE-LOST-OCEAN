@@ -31,7 +31,7 @@ public class EnemyBulletScript : MonoBehaviour
             var pm1 = collision.GetComponent<playermovement1>();
             if (pm1 != null)
             {
-                pm1.TakeDamage(2);
+                pm1.TakeDamage(1);
                 Destroy(gameObject);
                 return;
             }
@@ -39,7 +39,7 @@ public class EnemyBulletScript : MonoBehaviour
             var pm2 = collision.GetComponent<playermovement2>();
             if (pm2 != null)
             {
-                pm2.TakeDamage(2);
+                pm2.TakeDamage(1);
                 Destroy(gameObject);
             }
         }

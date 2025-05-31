@@ -19,16 +19,18 @@ public class bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
-            
-            EnemyShooting  enemy= collision.gameObject.GetComponent<EnemyShooting>();
-            Enemypatrolling enemyp = collision.gameObject.GetComponent<Enemypatrolling>();
-            
-            
-            if (enemy != null && enemyp.isActiveAndEnabled)
+            EnemyShooting enemy = collision.gameObject.GetComponent<EnemyShooting>();
+            if (enemy != null && enemy.isActiveAndEnabled)
             {
                 enemy.TakeDamage(2);
+            }
+
+            Enemypatrolling enemyp = collision.gameObject.GetComponent<Enemypatrolling>();
+            if (enemyp != null && enemyp.isActiveAndEnabled)
+            {
                 enemyp.TakeDamage(2);
             }
+
             destroy();
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
@@ -36,6 +38,7 @@ public class bullet : MonoBehaviour
             destroy();
         }
     }
+
 
     public void destroy()
     {
