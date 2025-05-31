@@ -28,8 +28,16 @@ public class Enemypatrolling : MonoBehaviour
 
     void Update()
     {
-        if (!isDead)
+        if (!isDead){
             Patrol();
+        if (animator != null)
+            animator.SetBool("isMoving", true);
+    }
+    else
+    {
+        if (animator != null)
+            animator.SetBool("isMoving", false);
+    }
     }
 
     void Patrol()
@@ -93,6 +101,10 @@ public class Enemypatrolling : MonoBehaviour
 
         if (healthUI != null)
             healthUI.UpdateHealthBar((float)currentHealth / maxHealth);
+        if (animator != null)
+        {
+            animator.SetTrigger("hit");
+        }
 
         if (currentHealth <= 0)
         {
@@ -102,8 +114,6 @@ public class Enemypatrolling : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("spawn");
-        GetComponent<lootbag>().spawndropitem(transform.position);
         isDead = true;
         if (animator != null)
         {
