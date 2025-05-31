@@ -39,10 +39,11 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        Debug.Log("Die called"); 
         GetComponent<lootbag>().spawndropitem(transform.position);
         EnemyManager.instance?.UnregisterEnemy(this);
         anim.SetTrigger("die");
-        Destroy(gameObject);
+       
         
     }
 

@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 
 public class playermovement1 : MonoBehaviour
 {
+    public GameObject boxUI;
     public Rigidbody2D rb;
     public float horizontalmovement;
     public float movespeed = 20;
@@ -31,12 +32,13 @@ public class playermovement1 : MonoBehaviour
     float horizontal;
 
 
-    public float dashspeed = 50f;
+    public float dashspeed = 100f;
     public float dashtime = 0.2f;
-    public float dashcoldown = 8f;
-    bool isDashing;
-    bool canDash = true;
+    public float dashcoldown = 10f;
+    public bool isDashing;
+    public bool canDash = true;
     TrailRenderer trail;
+    public GameObject dashicon;
 
     private bool isclimbing;
     public float climbspeed = 5f;
@@ -51,7 +53,7 @@ public class playermovement1 : MonoBehaviour
     public LayerMask enemylayers;
 
 
-    public int maxHealth = 4; //10 is too much
+    public int maxHealth = 3; //10 is too much
     public int currentHealth;
 
     public int maxlives = 3;
@@ -75,6 +77,21 @@ public class playermovement1 : MonoBehaviour
     bool inwater = false;
     private float watertime = 0;
 
+    bool cangethurt  = false;
+
+
+    public AudioSource audioSource;
+
+    public AudioClip attackSound;
+
+
+    IEnumerator gettinghurtagain(float duration)
+{
+    cangethurt = true;
+    yield return new WaitForSeconds(duration);
+    cangethurt = false;
+}
+
     public void addcoin(int value)
     {
         coins += value;
@@ -83,14 +100,20 @@ public class playermovement1 : MonoBehaviour
 
     public void addhealth(int value)
     {
-        currentHealth += value;
-        bar.Sethealth(currentHealth);
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += value;
+            bar.Sethealth(currentHealth);
+        }
     }
 
     public void addlives(int value)
     {
-        currentlives += value;
-        updatevives();
+        if (currentlives < maxlives)
+        {
+            currentlives += value;
+            updatevives();
+        }
     }
 
     public void addspeed(float value)
@@ -112,9 +135,9 @@ public class playermovement1 : MonoBehaviour
 
     IEnumerator power(float value)
     {
-        movespeed += value;
+        jumpforce += value;
         yield return new WaitForSeconds(10);
-        movespeed -= value;
+        jumpforce -= value;
     }
 
     private void Start()
@@ -150,36 +173,55 @@ public class playermovement1 : MonoBehaviour
         }
     }
 
-    // public IEnumerable<WaitForSeconds> onDash(InputAction.CallbackContext context)
-    // {
-    //     if (context.performed && canDash)
-    //     {
-    //         StartCoroutine(dashcourotine());
-    //     } 
-    //     trail.emitting = true;
-    //     float dashdirction = 1; 
-    //     rb.linearVelocity = new Vector2(dashdirction * dashspeed, rb.linearVelocity.y);
-    //     yield return new WaitForSeconds(dashtime);
-    //     rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-    //     isDashing = false;
-    //     trail.emitting = false;
-    //     
-    //     yield return new WaitForSeconds(dashcoldown);
-    //     canDash = true;
-    // }
-    //
-    // private IEnumerator dashcourotine()
-    // {
-    //     canDash = false;
-    //     isDashing = true;
-    // }
+
+    public void ondash(InputAction.CallbackContext context)
+    {
+        if (context.performed && canDash)
+        {
+            StartCoroutine("dashroutine");
+        }
+    }
 
 
-    // Update is called once per frame
+    public IEnumerator dashroutine()
+    {
+      
+    canDash = false;
+    isDashing = true;
+    trail.emitting = true;
+
+    float grav = rb.gravityScale;
+    rb.gravityScale = 0f;
+    Debug.Log(rb.linearVelocity);
+    float dashdirection = facingright ? 1f : -1f;
+    rb.linearVelocity= new Vector2(dashdirection * dashspeed, 0f);
+        Debug.Log(rb.linearVelocity);
+
+    yield return new WaitForSeconds(dashtime);
+        Debug.Log(rb.linearVelocity);
+
+    rb.linearVelocity= Vector2.zero;
+    trail.emitting = false;
+    rb.gravityScale = grav;
+    isDashing = false;
+
+    yield return new WaitForSeconds(dashcoldown);
+    canDash = true;
+}
+
+    
     void Update()
     {
+        if(!isDashing)
         rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
-
+        if(canDash)
+        {
+            dashicon.SetActive(true);
+        }
+        if (!canDash)
+        {
+            dashicon.SetActive(false);
+        }
         anim.SetFloat("magnitude", Mathf.Abs(horizontalmovement));
         anim.SetBool("jump", !isgrounded());
 
@@ -259,7 +301,9 @@ public class playermovement1 : MonoBehaviour
                 enemy.GetComponent<EnemyShooting>()?.TakeDamage(1);
                 Debug.Log("we hit enemy");
             }
+            audioSource.PlayOneShot(attackSound);
         }
+        
 
     }
     public void OnDrawGizmosSelected()
@@ -349,6 +393,11 @@ public class playermovement1 : MonoBehaviour
                 bar.Sethealth(currentHealth);
             }
         }
+
+        if (cangethurt) return;
+        StartCoroutine(gettinghurtagain(0.5f)); // for 0.5sec it canr get hurt again
+    
+
 
     }
     

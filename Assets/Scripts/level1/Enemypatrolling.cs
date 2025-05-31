@@ -102,6 +102,8 @@ public class Enemypatrolling : MonoBehaviour
 
     void Die()
     {
+        Debug.Log("spawn");
+        GetComponent<lootbag>().spawndropitem(transform.position);
         isDead = true;
         if (animator != null)
         {

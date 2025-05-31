@@ -83,6 +83,7 @@ public class EnemyShooting : MonoBehaviour
 
     void Die()
     {
+        GetComponent<lootbag>().spawndropitem(transform.position);
         isDead = true;
         if (animator != null)
         {

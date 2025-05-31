@@ -1,92 +1,120 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
-
 
 public class boxopening : MonoBehaviour
 {
     public List<lootsystem> items;
-    Animator animator;
+    private Animator animator;
 
-    private bool isopened = false;
+    private bool isOpened = false;
+    private bool isBoxUIActive = false;
 
-    public GameObject boxUI;
-  
-    private Image Imagebox;
-    private TextMeshProUGUI Textbox;
+    private GameObject player;
 
-    public GameObject player;
+    private GameObject boxUI;
+    private Image imageBox;
+    private TextMeshProUGUI textBox;
 
     public void Start()
     {
-        animator = gameObject.GetComponent<Animator>();
-        
-        
-        Imagebox =boxUI.transform.Find("Image").GetComponent<Image>();
-        Textbox = boxUI.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-        boxUI.SetActive(false);
+        animator = GetComponent<Animator>();
     }
-    public void OnTriggerEnter2D(Collider2D other)
+
+    void Update()
     {
-        if (other.CompareTag("Player") && !isopened)
+        if (isBoxUIActive && Input.GetKeyDown(KeyCode.Escape))
         {
-            player = other.gameObject;
-            isopened = true;
-            Debug.Log("opened");
-            StartCoroutine(openbox());
-            
+            CloseBoxUI();
         }
     }
 
-    IEnumerator openbox()
+    public void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Player") && !isOpened)
+        {
+            player = other.gameObject;
+            isOpened = true;
+            Debug.Log("Box opened!");
 
+            StartCoroutine(OpenBox());
+        }
+    }
+
+    IEnumerator OpenBox()
+    {
         animator.SetTrigger("open");
         yield return new WaitForSeconds(1.5f);
 
-
-        lootsystem item = getrandom();
-        
+        lootsystem item = GetRandomItem();
         if (item == null)
         {
-          ;
+            Debug.LogWarning("No item dropped.");
             yield break;
         }
- 
-        boxUI.SetActive(true);
-       
-        Imagebox.sprite = item.lootsprite;
-        Textbox.text = item.lootname;
-        
-        GameObject lootObject = new GameObject("TempLoot");
-        var take = lootObject.AddComponent<takingitems>();
+
+        if (player.TryGetComponent<playermovement1>(out var p1))
+        {
+            boxUI = p1.boxUI;
+        }
+        else if (player.TryGetComponent<playermovement2>(out var p2))
+        {
+            boxUI = p2.boxUI;
+        }
+        else
+        {
+            Debug.LogWarning("No playermovement script found!");
+            yield break;
+        }
+
+        if (boxUI != null)
+        {
+            imageBox = boxUI.transform.Find("Image").GetComponent<Image>();
+            textBox = boxUI.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+
+            boxUI.SetActive(true);
+            imageBox.sprite = item.lootsprite;
+            textBox.text = item.lootname;
+            isBoxUIActive = true;
+        }
+
+        GameObject tempLoot = new GameObject("TempLoot");
+        var take = tempLoot.AddComponent<takingitems>();
         take.loot = item;
         take.OnTriggerEnter2D(player.GetComponent<Collider2D>());
+        Destroy(tempLoot);
 
-        Destroy(lootObject);
- 
-        
-        
-        Debug.Log("item: " + item);
-        Debug.Log("Sprite: " + item.lootsprite);
-        Debug.Log("Name: " + item.lootname);
+        Debug.Log($"Player got: {item.lootname}");
 
+        // صبر تا زمانی که پلیر Escape بزنه یا 3 ثانیه بگذره
+        float timer = 0f;
+        while (timer < 3f && isBoxUIActive)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
 
-        yield return new WaitForSeconds(3f);
+        CloseBoxUI();
 
-        boxUI.SetActive(false);
-       Destroy(gameObject); 
+        Destroy(gameObject);
     }
 
-    lootsystem getrandom()
+    void CloseBoxUI()
     {
-        int random = UnityEngine.Random.Range(1, 101); // 1 to 100
+        if (boxUI != null)
+        {
+            boxUI.SetActive(false);
+        }
+        isBoxUIActive = false;
+    }
+
+    lootsystem GetRandomItem()
+    {
+        int random = Random.Range(1, 101); // 1 to 100
         List<lootsystem> possible = new List<lootsystem>();
+
         foreach (lootsystem item in items)
         {
             if (random <= item.dropchance)
@@ -95,12 +123,8 @@ public class boxopening : MonoBehaviour
             }
         }
 
-        if (possible.Count == 0)
-        {
-            return null;
-        }
-        int index = UnityEngine.Random.Range(0, possible.Count);
-        return possible[index];
+        if (possible.Count == 0) return null;
+
+        return possible[Random.Range(0, possible.Count)];
     }
 }
-

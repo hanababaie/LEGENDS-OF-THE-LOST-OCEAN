@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class playermovement2 : MonoBehaviour
 {
+    public GameObject boxUI;
     public Rigidbody2D rb;
     public float horizontalmovement;
     public float movespeed = 20;
@@ -37,7 +38,7 @@ public class playermovement2 : MonoBehaviour
     public Transform FirePoint;
 
     private Animator anim;
-    public int maxHealth = 5;
+    public int maxHealth = 2;
     private int currentHealth;
     private bool isDead = false;
 
@@ -62,6 +63,10 @@ public class playermovement2 : MonoBehaviour
     public bool atship = false;
     public GameObject keyicon;
 
+    public AudioSource audioSource;
+
+    public AudioClip attackSound;
+
 
     public void addcoin(int value)
     {
@@ -71,14 +76,18 @@ public class playermovement2 : MonoBehaviour
 
     public void addhealth(int value)
     {
-        currentHealth += value;
-        bar.Sethealth(currentHealth);
+        if(currentHealth < maxHealth)
+        { currentHealth += value;
+        bar.Sethealth(currentHealth);}
     }
 
     public void addlives(int value)
     {
-        currentlives += value;
-        updatelives();
+        if (currentHealth < maxlives)
+        {
+            currentlives += value;
+            updatelives();
+        }
     }
 
     public void addspeed(float value)
@@ -244,28 +253,26 @@ public class playermovement2 : MonoBehaviour
     }
 
     public void onattack(InputAction.CallbackContext context)
-{
-    if (context.performed)
     {
-        anim.SetTrigger("attack");
+        if (context.performed)
+        {
+            anim.SetTrigger("attack");
 
-        // Instantiate bullet at fire point
-        GameObject bullet = Instantiate(bulletref, FirePoint.position, Quaternion.identity);
-        
-        // Set direction based on player scale
-        float direction = transform.localScale.x >= 0 ? 1f : -1f;
+            GameObject bullet = Instantiate(bulletref, FirePoint.position, Quaternion.identity);
 
-        // Set direction value in bullet script
-        bullet.GetComponent<bullet>().direction = direction;
 
-        // Flip bullet sprite if needed
-        Vector3 bulletScale = bullet.transform.localScale;
-        bulletScale.x = Mathf.Abs(bulletScale.x) * direction;
-        bullet.transform.localScale = bulletScale;
+            float direction = transform.localScale.x >= 0 ? 1f : -1f;
 
-        // Prevent collision with player
-        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-    }
+            bullet.GetComponent<bullet>().direction = direction;
+
+            Vector3 bulletScale = bullet.transform.localScale;
+            bulletScale.x = Mathf.Abs(bulletScale.x) * direction;
+            bullet.transform.localScale = bulletScale;
+
+            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            audioSource.PlayOneShot(attackSound);
+        }
+    
 }
 
 
