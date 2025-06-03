@@ -15,6 +15,12 @@ TagManager:
   - obstecle
   - EnemySpawn
   - enemy
+  - movingblock
+  - Undefined
+  - bullet
+  - key2
+  - final
+  - finaldoor
   layers:
   - Default
   - TransparentFX

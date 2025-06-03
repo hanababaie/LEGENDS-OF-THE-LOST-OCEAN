@@ -8,8 +8,11 @@ using UnityEngine.UI;
 
 public class playermovement2 : MonoBehaviour
 {
+
+
     public GameObject boxUI;
     public Rigidbody2D rb;
+    public Vector3 startpos;
     public float horizontalmovement;
     public float movespeed = 20;
     public bool facingright = true;
@@ -50,10 +53,10 @@ public class playermovement2 : MonoBehaviour
     public Image[] lifeimages;
     public Color activeColor = Color.white;
     public Color inactiveColor = new Color(1, 1, 1, 0.3f);
-    
+
     public int coins = 0;
-    
-    
+
+
     public TextMeshProUGUI cointext;
 
     private bool inwater;
@@ -76,14 +79,16 @@ public class playermovement2 : MonoBehaviour
 
     public void addhealth(int value)
     {
-        if(currentHealth < maxHealth)
-        { currentHealth += value;
-        bar.Sethealth(currentHealth);}
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += value;
+            bar.Sethealth(currentHealth);
+        }
     }
 
     public void addlives(int value)
     {
-        if (currentHealth < maxlives)
+        if (currentlives < maxlives)
         {
             currentlives += value;
             updatelives();
@@ -104,7 +109,7 @@ public class playermovement2 : MonoBehaviour
 
     public void addpower(float value)
     {
-      power(value); 
+        power(value);
     }
 
     IEnumerator power(float value)
@@ -113,14 +118,15 @@ public class playermovement2 : MonoBehaviour
         yield return new WaitForSeconds(10);
         movespeed -= value;
     }
-    
+
 
 
     private void Start()
     {
+        startpos = transform.position;
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
-        
+
         bulletref = Resources.Load<GameObject>("Bullet");
         currentHealth = maxHealth;
         bar.Setmaxhealth(maxHealth);
@@ -166,7 +172,7 @@ public class playermovement2 : MonoBehaviour
         anim.SetBool("jump", !isgrounded());
 
         if (horizontalmovement < 0 && !facingright) flip();
-        if (horizontalmovement >  0 && facingright) flip();
+        if (horizontalmovement > 0 && facingright) flip();
 
         if (isclimbing)
         {
@@ -202,6 +208,25 @@ public class playermovement2 : MonoBehaviour
         facingright = !facingright;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("movingblock"))
+        {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("movingblock"))
+        {
+            transform.parent = null;
+        }
+    }
+
+    public bool finalkey = false;
+    public bool atfinaldoor = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("latter"))
@@ -215,24 +240,36 @@ public class playermovement2 : MonoBehaviour
             watertime = 0;
         }
         if (collision.CompareTag("key"))
-            {
-                     haskey = true;
-                     keyicon.SetActive(true);
-                     Destroy(collision.gameObject);
-            }
+        {
+            haskey = true;
+            keyicon.SetActive(true);
+            Destroy(collision.gameObject);
+        }
 
         if (collision.CompareTag("ship"))
         {
             atship = true;
-            sencemanager.Instance.ready();  
+            sencemanager.Instance.ready();
         }
-        
+
         if (collision.CompareTag("obstecle"))
         {
             TakeDamage(1);
         }
 
-        
+        if (collision.CompareTag("final"))
+        {
+            finalkey = true;
+            keyicon.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("finaldoor") && finalkey)
+        {
+            atfinaldoor = true;
+        }
+
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -249,7 +286,7 @@ public class playermovement2 : MonoBehaviour
             watertime = 0;
         }
 
-        
+
     }
 
     public void onattack(InputAction.CallbackContext context)
@@ -272,8 +309,8 @@ public class playermovement2 : MonoBehaviour
             Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             audioSource.PlayOneShot(attackSound);
         }
-    
-}
+
+    }
 
 
     public void TakeDamage(int amount)
@@ -294,25 +331,35 @@ public class playermovement2 : MonoBehaviour
             }
             else
             {
+                anim.SetTrigger("die");
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth);
+
+
+                Transform originalParent = transform.parent;
+                transform.SetParent(null); // موقت جدا کردن از parent
+                transform.position = startpos;
+                transform.SetParent(originalParent); // دوباره برگردوندن به parent
+
+                rb.bodyType = RigidbodyType2D.Dynamic;
+
             }
         }
     }
     private void updatelives()
-{
-    for (int i = 0; i < lifeimages.Length; i++)
     {
-        if (i < currentlives)
+        for (int i = 0; i < lifeimages.Length; i++)
         {
-            lifeimages[i].color = activeColor; // جون داره، رنگ روشن
-        }
-        else
-        {
-            lifeimages[i].color = inactiveColor; // جون از دست رفته، رنگ کمرنگ
+            if (i < currentlives)
+            {
+                lifeimages[i].color = activeColor; // جون داره، رنگ روشن
+            }
+            else
+            {
+                lifeimages[i].color = inactiveColor; // جون از دست رفته، رنگ کمرنگ
+            }
         }
     }
-}
 
     private void hurt()
     {
@@ -329,4 +376,26 @@ public class playermovement2 : MonoBehaviour
 
         // اگر بخوای UI یا صحنه restart شه، اون رو هم اینجا اضافه کن
     }
+    
+        public Transform playerRoot; 
+
+public void spawn()
+{
+    StartCoroutine(RespawnWithDelay(0.5f));
+}
+
+private IEnumerator RespawnWithDelay(float delay)
+{
+    yield return new WaitForSeconds(delay);
+
+    playerRoot.position = startpos;
+    currentHealth = maxHealth;
+    bar.Sethealth(currentHealth);
+    anim.ResetTrigger("die");
+    rb.bodyType = RigidbodyType2D.Dynamic;
+    gameObject.SetActive(true);
+}
+
+
+   
 }

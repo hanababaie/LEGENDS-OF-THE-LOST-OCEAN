@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,7 +24,7 @@ public class sencemanager : MonoBehaviour
         if (isGameOver) return;
 
         ready();
-
+        ready2();
         if (player1.currentlives <= 0 || player2.currentlives <= 0)
         {
             GameOver();
@@ -38,6 +39,15 @@ public class sencemanager : MonoBehaviour
         }
     }
 
+    public void ready2()
+    {
+        if (player2.finalkey && player1.atfinaldoor && player2.atfinaldoor)
+        {
+            Debug.Log("next");
+            SceneManager.LoadScene("nextlevel");
+        }
+    }
+
     public void GameOver()
     {
         if (isGameOver) return;
@@ -46,7 +56,7 @@ public class sencemanager : MonoBehaviour
 
         Debug.Log("Game Over!");
 
-        SceneManager.LoadScene("gameover"); 
+        SceneManager.LoadScene("gameover");
     }
 
     public void LoadNextLevel()

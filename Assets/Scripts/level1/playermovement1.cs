@@ -10,8 +10,11 @@ using UnityEngine.InputSystem;
 
 public class playermovement1 : MonoBehaviour
 {
+    public playermovement2 p2;
     public GameObject boxUI;
     public Rigidbody2D rb;
+    public Vector3 startpos;
+    public Transform orstartpos;
     public float horizontalmovement;
     public float movespeed = 20;
     public bool facingright = true;
@@ -66,31 +69,36 @@ public class playermovement1 : MonoBehaviour
     public healthbar bar;
 
     public int coins = 0;
-    
-    
+
+
     public TextMeshProUGUI cointext;
-    
+
     public bool haskey = false;
     public bool atship = false;
     public GameObject keyicon;
 
+    public bool haskey2;
+    public GameObject Keyicon2;
+
     bool inwater = false;
     private float watertime = 0;
 
-    bool cangethurt  = false;
+    bool cangethurt = false;
 
 
     public AudioSource audioSource;
 
     public AudioClip attackSound;
 
+    public bool atfinaldoor = false;
+
 
     IEnumerator gettinghurtagain(float duration)
-{
-    cangethurt = true;
-    yield return new WaitForSeconds(duration);
-    cangethurt = false;
-}
+    {
+        cangethurt = true;
+        yield return new WaitForSeconds(duration);
+        cangethurt = false;
+    }
 
     public void addcoin(int value)
     {
@@ -127,10 +135,10 @@ public class playermovement1 : MonoBehaviour
         yield return new WaitForSeconds(10);
         movespeed -= value;
     }
-    
+
     public void addpower(float value)
     {
-        power(value); 
+        power(value);
     }
 
     IEnumerator power(float value)
@@ -142,8 +150,11 @@ public class playermovement1 : MonoBehaviour
 
     private void Start()
     {
+        startpos = transform.position;
+        orstartpos = transform.parent;
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
+        p2 = GetComponent<playermovement2>();
         currentHealth = maxHealth;
         currentlives = maxlives;
         bar.Setmaxhealth(maxHealth);
@@ -185,36 +196,36 @@ public class playermovement1 : MonoBehaviour
 
     public IEnumerator dashroutine()
     {
-      
-    canDash = false;
-    isDashing = true;
-    trail.emitting = true;
 
-    float grav = rb.gravityScale;
-    rb.gravityScale = 0f;
-    Debug.Log(rb.linearVelocity);
-    float dashdirection = facingright ? 1f : -1f;
-    rb.linearVelocity= new Vector2(dashdirection * dashspeed, 0f);
+        canDash = false;
+        isDashing = true;
+        trail.emitting = true;
+
+        float grav = rb.gravityScale;
+        rb.gravityScale = 0f;
+        Debug.Log(rb.linearVelocity);
+        float dashdirection = facingright ? 1f : -1f;
+        rb.linearVelocity = new Vector2(dashdirection * dashspeed, 0f);
         Debug.Log(rb.linearVelocity);
 
-    yield return new WaitForSeconds(dashtime);
+        yield return new WaitForSeconds(dashtime);
         Debug.Log(rb.linearVelocity);
 
-    rb.linearVelocity= Vector2.zero;
-    trail.emitting = false;
-    rb.gravityScale = grav;
-    isDashing = false;
+        rb.linearVelocity = Vector2.zero;
+        trail.emitting = false;
+        rb.gravityScale = grav;
+        isDashing = false;
 
-    yield return new WaitForSeconds(dashcoldown);
-    canDash = true;
-}
+        yield return new WaitForSeconds(dashcoldown);
+        canDash = true;
+    }
 
-    
+
     void Update()
     {
-        if(!isDashing)
-        rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
-        if(canDash)
+        if (!isDashing)
+            rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
+        if (canDash)
         {
             dashicon.SetActive(true);
         }
@@ -303,7 +314,7 @@ public class playermovement1 : MonoBehaviour
             }
             audioSource.PlayOneShot(attackSound);
         }
-        
+
 
     }
     public void OnDrawGizmosSelected()
@@ -323,7 +334,7 @@ public class playermovement1 : MonoBehaviour
         gameObject.transform.localScale = theScale;
         facingright = !facingright;
     }
-
+    public bool jj = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("latter"))
@@ -337,24 +348,51 @@ public class playermovement1 : MonoBehaviour
             watertime = 0;
         }
         if (collision.CompareTag("key"))
-                 {
-                     haskey = true;
-                    keyicon.SetActive(true);
-                     Destroy(collision.gameObject);
-                 }
-        
-                 if (collision.CompareTag("ship"))
-                 {
-                     atship = true;
-                     sencemanager.Instance.ready();
-                 }
+        {
+            haskey = true;
+            keyicon.SetActive(true);
+            Destroy(collision.gameObject);
+        }
 
-                 if (collision.CompareTag("obstecle"))
-                 {
-                     TakeDamage(1);
-                 }
+        if (collision.CompareTag("ship"))
+        {
+            atship = true;
+            sencemanager.Instance.ready();
+        }
+
+        if (collision.CompareTag("obstecle"))
+        {
+            TakeDamage(1);
+        }
+
+        if (collision.CompareTag("key2"))
+        {
+            haskey2 = true;
+            Debug.Log("got iy");
+            Keyicon2.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("finaldoor"))
+        {
+            atfinaldoor = true;
+        }
     }
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("movingblock"))
+        {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("movingblock"))
+        {
+            transform.parent = null;
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("latter"))
@@ -368,7 +406,7 @@ public class playermovement1 : MonoBehaviour
             inwater = false;
             watertime = 0;
         }
-       
+
     }
 
     public void TakeDamage(int amount)
@@ -389,32 +427,54 @@ public class playermovement1 : MonoBehaviour
             }
             else
             {
+
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth);
+                spawn();
+
             }
         }
-
         if (cangethurt) return;
         StartCoroutine(gettinghurtagain(0.5f)); // for 0.5sec it canr get hurt again
-    
+
 
 
     }
-    
+
     private void updatevives()
-{
-    for (int i = 0; i < lifeimages.Length; i++)
     {
-        if (i < currentlives)
+        for (int i = 0; i < lifeimages.Length; i++)
         {
-            lifeimages[i].color = activeColor; 
-        }
-        else
-        {
-            lifeimages[i].color = inactiveColor; 
+            if (i < currentlives)
+            {
+                lifeimages[i].color = activeColor;
+            }
+            else
+            {
+                lifeimages[i].color = inactiveColor;
+            }
         }
     }
+    
+    public Transform playerRoot; 
+
+public void spawn()
+{
+    StartCoroutine(RespawnWithDelay(0.5f));
 }
- 
+
+private IEnumerator RespawnWithDelay(float delay)
+{
+    yield return new WaitForSeconds(delay);
+
+    playerRoot.position = startpos;
+    currentHealth = maxHealth;
+    bar.Sethealth(currentHealth);
+    anim.ResetTrigger("die");
+    rb.bodyType = RigidbodyType2D.Dynamic;
+    gameObject.SetActive(true);
+}
+
+
 
 }
