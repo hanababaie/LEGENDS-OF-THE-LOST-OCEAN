@@ -143,16 +143,31 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.21499999, y: 0.24499999}
-      - {x: 0.055, y: 0.275}
-      - {x: -0.145, y: 0.275}
+    - - {x: 0.2036259, y: 0.21300869}
+      - {x: 0.17851032, y: 0.23563315}
+      - {x: 0.102928005, y: 0.23967409}
+      - {x: 0.046181757, y: 0.23925875}
+      - {x: -0.015954386, y: 0.2460777}
+      - {x: -0.025435537, y: 0.27146763}
+      - {x: -0.12948588, y: 0.26864696}
+      - {x: -0.12909256, y: 0.21969567}
+      - {x: -0.12861772, y: 0.1743553}
+      - {x: -0.16383748, y: 0.17214885}
+      - {x: -0.1778729, y: 0.09870477}
       - {x: -0.255, y: 0.044999998}
-      - {x: -0.255, y: -0.21499999}
-      - {x: -0.175, y: -0.275}
+      - {x: -0.25831157, y: -0.18974006}
+      - {x: -0.2185721, y: -0.22120975}
+      - {x: -0.09849665, y: -0.22318074}
+      - {x: -0.101862974, y: -0.28999972}
+      - {x: 0.012480184, y: -0.2696565}
+      - {x: 0.018900637, y: -0.23131365}
+      - {x: 0.11253346, y: -0.22840539}
+      - {x: 0.11612424, y: -0.2883423}
       - {x: 0.205, y: -0.275}
       - {x: 0.255, y: -0.205}
-      - {x: 0.255, y: 0.114999995}
-      - {x: 0.24499999, y: 0.195}
+      - {x: 0.25566936, y: -0.02898672}
+      - {x: 0.2504825, y: 0.08747013}
+      - {x: 0.23822378, y: 0.17699973}
   m_UseDelaunayMesh: 0
 --- !u!50 &5925883923898859012
 Rigidbody2D:
@@ -220,10 +235,11 @@ MonoBehaviour:
   bulletPos: {fileID: 1969263690271608168}
   healthUI: {fileID: 7136913748585353671}
   shootRange: 20
-  shootSound: {fileID: 8300000, guid: ff7f6673943b2324a803370347b0548f, type: 3}
+  shootSound: {fileID: 8300000, guid: 6646b64f6e2ac994f80c7fe0f1388582, type: 3}
   deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
   leftViewLimit: {fileID: 618355542499421367}
   rightViewLimit: {fileID: 7419766293352588008}
+  explosionEffect: {fileID: 7090064668159823623, guid: 91662398050f2b4478c805a9e042fc2e, type: 3}
 --- !u!114 &-7259936524736268071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +575,7 @@ Transform:
   m_GameObject: {fileID: 7553400474222379816}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -621,7 +637,7 @@ Transform:
   m_GameObject: {fileID: 9011204643204299477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -155.0668, y: 211.9602, z: 0}
-  m_LocalScale: {x: 23.391514, y: 21.77307, z: 1}
+  m_LocalScale: {x: 24, y: 22, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,7 +50,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -184,4 +184,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae4141fc8b66274c92a0ad6278ec3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 5
+  force: 8
+  explosionEffect: {fileID: 7090064668159823623, guid: 91662398050f2b4478c805a9e042fc2e, type: 3}

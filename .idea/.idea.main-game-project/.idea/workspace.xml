@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6a6685d7-e92a-4e57-8c0f-c456ed0e2135" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.main-game-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.main-game-project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyBullet/Bomb.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyBullet/Bomb.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Bombguy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Bombguy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Crabby.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Crabby.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/PinkStar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/PinkStar.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Seashell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Seashell.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/level1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyBulletScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyBulletScript.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyShooting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyShooting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/animation/jack animation/jack.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/animation/jack animation/jack.controller" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +21,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/level1/EnemyBullet.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/level1/PlayerHealthUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/level2/AutoDestroyAfterAnim.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -109,7 +107,7 @@
       <workItem from="1748514625312" duration="2259000" />
       <workItem from="1748668632486" duration="403000" />
       <workItem from="1749025722174" duration="1694000" />
-      <workItem from="1749046518184" duration="5302000" />
+      <workItem from="1749046518184" duration="11958000" />
     </task>
     <servers />
   </component>

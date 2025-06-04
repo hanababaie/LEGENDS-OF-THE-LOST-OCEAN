@@ -12,15 +12,16 @@ public class EnemyShooting : MonoBehaviour
     public EnemyHealthUI healthUI;
     private Animator animator;
     private bool isDead = false;
-
-    public float shootRange = 20f;
+    
     public AudioClip shootSound;
     public AudioClip deathSound;
     private AudioSource audioSource;
 
-    // ✅ این دو برای تعیین محدوده دید
+    // این دو برای تعیین محدوده دید
     public Transform leftViewLimit;
     public Transform rightViewLimit;
+    
+
 
     void Start()
     {
@@ -139,7 +140,8 @@ public class EnemyShooting : MonoBehaviour
         {
             audioSource.PlayOneShot(deathSound);
         }
-
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject,1.5f);
     }
+  
+
 }
