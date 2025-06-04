@@ -7,9 +7,11 @@
     <list default="true" id="6a6685d7-e92a-4e57-8c0f-c456ed0e2135" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.main-game-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.main-game-project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Bombguy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Bombguy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Crabby.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Crabby.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/PinkStar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/PinkStar.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/characters/Seashell.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/characters/Seashell.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyShooting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/EnemyShooting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/level1/Enemypatrolling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/level1/Enemypatrolling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/animation/jack animation/jack.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/animation/jack animation/jack.controller" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +109,7 @@
       <workItem from="1748514625312" duration="2259000" />
       <workItem from="1748668632486" duration="403000" />
       <workItem from="1749025722174" duration="1694000" />
-      <workItem from="1749046518184" duration="2152000" />
+      <workItem from="1749046518184" duration="5302000" />
     </task>
     <servers />
   </component>
