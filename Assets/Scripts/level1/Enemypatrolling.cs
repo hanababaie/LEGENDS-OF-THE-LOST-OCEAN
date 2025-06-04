@@ -15,9 +15,12 @@ public class Enemypatrolling : MonoBehaviour
     private Vector2 startPoint;
     private bool movingRight = true;
     private bool isDead = false;
+    public AudioClip deathSound; // صدای مرگ
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>(); 
         startPoint = transform.position;
         currentHealth = maxHealth;
 
@@ -118,9 +121,13 @@ public class Enemypatrolling : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("die");
+        } 
+        if (audioSource != null && deathSound != null)
+        {
+            audioSource.PlayOneShot(deathSound);
         }
-
         // بعد از چند ثانیه نابود شود
         Destroy(gameObject, 1.5f);
+     
     }
 }

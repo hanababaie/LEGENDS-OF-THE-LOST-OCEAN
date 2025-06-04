@@ -13,9 +13,13 @@ public class EnemyShooting : MonoBehaviour
     private Animator animator;
     private bool isDead = false;
    public float shootRange = 20f;
+   public AudioClip shootSound;
+   private AudioSource audioSource;
+   public AudioClip deathSound; // صدای مرگ
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         animator = GetComponent<Animator>(); // Animator را مقداردهی می‌کنیم
         UpdateHealthUI();
@@ -63,6 +67,11 @@ public class EnemyShooting : MonoBehaviour
             Vector2 direction = (nearest.transform.position - bulletPos.position).normalized;
             GameObject b = Instantiate(bullet, bulletPos.position, Quaternion.identity);
             b.GetComponent<EnemyBulletScript>().SetDirection(direction);
+            if (audioSource != null && shootSound != null)
+            {
+                audioSource.PlayOneShot(shootSound);
+            }
+            
         }
     }
 
@@ -92,9 +101,13 @@ public class EnemyShooting : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("die");
+        } 
+        if (audioSource != null && deathSound != null)
+        {
+            audioSource.PlayOneShot(deathSound);
         }
-
         Destroy(gameObject, 1.5f);
+       
     }
 
    
