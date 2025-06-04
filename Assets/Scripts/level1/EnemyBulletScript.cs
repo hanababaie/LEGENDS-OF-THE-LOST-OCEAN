@@ -17,6 +17,7 @@ public class EnemyBulletScript : MonoBehaviour
 
     void Update()
     {
+        
         timer += Time.deltaTime;
         if (timer > 8f)
         {

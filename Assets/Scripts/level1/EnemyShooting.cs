@@ -12,6 +12,7 @@ public class EnemyShooting : MonoBehaviour
     public EnemyHealthUI healthUI;
     private Animator animator;
     private bool isDead = false;
+   public float shootRange = 20f;
 
     void Start()
     {
@@ -22,8 +23,9 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return; 
         shootTimer += Time.deltaTime;
-        if (shootTimer > 2f)
+        if (shootTimer >= 5f)
         {
             shootTimer = 0f;
             ShootAtNearestPlayer();
@@ -40,15 +42,17 @@ public class EnemyShooting : MonoBehaviour
 
         foreach (GameObject player in players)
         {
-            float distance = Vector2.Distance(transform.position, player.transform.position);
+            Vector2 enemyPos = new Vector2(transform.position.x, transform.position.y);
+            Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.y);
+            float distance = Vector2.Distance(enemyPos, playerPos);
             if (distance < minDistance)
             {
                 minDistance = distance;
                 nearest = player;
             }
         }
-
-        if (nearest != null)
+      
+        if (nearest != null&&bullet != null)
         {
             // فعال‌سازی انیمیشن حمله
             if (animator != null)
@@ -56,7 +60,7 @@ public class EnemyShooting : MonoBehaviour
                 animator.SetTrigger("attack");
             }
 
-            Vector2 direction = (Vector2)(nearest.transform.position - bulletPos.position);
+            Vector2 direction = (nearest.transform.position - bulletPos.position).normalized;
             GameObject b = Instantiate(bullet, bulletPos.position, Quaternion.identity);
             b.GetComponent<EnemyBulletScript>().SetDirection(direction);
         }
