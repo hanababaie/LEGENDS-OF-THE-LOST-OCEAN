@@ -29,6 +29,8 @@ public class playermovement1 : MonoBehaviour
     public Transform groundCheckpos;
     public Vector2 groundChecksize = new Vector2(0.5f, 0.05f);
     public LayerMask ground;
+    public bool falling = false;
+    public float fally;
 
 
 
@@ -82,6 +84,7 @@ public class playermovement1 : MonoBehaviour
 
     bool inwater = false;
     private float watertime = 0;
+    public GameObject watericon;
 
     bool cangethurt = false;
 
@@ -223,6 +226,28 @@ public class playermovement1 : MonoBehaviour
 
     void Update()
     {
+        if (!isgrounded())
+        {
+            if (!falling)
+            {
+                fally = transform.position.y;
+                falling = true;
+            }
+        }
+        else
+        {
+            if (falling)
+            {
+                float falldis = fally - transform.position.y;
+                if (falldis > 80f)
+                {
+                    TakeDamage(1);
+                    Debug.Log("demage: " + falldis);
+                }
+                falling = false;
+            }
+        }
+
         if (!isDashing)
             rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
         if (canDash)
@@ -255,15 +280,12 @@ public class playermovement1 : MonoBehaviour
         {
             watertime += Time.deltaTime;
 
-            if (watertime >= 5)
+            if (watertime >= 5f)
             {
-                TakeDamage(1);
-                watertime = 0;
+                TakeDamage(currentHealth);
+                watertime = 0f;
             }
         }
-
-
-
     }
 
 
@@ -363,6 +385,7 @@ public class playermovement1 : MonoBehaviour
         }
         if (collision.CompareTag("water"))
         {
+            watericon.SetActive(true);
             inwater = true;
             watertime = 0;
         }
@@ -422,6 +445,7 @@ public class playermovement1 : MonoBehaviour
 
         if (collision.CompareTag("water"))
         {
+            watericon.SetActive(false);
             inwater = false;
             watertime = 0;
         }
@@ -447,14 +471,20 @@ public class playermovement1 : MonoBehaviour
             else
             {
 
+                anim.SetTrigger("die");
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth);
-                spawn();
+
+
+                Transform originalParent = transform.parent;
+                transform.SetParent(null); // موقت جدا کردن از parent
+                transform.position = startpos;
+                transform.SetParent(originalParent);
 
             }
         }
         if (cangethurt) return;
-        StartCoroutine(gettinghurtagain(0.5f)); // for 0.5sec it canr get hurt again
+        
 
 
 
@@ -476,24 +506,5 @@ public class playermovement1 : MonoBehaviour
     }
     
     public Transform playerRoot; 
-
-public void spawn()
-{
-    StartCoroutine(RespawnWithDelay(0.5f));
-}
-
-private IEnumerator RespawnWithDelay(float delay)
-{
-    yield return new WaitForSeconds(delay);
-
-    playerRoot.position = startpos;
-    currentHealth = maxHealth;
-    bar.Sethealth(currentHealth);
-    anim.ResetTrigger("die");
-    rb.bodyType = RigidbodyType2D.Dynamic;
-    gameObject.SetActive(true);
-}
-
-
-
+    
 }

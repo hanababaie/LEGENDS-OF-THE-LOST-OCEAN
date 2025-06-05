@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class playermovement2 : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class playermovement2 : MonoBehaviour
     public Transform groundCheckpos;
     public Vector2 groundChecksize = new Vector2(0.5f, 0.05f);
     public LayerMask ground;
+    public bool falling = false;
+    public float fally;
 
     public int maxjump = 2;
     private int jumpremaining;
@@ -61,6 +64,7 @@ public class playermovement2 : MonoBehaviour
 
     private bool inwater;
     private float watertime;
+    public GameObject watericon;
 
     public bool haskey = false;
     public bool atship = false;
@@ -163,6 +167,27 @@ public class playermovement2 : MonoBehaviour
 
     void Update()
     {
+        if (!isgrounded())
+        {
+            if (!falling)
+            {
+                fally = transform.position.y;
+                falling = true;
+            }
+        }
+        else
+        {
+            if (falling)
+            {
+                float falldis = fally - transform.position.y;
+                if (falldis > 80f)
+                {
+                    TakeDamage(1);
+                    Debug.Log("demage: " + falldis);
+                }
+                falling = false;
+            }
+        }
         if (isDead) return;
 
         rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
@@ -179,6 +204,17 @@ public class playermovement2 : MonoBehaviour
             float vertical = Input.GetAxis("Vertical");
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
         }
+        if(inwater)
+        {
+            watertime += Time.deltaTime;
+
+        if(watertime >= 5f)
+        {
+            TakeDamage(currentHealth);
+            watertime = 0f;
+        }
+    }
+
     }
 
     private void OnDrawGizmosSelected()
@@ -236,6 +272,7 @@ public class playermovement2 : MonoBehaviour
         }
         if (collision.CompareTag("water"))
         {
+            watericon.SetActive(true);
             inwater = true;
             watertime = 0;
         }
@@ -282,6 +319,7 @@ public class playermovement2 : MonoBehaviour
 
         if (collision.CompareTag("water"))
         {
+            watericon.SetActive(false);
             inwater = false;
             watertime = 0;
         }

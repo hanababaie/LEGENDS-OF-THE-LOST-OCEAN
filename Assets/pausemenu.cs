@@ -10,9 +10,19 @@ public class pausemenu : MonoBehaviour
     [SerializeField] Sprite soundOnIcon;
     [SerializeField] Sprite soundOffIcon;
 
+
+    public void Update()
+    {
+            if (Input.GetKeyDown(KeyCode.Escape))
+    {
+        pause();
+    }
+
+    }
     public void pause()
     {
         pauseMenu.SetActive(true);
+        Debug.Log("setting");
         Time.timeScale = 0;
     }
     public void mainmenu()

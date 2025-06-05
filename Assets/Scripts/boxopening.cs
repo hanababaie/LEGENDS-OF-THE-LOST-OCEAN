@@ -14,7 +14,7 @@ public class boxopening : MonoBehaviour
 
     private GameObject player;
 
-    private GameObject boxUI;
+    public GameObject boxUI;
     private Image imageBox;
     private TextMeshProUGUI textBox;
 
@@ -88,9 +88,8 @@ public class boxopening : MonoBehaviour
 
         Debug.Log($"Player got: {item.lootname}");
 
-        // صبر تا زمانی که پلیر Escape بزنه یا 3 ثانیه بگذره
         float timer = 0f;
-        while (timer < 3f && isBoxUIActive)
+        while (timer < 4f && isBoxUIActive)
         {
             timer += Time.deltaTime;
             yield return null;
