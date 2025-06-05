@@ -85,4 +85,9 @@ public class MusicManager : MonoBehaviour
     {
         audioSource.mute = !audioSource.mute;
     }
+    public bool GetIsMuted()
+    {
+        return audioSource.mute;
+    }
+
 }
