@@ -177,7 +177,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428526114349591350}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -230,16 +230,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e9c39066c01944e97654cd63229b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 6
   bullet: {fileID: 782628016683332379, guid: 0ef5936050409074abc9aaa817392846, type: 3}
   bulletPos: {fileID: 1969263690271608168}
   healthUI: {fileID: 7136913748585353671}
-  shootRange: 20
   shootSound: {fileID: 8300000, guid: 6646b64f6e2ac994f80c7fe0f1388582, type: 3}
   deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
   leftViewLimit: {fileID: 618355542499421367}
   rightViewLimit: {fileID: 7419766293352588008}
-  explosionEffect: {fileID: 7090064668159823623, guid: 91662398050f2b4478c805a9e042fc2e, type: 3}
 --- !u!114 &-7259936524736268071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +413,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &1605750743192042966
 MonoBehaviour:

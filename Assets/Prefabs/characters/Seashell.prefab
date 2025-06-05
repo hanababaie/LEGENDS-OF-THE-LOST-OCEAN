@@ -401,7 +401,6 @@ MonoBehaviour:
   bullet: {fileID: 7664240046129986066, guid: ccae98a50ce877a4abc4a35ae541440a, type: 3}
   bulletPos: {fileID: 4808831934172152275}
   healthUI: {fileID: 3785451189252603342}
-  shootRange: 20
   shootSound: {fileID: 8300000, guid: f0050063a6903da4abb0451ccab3528f, type: 3}
   deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
   leftViewLimit: {fileID: 9049612909917001172}
@@ -564,7 +563,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 150
+  m_SortingOrder: 200
   m_TargetDisplay: 0
 --- !u!114 &3261368927872162229
 MonoBehaviour:

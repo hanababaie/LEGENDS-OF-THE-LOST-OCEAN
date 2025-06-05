@@ -1123,6 +1123,71 @@ MonoBehaviour:
   pic: {fileID: 1608203560}
   mainmenu: {fileID: 1715373982}
   splashTime: 3
+--- !u!1001 &3647154151015021939
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 85765090730569828, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: menuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 34dfb1c1cdd3c5f4aaf307525480a86d, type: 3}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 431.63132
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 194.63658
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.1673396
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120457378465926028, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285556107860165450, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549795051504436274, guid: 189631792c318624b916005619792c10, type: 3}
+      propertyPath: m_Name
+      value: MusicManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 189631792c318624b916005619792c10, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1131,3 +1196,4 @@ SceneRoots:
   - {fileID: 1040850210}
   - {fileID: 2059680326}
   - {fileID: 1611537008}
+  - {fileID: 3647154151015021939}
