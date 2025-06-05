@@ -301,18 +301,37 @@ public class playermovement1 : MonoBehaviour
     public void onattack(InputAction.CallbackContext context)
     {
         Debug.Log("Attack Input Received");
+
         if (context.performed)
         {
             Debug.Log("Attack Input Performed");
             anim.SetTrigger("attack");
+
             Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackpoint.position, attackrange, enemylayers);
+
             foreach (Collider2D enemy in hitenemies)
             {
-                enemy.GetComponent<Enemypatrolling>()?.TakeDamage(1);
-                enemy.GetComponent<EnemyShooting>()?.TakeDamage(1);
-                Debug.Log("we hit enemy");
+                // بررسی اینکه آیا این دشمن اسکریپت patrolling داره
+                Enemypatrolling patrolling = enemy.GetComponent<Enemypatrolling>();
+                if (patrolling != null)
+                {
+                    patrolling.TakeDamage(1);
+                    Debug.Log("Hit patrolling enemy");
+                }
+
+                // بررسی اینکه آیا این دشمن اسکریپت shooting داره
+                EnemyShooting shooting = enemy.GetComponent<EnemyShooting>();
+                if (shooting != null)
+                {
+                    shooting.TakeDamage(1);
+                    Debug.Log("Hit shooting enemy");
+                }
             }
-            audioSource.PlayOneShot(attackSound);
+
+            if (audioSource != null && attackSound != null)
+            {
+                audioSource.PlayOneShot(attackSound);
+            }
         }
 
 

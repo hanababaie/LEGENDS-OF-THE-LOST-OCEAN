@@ -109,7 +109,15 @@ public class EnemyShooting : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (isDead) return;
+
         currentHealth -= amount;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("hit");
+        }
+
         UpdateHealthUI();
 
         if (currentHealth <= 0f)
