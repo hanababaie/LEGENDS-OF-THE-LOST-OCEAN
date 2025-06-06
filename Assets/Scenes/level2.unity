@@ -516,6 +516,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5019100368982581252, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
       propertyPath: m_Name
       value: Bigguy (1)
@@ -1456,6 +1468,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5212988621446198010, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
       propertyPath: m_Name
       value: BldPirate (1)
@@ -2045,6 +2069,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5019100368982581252, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
       propertyPath: m_Name
       value: Bigguy
@@ -3910,6 +3946,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5212988621446198010, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
       propertyPath: m_Name
       value: BldPirate
@@ -3967,6 +4015,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5212988621446198010, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
       propertyPath: m_Name
       value: BldPirate (2)
@@ -11934,6 +11994,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5019100368982581252, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
       propertyPath: m_Name
       value: Bigguy (2)
@@ -16220,6 +16292,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 2312013646672398537, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5019100368982581252, guid: 1d8725d8fec6ef942bd7ff186b1c1e14, type: 3}
       propertyPath: m_Name
       value: Bigguy (3)
@@ -45089,6 +45173,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+    - target: {fileID: 3280256669283949666, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
+      propertyPath: 'lootlist.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
     - target: {fileID: 5212988621446198010, guid: 90bd42c566e323c45840aa41a0c25387, type: 3}
       propertyPath: m_Name
       value: BldPirate (3)
