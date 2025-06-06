@@ -224,9 +224,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropitemprefab: {fileID: 1229844465707745011, guid: dcbe5b7f6dca3cc478880e2df89cf30d, type: 3}
   lootlist:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 5417d370fb1f0c14aa17e1e1add313c2, type: 2}
+  - {fileID: 11400000, guid: 186e52f798f4d2347a453391b1d57fba, type: 2}
+  - {fileID: 11400000, guid: 30a8116cd9e1b85498a9848768fa69b1, type: 2}
+  - {fileID: 11400000, guid: 514f5ce1d06621240876728d44cf29f9, type: 2}
+  - {fileID: 11400000, guid: 352bf497603af2147ad60c370a3eb7d8, type: 2}
 --- !u!114 &835404600401463616
 MonoBehaviour:
   m_ObjectHideFlags: 0

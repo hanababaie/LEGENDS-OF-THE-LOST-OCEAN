@@ -117,6 +117,7 @@ public class Enemypatrolling : MonoBehaviour
 
     void Die()
     {
+        
         isDead = true;
         if (animator != null)
         {
@@ -128,6 +129,6 @@ public class Enemypatrolling : MonoBehaviour
         }
         // بعد از چند ثانیه نابود شود
         Destroy(gameObject, 1.5f);
-     
+        GetComponent<lootbag>().spawndropitem(transform.position);
     }
 }

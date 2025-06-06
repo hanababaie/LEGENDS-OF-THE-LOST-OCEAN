@@ -36,9 +36,7 @@ public class playermovement2 : MonoBehaviour
     public float dashspeed = 50f;
     public float dashtime = 0.2f;
     public float dashcoldown = 8f;
-    bool isDashing;
-    bool canDash = true;
-    TrailRenderer trail;
+   
 
     public GameObject bulletref;
     public Transform FirePoint;
@@ -128,7 +126,7 @@ public class playermovement2 : MonoBehaviour
     private void Start()
     {
         startpos = transform.position;
-        trail = GetComponent<TrailRenderer>();
+        
         anim = GetComponent<Animator>();
 
         bulletref = Resources.Load<GameObject>("Bullet");
