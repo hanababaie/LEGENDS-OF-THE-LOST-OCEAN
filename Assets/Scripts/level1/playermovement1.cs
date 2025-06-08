@@ -37,7 +37,7 @@ public class playermovement1 : MonoBehaviour
     float horizontal;
 
 
-    public float dashspeed = 100f;
+    public float dashspeed = 200f;
     public float dashtime = 0.2f;
     public float dashcoldown = 10f;
     public bool isDashing;
@@ -198,30 +198,49 @@ public class playermovement1 : MonoBehaviour
 
 
     public IEnumerator dashroutine()
+{
+    Physics2D.IgnoreLayerCollision(6, 8, true);
+    canDash = false;
+    isDashing = true;
+    trail.emitting = true;
+
+    float grav = rb.gravityScale;
+    rb.gravityScale = 0f;
+
+    float dashdirection = facingright ? 1f : -1f;
+    rb.linearVelocity = new Vector2(dashdirection * dashspeed, 0f);
+
+    float hit = 0f;
+
+    while (hit < dashtime)
     {
-
-        canDash = false;
-        isDashing = true;
-        trail.emitting = true;
-
-        float grav = rb.gravityScale;
-        rb.gravityScale = 0f;
-        Debug.Log(rb.linearVelocity);
-        float dashdirection = facingright ? 1f : -1f;
-        rb.linearVelocity = new Vector2(dashdirection * dashspeed, 0f);
-        Debug.Log(rb.linearVelocity);
-
-        yield return new WaitForSeconds(dashtime);
-        Debug.Log(rb.linearVelocity);
-
-        rb.linearVelocity = Vector2.zero;
-        trail.emitting = false;
-        rb.gravityScale = grav;
-        isDashing = false;
-
-        yield return new WaitForSeconds(dashcoldown);
-        canDash = true;
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 1f, enemylayers);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Enemypatrolling patrolling = enemy.GetComponent<Enemypatrolling>();
+            if (patrolling != null)
+            {
+                patrolling.TakeDamage(1);
+            }
+            EnemyShooting shooting = enemy.GetComponent<EnemyShooting>();
+            if (shooting != null)
+            {
+                shooting.TakeDamage(1);
+            }
+        }
+        hit += Time.deltaTime;
+        yield return null;
     }
+
+    rb.linearVelocity = Vector2.zero;
+    trail.emitting = false;
+    rb.gravityScale = grav;
+    isDashing = false;
+    Physics2D.IgnoreLayerCollision(6, 8, false);
+
+    yield return new WaitForSeconds(dashcoldown);
+    canDash = true;
+}
 
 
     void Update()
