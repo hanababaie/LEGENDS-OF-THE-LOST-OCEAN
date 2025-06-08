@@ -1,6 +1,9 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+
 
 public class sencemanager : MonoBehaviour
 {
@@ -59,8 +62,14 @@ public class sencemanager : MonoBehaviour
         SceneManager.LoadScene("gameover");
     }
 
-    public void LoadNextLevel()
+     public void LoadNextLevel()
     {
-        SceneManager.LoadScene("level2");
+        StartCoroutine(loading("level2", 5f));
+    }
+
+    private IEnumerator loading(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
     }
 }

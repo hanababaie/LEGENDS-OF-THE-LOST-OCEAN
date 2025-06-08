@@ -13,16 +13,14 @@ public class ChunkGenerator : MonoBehaviour
     public Transform player2;
 
     [Header("Settings")]
-    public Vector3 startPositionPlayer1 = new Vector3(-20, 0, 0); // شروع بازیکن اول
-    public Vector3 startPositionPlayer2 = new Vector3(20, 0, 0);  // شروع بازیکن دوم
-    public int chunkCount = 5; // تعداد چانک‌های تصادفی
+    public Vector3 startPositionPlayer1 = new Vector3(-20, 0, 0);
+    public Vector3 startPositionPlayer2 = new Vector3(20, 0, 0); 
+    public int chunkCount = 5; 
 
     private void Start()
     {
-        // ابتدا ترتیب چانک‌ها رو تولید می‌کنیم (هم برای پلیر ۱ و هم ۲ یکسانه)
         List<int> chunkSequence = GenerateChunkSequence();
 
-        // مسیر مجزا ولی یکسان برای هر پلیر می‌سازیم
         GeneratePathForPlayer(startPositionPlayer1, chunkSequence);
         GeneratePathForPlayer(startPositionPlayer2, chunkSequence);
     }
@@ -53,7 +51,6 @@ public class ChunkGenerator : MonoBehaviour
         {
             GameObject chunk = Instantiate(randomChunks[index], spawnPos, Quaternion.identity);
 
-            // پیدا کردن endpoint و گرفتن فاصله محلی آن
             Transform endPoint = chunk.transform.Find("endpoint");
             if (endPoint != null)
             {
@@ -63,7 +60,6 @@ public class ChunkGenerator : MonoBehaviour
             
         }
 
-        // چانک نهایی
         GameObject final = Instantiate(finalChunk, spawnPos, Quaternion.identity);
     }
 }

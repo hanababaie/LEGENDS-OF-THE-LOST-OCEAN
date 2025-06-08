@@ -7479,6 +7479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 980659765}
   player2: {fileID: 421879645}
+  loadingPanel: {fileID: 0}
 --- !u!4 &2040009942
 Transform:
   m_ObjectHideFlags: 0
