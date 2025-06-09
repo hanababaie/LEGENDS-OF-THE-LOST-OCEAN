@@ -94,6 +94,9 @@ public class playermovement1 : MonoBehaviour
     public AudioClip attackSound;
 
     public bool atfinaldoor = false;
+    public AudioClip deathSound;
+    public AudioClip jumpSound;
+
 
 
     IEnumerator gettinghurtagain(float duration)
@@ -179,6 +182,11 @@ public class playermovement1 : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
                 anim.SetBool("jump", true);
+                if (audioSource != null && jumpSound != null)
+                {
+                    audioSource.PlayOneShot(jumpSound);
+                }
+
             }
             else if (context.canceled)
             {
@@ -489,6 +497,10 @@ public class playermovement1 : MonoBehaviour
             }
             else
             {
+                  if (audioSource != null && deathSound != null)
+                        {
+                            audioSource.PlayOneShot(deathSound);
+                        }
 
                 anim.SetTrigger("die");
                 currentHealth = maxHealth;

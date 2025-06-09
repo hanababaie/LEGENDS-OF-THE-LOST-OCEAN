@@ -7479,7 +7479,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 980659765}
   player2: {fileID: 421879645}
-  loadingPanel: {fileID: 0}
 --- !u!4 &2040009942
 Transform:
   m_ObjectHideFlags: 0
@@ -8131,6 +8130,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 281952635f6916546a3297e011ff95c9, type: 3}
+    - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: jumpforce
       value: 140
       objectReference: {fileID: 0}
@@ -8138,6 +8141,10 @@ PrefabInstance:
       propertyPath: watericon
       value: 
       objectReference: {fileID: 958485655}
+    - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4255dbf6aabe9064bae0ed64eda36565, type: 3}
     - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: attackSound
       value: 
@@ -8368,9 +8375,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1363656916886568770, guid: 643413ca19f68104a935ec94818f1579, type: 3}
     - target: {fileID: 2619712247555888897, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ac1db61bfdb348e43b171ba0d1a9a2b4, type: 3}
+    - target: {fileID: 2619712247555888897, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
       propertyPath: watericon
       value: 
       objectReference: {fileID: 1202560282}
+    - target: {fileID: 2619712247555888897, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f4a8d16d60defe64092cfa50d94d4857, type: 3}
     - target: {fileID: 2619712247555888897, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
       propertyPath: attackSound
       value: 

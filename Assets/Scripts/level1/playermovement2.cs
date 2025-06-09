@@ -71,6 +71,9 @@ public class playermovement2 : MonoBehaviour
     public AudioSource audioSource;
 
     public AudioClip attackSound;
+    public AudioClip deathSound;
+    public AudioClip jumpSound;
+
 
 
     public void addcoin(int value)
@@ -154,6 +157,11 @@ public class playermovement2 : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
                 jumpremaining -= 1;
                 anim.SetBool("jump", true);
+                if (audioSource != null && jumpSound != null)
+                {
+                    audioSource.PlayOneShot(jumpSound);
+                }
+
             }
             else if (context.canceled)
             {
@@ -367,6 +375,10 @@ public class playermovement2 : MonoBehaviour
             }
             else
             {
+                  if (audioSource != null && deathSound != null)
+                        {
+                            audioSource.PlayOneShot(deathSound);
+                        }
                 anim.SetTrigger("die");
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth);
