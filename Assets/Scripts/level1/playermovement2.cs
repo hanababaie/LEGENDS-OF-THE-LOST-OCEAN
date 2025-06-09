@@ -132,7 +132,7 @@ public class playermovement2 : MonoBehaviour
         
         anim = GetComponent<Animator>();
 
-        bulletref = Resources.Load<GameObject>("Bullet");
+        bulletref = Resources.Load<GameObject>("Bullet"); // take the bullet form resoure folder
         currentHealth = maxHealth;
         bar.Setmaxhealth(maxHealth);
         bar.Sethealth(currentHealth);
@@ -150,11 +150,11 @@ public class playermovement2 : MonoBehaviour
     {
         if (isDead) return;
 
-        if (jumpremaining > 0)
+        if (jumpremaining > 0) // check if we still can jump(we can jump 2 times)
         {
             if (context.performed)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce); //aply the jump
                 jumpremaining -= 1;
                 anim.SetBool("jump", true);
                 if (audioSource != null && jumpSound != null)
@@ -233,7 +233,7 @@ public class playermovement2 : MonoBehaviour
     {
         if (Physics2D.OverlapBox(groundCheckpos.position, groundChecksize, 0, ground))
         {
-            jumpremaining = maxjump;
+            jumpremaining = maxjump; // set the jump to max
         }
     }
 
@@ -340,17 +340,19 @@ public class playermovement2 : MonoBehaviour
             anim.SetTrigger("attack");
 
             GameObject bullet = Instantiate(bulletref, FirePoint.position, Quaternion.identity);
+            // insatantion of the bullet in fire point that we set for the player
 
 
             float direction = transform.localScale.x >= 0 ? 1f : -1f;
 
-            bullet.GetComponent<bullet>().direction = direction;
+            bullet.GetComponent<bullet>().direction = direction; // acessing the bullet script
 
-            Vector3 bulletScale = bullet.transform.localScale;
-            bulletScale.x = Mathf.Abs(bulletScale.x) * direction;
-            bullet.transform.localScale = bulletScale;
+            Vector3 bulletScale = bullet.transform.localScale; //take the scale of the bullet
+            bulletScale.x = Mathf.Abs(bulletScale.x) * direction; // set in + or - based on the direction
+            bullet.transform.localScale = bulletScale; //scale/update the 
+            // check if the bullet has the right direction
 
-            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());//avoid the coliidition of the bullet and player
             audioSource.PlayOneShot(attackSound);
         }
 
@@ -385,9 +387,9 @@ public class playermovement2 : MonoBehaviour
 
 
                 Transform originalParent = transform.parent;
-                transform.SetParent(null); // موقت جدا کردن از parent
+                transform.SetParent(null);
                 transform.position = startpos;
-                transform.SetParent(originalParent); // دوباره برگردوندن به parent
+                transform.SetParent(originalParent);
 
                 rb.bodyType = RigidbodyType2D.Dynamic;
 
@@ -400,11 +402,11 @@ public class playermovement2 : MonoBehaviour
         {
             if (i < currentlives)
             {
-                lifeimages[i].color = activeColor; // جون داره، رنگ روشن
+                lifeimages[i].color = activeColor;
             }
             else
             {
-                lifeimages[i].color = inactiveColor; // جون از دست رفته، رنگ کمرنگ
+                lifeimages[i].color = inactiveColor;
             }
         }
     }

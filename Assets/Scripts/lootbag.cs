@@ -9,73 +9,76 @@ public class lootbag : MonoBehaviour
 
     public GameObject dropitemprefab;
     public List<lootsystem> lootlist = new List<lootsystem>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // Update is called once per frame
     lootsystem getdropitem()
     {
         int random = Random.Range(1, 101); // 1 to 100
-        List<lootsystem> possible = new List<lootsystem>();
+        List<lootsystem> possible = new List<lootsystem>(); // create a list for possible loots
         foreach (lootsystem item in lootlist)
         {
             if (random <= item.dropchance)
             {
-                possible.Add(item);
+                possible.Add(item); // add to the list
             }
         }
 
         if (possible.Count > 0)
         {
-            lootsystem drop = possible[Random.Range(0, possible.Count)];
+            lootsystem drop = possible[Random.Range(0, possible.Count)]; // return one random
             return drop;
         }
         return null;
     }
 
 
-   public void spawndropitem(Vector3 position)
-{
-    lootsystem drop = getdropitem();
-    Debug.Log("Trying to drop item...");
-
-    if (drop == null)
+    public void spawndropitem(Vector3 position)
     {
-        Debug.LogWarning("No loot item to drop!");
-        return;
-    }
+        lootsystem drop = getdropitem();
+        Debug.Log("Trying to drop item...");
 
-    Debug.Log("Dropping item: " + drop.lootname);
+        if (drop == null)
+        {
+            Debug.LogWarning("No loot item to drop!");
+            return;
+        }
 
-    if (dropitemprefab == null)
-    {
-        Debug.LogError("Drop Item Prefab is not assigned!");
-        return;
-    }
+        Debug.Log("Dropping item: " + drop.lootname);
 
-    GameObject lootGameObject = Instantiate(dropitemprefab, position, Quaternion.identity);
-    Debug.Log("Instantiated lootGameObject");
+        if (dropitemprefab == null)
+        {
+            Debug.LogError("Drop Item Prefab is not assigned!");
+            return;
+        }
 
-    SpriteRenderer sr = lootGameObject.GetComponent<SpriteRenderer>();
-    if (sr != null)
-    {
-        sr.sprite = drop.lootsprite;
-    }
-    else
-    {
-        Debug.LogError("Prefab missing SpriteRenderer!");
-    }
+        GameObject lootGameObject = Instantiate(dropitemprefab, position, Quaternion.identity); // instantite the square
+        Debug.Log("Instantiated lootGameObject");
 
-    var takingItemsScript = lootGameObject.GetComponent<takingitems>();
-    if (takingItemsScript != null)
-    {
-        takingItemsScript.loot = drop;
-    }
+        SpriteRenderer sr = lootGameObject.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.sprite = drop.lootsprite; // change the pic and its sprite 
+        }
+        else
+        {
+            Debug.LogError("Prefab missing SpriteRenderer!");
+        }
 
-    Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
-    if (rb != null)
-    {
-        Vector2 force = new Vector2(Random.Range(-1f, 1f), Random.Range(1f, 2f)).normalized * 10f;
-        rb.AddForce(force, ForceMode2D.Impulse);
-    }
+        var takingItemsScript = lootGameObject.GetComponent<takingitems>(); // having access to the taking script
+        if (takingItemsScript != null)
+        {
+            takingItemsScript.loot = drop; // pass the loot to it so player can pickit
+        }
+
+        Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            Vector2 force = new Vector2(Random.Range(-1f, 1f), Random.Range(1f, 2f)).normalized * 10f;
+            rb.AddForce(force, ForceMode2D.Impulse);
+        }
+    
+    //add for when the loot appears
 }
 
         

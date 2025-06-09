@@ -1,39 +1,39 @@
 using UnityEngine;
 
-public class MoveBackAndForth : MonoBehaviour
+public class moveableblock : MonoBehaviour
 {
     public Vector3 direction = Vector3.right;
     public float speed = 2f;
     public float distance = 5f;
 
     private Vector3 startPosition;
-    private bool movingForward = true;
-    private float traveledDistance = 0f;
+    private bool movingforward = true;
+    private float traveleddistance = 0f;
 
     void Start()
     {
-        startPosition = transform.position;
+        startPosition = transform.position; // take the start pos
     }
 
     void Update()
     {
-        float moveStep = speed * Time.deltaTime;
+        float moveStep = speed * Time.deltaTime; //caculate how much to move this frame
 
-        if (movingForward)
+        if (movingforward) // when we move forward
         {
-            transform.Translate(direction * moveStep);
-            traveledDistance += moveStep;
+            transform.Translate(direction * moveStep); // move forforward
+            traveleddistance += moveStep; // how much we moves
 
-            if (traveledDistance >= distance)
-                movingForward = false;
+            if (traveleddistance >= distance) // if we move enough
+                movingforward = false;
         }
         else
         {
-            transform.Translate(-direction * moveStep);
-            traveledDistance -= moveStep;
+            transform.Translate(-direction * moveStep); // move in the opposite direction
+            traveleddistance -= moveStep; // we updae it
 
-            if (traveledDistance <= 0)
-                movingForward = true;
+            if (traveleddistance <= 0) // when move enough
+                movingforward = true; // move forward again
         }
     }
 }

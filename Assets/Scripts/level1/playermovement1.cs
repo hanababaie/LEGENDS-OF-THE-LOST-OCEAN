@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
 public class playermovement1 : MonoBehaviour
 {
     public playermovement2 p2;
+
     public GameObject boxUI;
     public Rigidbody2D rb;
     public Vector3 startpos;
@@ -102,14 +103,14 @@ public class playermovement1 : MonoBehaviour
     IEnumerator gettinghurtagain(float duration)
     {
         cangethurt = true;
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration); // waits for duration and during it we can get hurt
         cangethurt = false;
     }
 
     public void addcoin(int value)
     {
         coins += value;
-        cointext.text = coins.ToString("000");
+        cointext.text = coins.ToString("000"); // it changes the text
     }
 
     public void addhealth(int value)
@@ -117,7 +118,7 @@ public class playermovement1 : MonoBehaviour
         if (currentHealth < maxHealth)
         {
             currentHealth += value;
-            bar.Sethealth(currentHealth);
+            bar.Sethealth(currentHealth); // for updating the health bar
         }
     }
 
@@ -138,8 +139,8 @@ public class playermovement1 : MonoBehaviour
     IEnumerator speed(float value)
     {
         movespeed += value;
-        yield return new WaitForSeconds(10);
-        movespeed -= value;
+        yield return new WaitForSeconds(10); // for 10  seconds our speed is larger
+        movespeed -= value;  //back to original speed
     }
 
     public void addpower(float value)
@@ -150,7 +151,7 @@ public class playermovement1 : MonoBehaviour
     IEnumerator power(float value)
     {
         jumpforce += value;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(10); // waits for 10 sec 
         jumpforce -= value;
     }
 
@@ -160,10 +161,10 @@ public class playermovement1 : MonoBehaviour
         orstartpos = transform.parent;
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
-        p2 = GetComponent<playermovement2>();
+        p2 = GetComponent<playermovement2>(); // for having the script of the playermovement2
         currentHealth = maxHealth;
         currentlives = maxlives;
-        bar.Setmaxhealth(maxHealth);
+        bar.Setmaxhealth(maxHealth); // seting the health bar
         bar.Sethealth(currentHealth);
         updatevives();
 
@@ -171,16 +172,17 @@ public class playermovement1 : MonoBehaviour
 
     public void onmove(InputAction.CallbackContext context)
     {
-        horizontalmovement = context.ReadValue<Vector2>().x;
+        horizontalmovement = context.ReadValue<Vector2>().x; // for moving horizontally
+        // reads the value from the keyboard and then as long as its x is important and then update horizontal movement
     }
 
-    public void onjump(InputAction.CallbackContext context)
+    public void onjump(InputAction.CallbackContext context) // for jumping
     {
-        if (isgrounded())
+        if (isgrounded()) // checks if we are at ground
         {
-            if (context.performed)
+            if (context.performed) // if we hit the key
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce); // we give tis to rigidbody and it causes jump, x doesn't change
                 anim.SetBool("jump", true);
                 if (audioSource != null && jumpSound != null)
                 {
@@ -188,7 +190,7 @@ public class playermovement1 : MonoBehaviour
                 }
 
             }
-            else if (context.canceled)
+            else if (context.canceled) // if leave the ley it jump less this time(half)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
             }
@@ -198,66 +200,77 @@ public class playermovement1 : MonoBehaviour
 
     public void ondash(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash)
+        if (context.performed && canDash) // if key is pressed and we can dash
         {
-            StartCoroutine("dashroutine");
+            StartCoroutine("dashroutine"); // start the coroutine
         }
     }
 
 
     public IEnumerator dashroutine()
 {
-    Physics2D.IgnoreLayerCollision(6, 8, true);
+    Physics2D.IgnoreLayerCollision(6, 8, true); // it is set so enemies and player doesn't collide
+                                                // player is at layer 6 and enemies at 8
+                                                // true means we want to ignore the collide
+    
     canDash = false;
     isDashing = true;
     trail.emitting = true;
 
-    float grav = rb.gravityScale;
-    rb.gravityScale = 0f;
+    float grav = rb.gravityScale; // we store the gravity to use later
+    rb.gravityScale = 0f; // set gravity to 0 so when it doesn't fall
 
-    float dashdirection = facingright ? 1f : -1f;
-    rb.linearVelocity = new Vector2(dashdirection * dashspeed, 0f);
+    float dashdirection = facingright ? 1f : -1f; //set the direction based on the direction of the player
 
-    float hit = 0f;
+    rb.linearVelocity = new Vector2(dashdirection * dashspeed, 0f); // apply the dash force
 
-    while (hit < dashtime)
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 1f, enemylayers);
-        foreach (Collider2D enemy in hitEnemies)
+    float hit = 0f; // timer for checking how much time we still have
+
+        while (hit < dashtime) //while we have time
         {
-            Enemypatrolling patrolling = enemy.GetComponent<Enemypatrolling>();
-            if (patrolling != null)
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 1f, enemylayers);
+            // check for the enemies near the player
+
+            foreach (Collider2D enemy in hitEnemies)
+            // set a for each for the enemies
             {
-                patrolling.TakeDamage(1);
+                Enemypatrolling patrolling = enemy.GetComponent<Enemypatrolling>();
+                if (patrolling != null)
+                {
+                    patrolling.TakeDamage(1);
+                    // if it does have the script of patrolling take damage
+                }
+                EnemyShooting shooting = enemy.GetComponent<EnemyShooting>();
+                if (shooting != null)
+                {
+                    shooting.TakeDamage(1);
+                    // if it has the shooting script takes damage
+                }
             }
-            EnemyShooting shooting = enemy.GetComponent<EnemyShooting>();
-            if (shooting != null)
-            {
-                shooting.TakeDamage(1);
-            }
-        }
-        hit += Time.deltaTime;
-        yield return null;
+            hit += Time.deltaTime;
+            //updating the timer
+            yield return null;
+        // wait for the next frame
     }
 
-    rb.linearVelocity = Vector2.zero;
-    trail.emitting = false;
-    rb.gravityScale = grav;
+    rb.linearVelocity = Vector2.zero; // resetting the velocity to stop the dash
+    trail.emitting = false; // turn of the trail
+    rb.gravityScale = grav; // reset the gravity to its original
     isDashing = false;
-    Physics2D.IgnoreLayerCollision(6, 8, false);
+    Physics2D.IgnoreLayerCollision(6, 8, false); // we turn of ignoring the colliders
 
-    yield return new WaitForSeconds(dashcoldown);
+    yield return new WaitForSeconds(dashcoldown); // waits for the coldown so after that we can dash
     canDash = true;
 }
 
 
     void Update()
     {
-        if (!isgrounded())
+        if (!isgrounded()) //if we are not on the ground
         {
-            if (!falling)
+            if (!falling) 
             {
-                fally = transform.position.y;
+                fally = transform.position.y; // store the y in the beginning
                 falling = true;
             }
         }
@@ -265,8 +278,8 @@ public class playermovement1 : MonoBehaviour
         {
             if (falling)
             {
-                float falldis = fally - transform.position.y;
-                if (falldis > 80f)
+                float falldis = fally - transform.position.y; // check the distance we fel
+                if (falldis > 100f)  // if it was greater that 100  we get hurt
                 {
                     TakeDamage(1);
                     Debug.Log("demage: " + falldis);
@@ -275,20 +288,21 @@ public class playermovement1 : MonoBehaviour
             }
         }
 
-        if (!isDashing)
+        if (!isDashing) // when we don't dash we upadte the movement
             rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
         if (canDash)
         {
-            dashicon.SetActive(true);
+            dashicon.SetActive(true); // apear the dash icon
         }
         if (!canDash)
         {
-            dashicon.SetActive(false);
+            dashicon.SetActive(false); // disapear
         }
-        anim.SetFloat("magnitude", Mathf.Abs(horizontalmovement));
-        anim.SetBool("jump", !isgrounded());
 
-        if (horizontalmovement > 0 && !facingright)
+        anim.SetFloat("magnitude", Mathf.Abs(horizontalmovement)); //idle
+        anim.SetBool("jump", !isgrounded()); //jump
+
+        if (horizontalmovement > 0 && !facingright) // check fo the dirction and flip the player
         {
             flip();
         }
@@ -298,16 +312,17 @@ public class playermovement1 : MonoBehaviour
             flip();
         }
 
-        if (isclimbing)
+        if (isclimbing) // for climbing the latter
         {
             float vertical = Input.GetAxis("Vertical");
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
         }
+        
         if (inwater)
         {
-            watertime += Time.deltaTime;
+            watertime += Time.deltaTime; // timer
 
-            if (watertime >= 5f)
+            if (watertime >= 5f) // more than 5 sce in water -> take damage
             {
                 TakeDamage(currentHealth);
                 watertime = 0f;
@@ -319,9 +334,10 @@ public class playermovement1 : MonoBehaviour
 
 
 
-    private bool isgrounded()
+    private bool isgrounded() 
     {
         if (Physics2D.OverlapBox(groundCheckpos.position, groundChecksize, 0, ground))
+        // check if any block with layer groud has collide with the box
         {
             return true;
         }
@@ -357,6 +373,7 @@ public class playermovement1 : MonoBehaviour
             anim.SetTrigger("attack");
 
             Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackpoint.position, attackrange, enemylayers);
+            // take the enemies near the player in attack range 
 
             foreach (Collider2D enemy in hitenemies)
             {
@@ -379,13 +396,13 @@ public class playermovement1 : MonoBehaviour
 
             if (audioSource != null && attackSound != null)
             {
-                audioSource.PlayOneShot(attackSound);
+                audioSource.PlayOneShot(attackSound); // plays the attack sound
             }
         }
 
 
     }
-    public void OnDrawGizmosSelected()
+    public void OnDrawGizmosSelected() // used to set the attack range
     {
 
         if (attackpoint == null)
@@ -398,16 +415,18 @@ public class playermovement1 : MonoBehaviour
     public void flip()
     {
         Vector3 theScale = gameObject.transform.localScale;
-        theScale.x *= -1;
-        gameObject.transform.localScale = theScale;
-        facingright = !facingright;
+        // get the size of the player
+        theScale.x *= -1; // rotate it in x 
+        gameObject.transform.localScale = theScale; //aplly the scale
+        facingright = !facingright; // change the position
     }
-    public bool jj = false;
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("latter"))
         {
-            rb.gravityScale = 0f;
+            rb.gravityScale = 0f; // when on ladder we set the graviy to 0
             isclimbing = true;
         }
         if (collision.CompareTag("water"))
@@ -451,7 +470,7 @@ public class playermovement1 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("movingblock"))
         {
-            transform.parent = collision.transform;
+            transform.parent = collision.transform; // so that the player move with the block
         }
     }
 
@@ -484,7 +503,7 @@ public class playermovement1 : MonoBehaviour
         if (currentHealth <= 0) return;
 
         currentHealth -= amount;
-        bar.Sethealth(currentHealth);
+        bar.Sethealth(currentHealth); //updating the healthbar
         hurt();
 
         if (currentHealth <= 0)
@@ -504,17 +523,18 @@ public class playermovement1 : MonoBehaviour
 
                 anim.SetTrigger("die");
                 currentHealth = maxHealth;
-                bar.Sethealth(currentHealth);
+                bar.Sethealth(currentHealth); //reset the health bar
 
 
-                Transform originalParent = transform.parent;
-                transform.SetParent(null); // موقت جدا کردن از parent
-                transform.position = startpos;
-                transform.SetParent(originalParent);
+                Transform originalParent = transform.parent; //store the parent of the player
+                transform.SetParent(null); // set free the player from any parent
+                transform.position = startpos; // change the positon to the begining
+                transform.SetParent(originalParent); // set the parent
 
             }
         }
-        if (cangethurt) return;
+
+        if (cangethurt) return; // for that time to get hurt
         
 
 
@@ -527,11 +547,11 @@ public class playermovement1 : MonoBehaviour
         {
             if (i < currentlives)
             {
-                lifeimages[i].color = activeColor;
+                lifeimages[i].color = activeColor; // turn of the icon
             }
             else
             {
-                lifeimages[i].color = inactiveColor;
+                lifeimages[i].color = inactiveColor; //turn of the icon
             }
         }
     }
