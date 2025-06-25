@@ -1,10 +1,13 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+
 
 public class sencemanager : MonoBehaviour
 {
-    public static sencemanager Instance;
+    public static sencemanager Instance; // a singlton
 
     public playermovement1 player1;
     public playermovement2 player2;
@@ -25,13 +28,13 @@ public class sencemanager : MonoBehaviour
 
         ready();
         ready2();
-        if (player1.currentlives <= 0 || player2.currentlives <= 0)
+        if (player1.currentlives <= 0 || player2.currentlives <= 0) // check if we are lost or not
         {
             GameOver();
         }
     }
 
-    public void ready()
+    public void ready() // for level on
     {
         if (player1.haskey && player1.atship && player2.haskey && player2.atship)
         {
@@ -39,7 +42,7 @@ public class sencemanager : MonoBehaviour
         }
     }
 
-    public void ready2()
+    public void ready2() // for level  two
     {
         if (player2.finalkey && player1.atfinaldoor && player2.atfinaldoor)
         {
@@ -59,8 +62,14 @@ public class sencemanager : MonoBehaviour
         SceneManager.LoadScene("gameover");
     }
 
-    public void LoadNextLevel()
+     public void LoadNextLevel()
     {
-        SceneManager.LoadScene("level2");
+        StartCoroutine(loading("level2", 5f)); // show level 2 after 5 sec
+    }
+
+    private IEnumerator loading(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay); // wait 5 sec 
+        SceneManager.LoadScene(sceneName);
     }
 }

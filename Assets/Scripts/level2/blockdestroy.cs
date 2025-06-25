@@ -8,20 +8,20 @@ public class blockdestroy : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && p1.isDashing)
+        if (other.gameObject.CompareTag("Player") && p1.isDashing) // if player1 hit it when dashing
         {
             Destroy();
         }
-        if (other.gameObject.CompareTag("bullet"))
+        if (other.gameObject.CompareTag("bullet")) // if player 2 hit it with bullet
         {
             Destroy();
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); // destroy the bullet
         }
     }
 
     public void Destroy()
     {
-        audioSource.PlayOneShot(breaking);
+        audioSource.PlayOneShot(breaking); // play the music
         Destroy(gameObject);
     }
 }

@@ -8,7 +8,7 @@ public class portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !istele)
+        if (other.CompareTag("Player") && !istele) // when we hit it and we are not teleporting
         {
             StartCoroutine(Teleport(other));
         }
@@ -16,18 +16,18 @@ public class portal : MonoBehaviour
 
     private System.Collections.IEnumerator Teleport(Collider2D player)
     {
-        istele = true;
+        istele = true; // we are teleporting
 
-        portal destPortal = destinationPortal.GetComponent<portal>();
+        portal destPortal = destinationPortal.GetComponent<portal>(); // take the componnet of it
         if (destPortal != null)
         {
-            destPortal.istele = true;
+            destPortal.istele = true; // now portal2 is busy
         }
 
 
-        player.transform.position = destinationPortal.position;
+        player.transform.position = destinationPortal.position; // transform the player
 
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(cooldown); // wait to do it again
         istele = false;
 
         if (destPortal != null)

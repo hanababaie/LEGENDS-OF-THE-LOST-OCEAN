@@ -17,13 +17,13 @@ public class dodr1 : MonoBehaviour
 
     public void Start()
     {
-        spriterenderer = GetComponent<SpriteRenderer>();
+        spriterenderer = GetComponent<SpriteRenderer>(); // take the sprite renderer
 
     }
 
     void OnTriggerEnter2D(Collider2D other)
 {
-    if (p1.haskey2)
+    if (p1.haskey2) // if player 1 has the key we can open the door 
     {
         Debug.Log("opened");
         opendoor();
@@ -33,11 +33,12 @@ public class dodr1 : MonoBehaviour
     public void opendoor()
     {
         audioSource.PlayOneShot(opendoorsound);
-        oldtile.SetActive(false);
+
+        oldtile.SetActive(false); // turn of the old set tile 
         gameObject.SetActive(false);
 
-        newtile.SetActive(true);
-        portal.SetActive(true);
+        newtile.SetActive(true); // active the new tiles
+        portal.SetActive(true); // active the portal
     }
         
 }

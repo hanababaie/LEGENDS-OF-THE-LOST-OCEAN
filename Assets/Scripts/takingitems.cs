@@ -11,7 +11,7 @@ public class takingitems : MonoBehaviour
         {
             var p1 = other.GetComponent<playermovement1>();
             var p2 = other.GetComponent<playermovement2>();
-            if (p1 != null)
+            if (p1 != null) // if player has script 1
             {
                 switch (loot.lootname)
                 {
@@ -43,7 +43,7 @@ public class takingitems : MonoBehaviour
                 }
             }
 
-            if (p2 != null)
+            if (p2 != null) // if player has script 2
             {
                 switch (loot.lootname)
                 {

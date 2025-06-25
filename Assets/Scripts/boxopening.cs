@@ -25,7 +25,7 @@ public class boxopening : MonoBehaviour
 
     void Update()
     {
-        if (isBoxUIActive && Input.GetKeyDown(KeyCode.Escape))
+        if (isBoxUIActive && Input.GetKeyDown(KeyCode.Escape)) // pressing the  key and close it
         {
             CloseBoxUI();
         }
@@ -35,31 +35,34 @@ public class boxopening : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isOpened)
         {
-            player = other.gameObject;
+            player = other.gameObject; // we set the player
             isOpened = true;
             Debug.Log("Box opened!");
 
-            StartCoroutine(OpenBox());
+            StartCoroutine(OpenBox()); // start the process
         }
     }
 
     IEnumerator OpenBox()
     {
         animator.SetTrigger("open");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f); // showing the open animation
 
-        lootsystem item = GetRandomItem();
+        lootsystem item = GetRandomItem(); // get the item
         if (item == null)
         {
             Debug.LogWarning("No item dropped.");
             yield break;
         }
 
-        if (player.TryGetComponent<playermovement1>(out var p1))
+        // find which ui for which player should open
+
+        if (player.TryGetComponent<playermovement1>(out var p1)) // if the player has the playermovement1 script
         {
             boxUI = p1.boxUI;
         }
-        else if (player.TryGetComponent<playermovement2>(out var p2))
+
+        else if (player.TryGetComponent<playermovement2>(out var p2)) // if the player has the playermovement2 script
         {
             boxUI = p2.boxUI;
         }
@@ -75,16 +78,16 @@ public class boxopening : MonoBehaviour
             textBox = boxUI.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
             boxUI.SetActive(true);
-            imageBox.sprite = item.lootsprite;
-            textBox.text = item.lootname;
+            imageBox.sprite = item.lootsprite; //change the image sprite
+            textBox.text = item.lootname; // cahnge the text
             isBoxUIActive = true;
         }
 
         GameObject tempLoot = new GameObject("TempLoot");
-        var take = tempLoot.AddComponent<takingitems>();
+        var take = tempLoot.AddComponent<takingitems>(); // acessing the takingitem script
         take.loot = item;
         take.OnTriggerEnter2D(player.GetComponent<Collider2D>());
-        Destroy(tempLoot);
+        Destroy(tempLoot); // destroy the loot
 
         Debug.Log($"Player got: {item.lootname}");
 
@@ -95,6 +98,7 @@ public class boxopening : MonoBehaviour
             yield return null;
         }
 
+        // wait for a time to close the ui
         CloseBoxUI();
 
         Destroy(gameObject);
@@ -112,18 +116,19 @@ public class boxopening : MonoBehaviour
     lootsystem GetRandomItem()
     {
         int random = Random.Range(1, 101); // 1 to 100
-        List<lootsystem> possible = new List<lootsystem>();
+
+        List<lootsystem> possible = new List<lootsystem>(); // create a list for possible loots
 
         foreach (lootsystem item in items)
         {
             if (random <= item.dropchance)
             {
-                possible.Add(item);
+                possible.Add(item); // add to the list
             }
         }
 
         if (possible.Count == 0) return null;
 
-        return possible[Random.Range(0, possible.Count)];
+        return possible[Random.Range(0, possible.Count)]; // randomly chose 1 item form the list
     }
 }
