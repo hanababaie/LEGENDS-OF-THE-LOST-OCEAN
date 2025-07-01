@@ -87,10 +87,10 @@ GameObject:
   - component: {fileID: 6828089661539349309}
   - component: {fileID: 5251143946935653796}
   - component: {fileID: 6836318581688819569}
-  - component: {fileID: 3378659531592023932}
   - component: {fileID: 5233730359874724154}
   - component: {fileID: 5986385594006094010}
   - component: {fileID: 586811078757900442}
+  - component: {fileID: 637373286339108923}
   m_Layer: 8
   m_Name: Shootercrab
   m_TagString: enemy
@@ -113,8 +113,6 @@ Transform:
   m_Children:
   - {fileID: 8872613091677237079}
   - {fileID: 5065320141621648658}
-  - {fileID: 4583108773702776329}
-  - {fileID: 324379398134150207}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6828089661539349309
@@ -221,26 +219,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3378659531592023932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2957738038926114979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06e9c39066c01944e97654cd63229b10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 6
-  bullet: {fileID: 782628016683332379, guid: 0ef5936050409074abc9aaa817392846, type: 3}
-  bulletPos: {fileID: 5065320141621648658}
-  healthUI: {fileID: 6538588798959504886}
-  shootSound: {fileID: 8300000, guid: 6646b64f6e2ac994f80c7fe0f1388582, type: 3}
-  deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
-  leftViewLimit: {fileID: 324379398134150207}
-  rightViewLimit: {fileID: 4583108773702776329}
 --- !u!114 &5233730359874724154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,6 +781,26 @@ PolygonCollider2D:
       - {x: 1.8299999, y: 1.555}
       - {x: 1.8299999, y: 1.5649999}
   m_UseDelaunayMesh: 0
+--- !u!114 &637373286339108923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2957738038926114979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ff1f087fc31fa4382a32f1af87e76f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  bullet: {fileID: 2265184198519310520, guid: a32e83d58a962da4386f640fa0ad6253, type: 3}
+  bulletPos: {fileID: 5065320141621648658}
+  detectionRadius: 5
+  shootInterval: 3
+  shootSound: {fileID: 8300000, guid: 6646b64f6e2ac994f80c7fe0f1388582, type: 3}
+  deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
+  healthUI: {fileID: 6538588798959504886}
 --- !u!1 &4284488152955356886
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +826,7 @@ Transform:
   m_GameObject: {fileID: 4284488152955356886}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03, y: -1.57, z: 0}
+  m_LocalPosition: {x: -0.14, y: -1.57, z: 0}
   m_LocalScale: {x: 0.028779412, y: 0.026982171, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -955,65 +953,3 @@ MonoBehaviour:
   health50: {fileID: -6256569922015830096, guid: 934ec67a687d18147a9a0fad6a485e36, type: 3}
   health25: {fileID: 4096809592576409456, guid: 934ec67a687d18147a9a0fad6a485e36, type: 3}
   health0: {fileID: -1689989432556622034, guid: 934ec67a687d18147a9a0fad6a485e36, type: 3}
---- !u!1 &7869223535854449211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 324379398134150207}
-  m_Layer: 8
-  m_Name: leftViewLimit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &324379398134150207
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7869223535854449211}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.12, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7157470840207425074}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8459433231090203000
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4583108773702776329}
-  m_Layer: 8
-  m_Name: rightViewLimit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4583108773702776329
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8459433231090203000}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.71, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7157470840207425074}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

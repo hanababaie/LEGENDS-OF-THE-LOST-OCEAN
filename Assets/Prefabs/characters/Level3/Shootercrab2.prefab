@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4585523950242064810}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.276, y: -2.35, z: 0}
+  m_LocalPosition: {x: -0.14, y: -2.33, z: 0}
   m_LocalScale: {x: 0.028779412, y: 0.026982171, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,37 +152,6 @@ MonoBehaviour:
   health50: {fileID: -2506030588037272182, guid: 934ec67a687d18147a9a0fad6a485e36, type: 3}
   health25: {fileID: 3006025174615210104, guid: 934ec67a687d18147a9a0fad6a485e36, type: 3}
   health0: {fileID: -7822857916801055162, guid: 934ec67a687d18147a9a0fad6a485e36, type: 3}
---- !u!1 &5178757228232422974
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3206754187921141758}
-  m_Layer: 8
-  m_Name: leftViewLimit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3206754187921141758
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5178757228232422974}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3974054765074697904}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5690881139826975915
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +243,7 @@ GameObject:
   - component: {fileID: 5646806362535786458}
   - component: {fileID: 4926178282772870959}
   - component: {fileID: 8210280931698383938}
+  - component: {fileID: 1947058588098124323}
   m_Layer: 8
   m_Name: Shootercrab2
   m_TagString: enemy
@@ -296,8 +266,6 @@ Transform:
   m_Children:
   - {fileID: 4067879007178809511}
   - {fileID: 6652425215819759802}
-  - {fileID: 2997258499936861984}
-  - {fileID: 3206754187921141758}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &860063187160074554
@@ -422,8 +390,8 @@ MonoBehaviour:
   healthUI: {fileID: 3409523978576064047}
   shootSound: {fileID: 8300000, guid: 6646b64f6e2ac994f80c7fe0f1388582, type: 3}
   deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
-  leftViewLimit: {fileID: 3206754187921141758}
-  rightViewLimit: {fileID: 2997258499936861984}
+  leftViewLimit: {fileID: 0}
+  rightViewLimit: {fileID: 0}
 --- !u!114 &5646806362535786458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1452,34 +1420,23 @@ PolygonCollider2D:
       - {x: -1.885, y: -0.355}
       - {x: -1.905, y: -0.33499998}
   m_UseDelaunayMesh: 0
---- !u!1 &8980450964616821397
-GameObject:
+--- !u!114 &1947058588098124323
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2997258499936861984}
-  m_Layer: 8
-  m_Name: rightViewLimit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2997258499936861984
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8980450964616821397}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3974054765074697904}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 6539763524536066110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ff1f087fc31fa4382a32f1af87e76f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  bullet: {fileID: 1903116115136605084, guid: 667d0c177c4ae6b4789214c72f4678ea, type: 3}
+  bulletPos: {fileID: 6652425215819759802}
+  detectionRadius: 20
+  shootInterval: 3
+  shootSound: {fileID: 8300000, guid: 6646b64f6e2ac994f80c7fe0f1388582, type: 3}
+  deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
+  healthUI: {fileID: 3409523978576064047}
