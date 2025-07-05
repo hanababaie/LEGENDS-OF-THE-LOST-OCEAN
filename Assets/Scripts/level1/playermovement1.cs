@@ -246,6 +246,11 @@ public class playermovement1 : MonoBehaviour
                     shooting.TakeDamage(1);
                     // if it has the shooting script takes damage
                 }
+                BossController boss = enemy.GetComponent<BossController>();
+                if (boss != null)
+                {
+                    boss.TakeDamage(1);
+                }
             }
             hit += Time.deltaTime;
             //updating the timer
@@ -391,6 +396,12 @@ public class playermovement1 : MonoBehaviour
                 {
                     shooting.TakeDamage(1);
                     Debug.Log("Hit shooting enemy");
+                }
+                BossController boss = enemy.GetComponent<BossController>();
+                if (boss != null)
+                {
+                    boss.TakeDamage(3);
+                    Debug.Log("Hit Boss enemy");
                 }
             }
 

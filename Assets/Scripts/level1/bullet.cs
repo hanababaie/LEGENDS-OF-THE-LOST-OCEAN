@@ -33,6 +33,11 @@ public class bullet : MonoBehaviour
             {
                 enemyp.TakeDamage(2);
             }
+            BossController boss = collision.gameObject.GetComponent<BossController>();
+            if (boss != null && boss.isActiveAndEnabled)
+            {
+                boss.TakeDamage(5);  // مقدار آسیب دلخواه به Boss
+            }
 
             destroy(); // destroy the bullet
         }
