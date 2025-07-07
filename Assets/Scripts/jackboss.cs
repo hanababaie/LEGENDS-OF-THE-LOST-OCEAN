@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class playermovement1 : MonoBehaviour
+public class jackboss : MonoBehaviour
 {
     public playermovement2 p2;
 
@@ -17,6 +17,7 @@ public class playermovement1 : MonoBehaviour
     public Vector3 startpos;
     public Transform orstartpos;
     public float horizontalmovement;
+    public float verticalmovement;
     public float movespeed = 20;
     public bool facingright = true;
 
@@ -98,12 +99,6 @@ public class playermovement1 : MonoBehaviour
     public AudioClip deathSound;
     public AudioClip jumpSound;
 
-    public float verticalmovement;
-
-    public bool isLevel3;
-
-
-
 
 
     IEnumerator gettinghurtagain(float duration)
@@ -163,12 +158,6 @@ public class playermovement1 : MonoBehaviour
 
     private void Start()
     {
-
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "boss fight")
-        {
-            isLevel3 = true;
-        }
-    
         startpos = transform.position;
         orstartpos = transform.parent;
         trail = GetComponent<TrailRenderer>();
@@ -306,15 +295,8 @@ public class playermovement1 : MonoBehaviour
             }
         }
 
-       if (isLevel3 && !isDashing && !isclimbing)
-        {
+        if (!isDashing) // when we don't dash we upadte the movement
             rb.linearVelocity = new Vector2(horizontalmovement * movespeed, verticalmovement * movespeed);
-        }
-        else if (!isDashing && !isLevel3)
-        {
-            rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
-        }
-
         if (canDash)
         {
             dashicon.SetActive(true); // apear the dash icon
@@ -323,24 +305,14 @@ public class playermovement1 : MonoBehaviour
         {
             dashicon.SetActive(false); // disapear
         }
-         if (isLevel3)
-        {
-            Vector2 moveDirection = new Vector2(horizontalmovement, verticalmovement);
-            anim.SetFloat("magnitude", moveDirection.magnitude); // شدت کلی حرکت
 
-        }
-        
-         if (!isLevel3)
-        {
-            anim.SetFloat("magnitude", Mathf.Abs(horizontalmovement));
-            anim.SetBool("jump", !isgrounded()); //jump
-        }
-        
+        anim.SetFloat("magnitude", Mathf.Abs(horizontalmovement)); //idle
+        anim.SetBool("jump", !isgrounded()); //jump
 
         if (horizontalmovement > 0 && !facingright) // check fo the dirction and flip the player
-            {
-                flip();
-            }
+        {
+            flip();
+        }
 
         if (horizontalmovement < 0 && facingright)
         {

@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.Rendering;
 
-public class playermovement2 : MonoBehaviour
+public class willboss : MonoBehaviour
 {
 
 
@@ -15,6 +16,7 @@ public class playermovement2 : MonoBehaviour
     public Rigidbody2D rb;
     public Vector3 startpos;
     public float horizontalmovement;
+    public float verticalmovement;
     public float movespeed = 20;
     public bool facingright = true;
 
@@ -74,12 +76,6 @@ public class playermovement2 : MonoBehaviour
     public AudioClip deathSound;
     public AudioClip jumpSound;
 
-    public float verticalmovement;
-
-    public bool isLevel3;
-
-  
-
 
 
     public void addcoin(int value)
@@ -134,11 +130,6 @@ public class playermovement2 : MonoBehaviour
 
     private void Start()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "boss fight")
-        {
-            isLevel3 = true;
-        }
-
         startpos = transform.position;
         
         anim = GetComponent<Animator>();
@@ -210,30 +201,11 @@ public class playermovement2 : MonoBehaviour
         }
         if (isDead) return;
 
-        if (isLevel3  && !isclimbing)
-        {
-            rb.linearVelocity = new Vector2(horizontalmovement * movespeed, verticalmovement * movespeed);
-        }
-        else if (!isLevel3)
-        {
-            rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
-        }
-
-
+        rb.linearVelocity = new Vector2(horizontalmovement * movespeed, verticalmovement * movespeed);
         groundcheck();
 
-        
-        if (isLevel3)
-        {
-            Vector2 moveDirection = new Vector2(horizontalmovement, verticalmovement);
-            anim.SetFloat("speed", moveDirection.magnitude); // شدت کلی حرکت
-
-        }
-         if (!isLevel3)
-        {   
-            anim.SetFloat("speed", Mathf.Abs(horizontalmovement));
-            anim.SetBool("jump", !isgrounded()); //jump
-        }
+        anim.SetFloat("speed", Mathf.Abs(horizontalmovement));
+        anim.SetBool("jump", !isgrounded());
 
         if (horizontalmovement < 0 && !facingright) flip();
         if (horizontalmovement > 0 && facingright) flip();
