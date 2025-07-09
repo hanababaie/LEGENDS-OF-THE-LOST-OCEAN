@@ -284,6 +284,7 @@ public class playermovement1 : MonoBehaviour
 
     void Update()
     {
+        
         if (!isgrounded()) //if we are not on the ground
         {
             if (!falling) 
