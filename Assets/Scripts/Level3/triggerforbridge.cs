@@ -1,9 +1,10 @@
+
 using UnityEngine;
 
 public class BridgeTriggerController : MonoBehaviour
 {
     public Camera maincamera;
-    public Vector3 newpos;
+    public Vector3 newpos = new Vector3(4450,-230,-10);
     public float movespeed = 2f;
 
     public GameObject wallBlock;
@@ -11,6 +12,11 @@ public class BridgeTriggerController : MonoBehaviour
     private bool player1Reached = false;
     private bool player2Reached = false;
     private bool cameramove = false;
+    public Vector3 startingpoint = new Vector3(4450,-800,-10);
+
+    public void Start(){
+        maincamera.transform.position = startingpoint;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
