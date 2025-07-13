@@ -22,7 +22,6 @@ public class ChunkGenerator : MonoBehaviour
         List<int> chunkSequence = generate();
 
         generateforplayers(startp1, chunkSequence);
-        generateforplayers(startp2, chunkSequence);
     }
 
     List<int> generate()

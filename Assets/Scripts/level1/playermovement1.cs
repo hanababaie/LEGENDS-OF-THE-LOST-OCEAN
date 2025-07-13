@@ -168,18 +168,34 @@ public class playermovement1 : MonoBehaviour
         {
             isLevel3 = true;
         }
-    
+
         startpos = transform.position;
         orstartpos = transform.parent;
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
         p2 = GetComponent<playermovement2>(); // for having the script of the playermovement2
-        currentHealth = maxHealth;
-        currentlives = maxlives;
-        bar.Setmaxhealth(maxHealth); // seting the health bar
+
+        gamedata savedata = savingsystem.loadingGame();
+
+        if (savedata.lastunlockedlevel > 1 && savedata.player1Data != null)
+        {
+            LoadPlayerData(savedata.player1Data);
+        }
+        else
+        {
+            currentHealth = maxHealth;
+            currentlives = maxlives;
+            coins = 0;
+            haskey = false;
+            haskey2 = false;
+            atship = false;
+            atfinaldoor = false;
+        }
+        
+        bar.Setmaxhealth(maxHealth);
         bar.Sethealth(currentHealth);
         updatevives();
-
+        cointext.text = coins.ToString("000");
     }
 
     public void onmove(InputAction.CallbackContext context)
@@ -221,23 +237,23 @@ public class playermovement1 : MonoBehaviour
 
 
     public IEnumerator dashroutine()
-{
-    Physics2D.IgnoreLayerCollision(6, 8, true); // it is set so enemies and player doesn't collide
-                                                // player is at layer 6 and enemies at 8
-                                                // true means we want to ignore the collide
-    
-    canDash = false;
-    isDashing = true;
-    trail.emitting = true;
+    {
+        Physics2D.IgnoreLayerCollision(6, 8, true); // it is set so enemies and player doesn't collide
+                                                    // player is at layer 6 and enemies at 8
+                                                    // true means we want to ignore the collide
 
-    float grav = rb.gravityScale; // we store the gravity to use later
-    rb.gravityScale = 0f; // set gravity to 0 so when it doesn't fall
+        canDash = false;
+        isDashing = true;
+        trail.emitting = true;
 
-    float dashdirection = facingright ? 1f : -1f; //set the direction based on the direction of the player
+        float grav = rb.gravityScale; // we store the gravity to use later
+        rb.gravityScale = 0f; // set gravity to 0 so when it doesn't fall
 
-    rb.linearVelocity = new Vector2(dashdirection * dashspeed, 0f); // apply the dash force
+        float dashdirection = facingright ? 1f : -1f; //set the direction based on the direction of the player
 
-    float hit = 0f; // timer for checking how much time we still have
+        rb.linearVelocity = new Vector2(dashdirection * dashspeed, 0f); // apply the dash force
+
+        float hit = 0f; // timer for checking how much time we still have
 
         while (hit < dashtime) //while we have time
         {
@@ -268,26 +284,26 @@ public class playermovement1 : MonoBehaviour
             hit += Time.deltaTime;
             //updating the timer
             yield return null;
-        // wait for the next frame
+            // wait for the next frame
+        }
+
+        rb.linearVelocity = Vector2.zero; // resetting the velocity to stop the dash
+        trail.emitting = false; // turn of the trail
+        rb.gravityScale = grav; // reset the gravity to its original
+        isDashing = false;
+        Physics2D.IgnoreLayerCollision(6, 8, false); // we turn of ignoring the colliders
+
+        yield return new WaitForSeconds(dashcoldown); // waits for the coldown so after that we can dash
+        canDash = true;
     }
-
-    rb.linearVelocity = Vector2.zero; // resetting the velocity to stop the dash
-    trail.emitting = false; // turn of the trail
-    rb.gravityScale = grav; // reset the gravity to its original
-    isDashing = false;
-    Physics2D.IgnoreLayerCollision(6, 8, false); // we turn of ignoring the colliders
-
-    yield return new WaitForSeconds(dashcoldown); // waits for the coldown so after that we can dash
-    canDash = true;
-}
 
 
     void Update()
     {
-        
+
         if (!isgrounded()) //if we are not on the ground
         {
-            if (!falling) 
+            if (!falling)
             {
                 fally = transform.position.y; // store the y in the beginning
                 falling = true;
@@ -307,7 +323,7 @@ public class playermovement1 : MonoBehaviour
             }
         }
 
-       if (isLevel3 && !isDashing && !isclimbing)
+        if (isLevel3 && !isDashing && !isclimbing)
         {
             rb.linearVelocity = new Vector2(horizontalmovement * movespeed, verticalmovement * movespeed);
         }
@@ -324,24 +340,24 @@ public class playermovement1 : MonoBehaviour
         {
             dashicon.SetActive(false); // disapear
         }
-         if (isLevel3)
+        if (isLevel3)
         {
             Vector2 moveDirection = new Vector2(horizontalmovement, verticalmovement);
             anim.SetFloat("magnitude", moveDirection.magnitude); // شدت کلی حرکت
 
         }
-        
-         if (!isLevel3)
+
+        if (!isLevel3)
         {
             anim.SetFloat("magnitude", Mathf.Abs(horizontalmovement));
             anim.SetBool("jump", !isgrounded()); //jump
         }
-        
+
 
         if (horizontalmovement > 0 && !facingright) // check fo the dirction and flip the player
-            {
-                flip();
-            }
+        {
+            flip();
+        }
 
         if (horizontalmovement < 0 && facingright)
         {
@@ -353,7 +369,7 @@ public class playermovement1 : MonoBehaviour
             float vertical = Input.GetAxis("Vertical");
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
         }
-        
+
         if (inwater)
         {
             watertime += Time.deltaTime; // timer
@@ -370,7 +386,7 @@ public class playermovement1 : MonoBehaviour
 
 
 
-    private bool isgrounded() 
+    private bool isgrounded()
     {
         if (Physics2D.OverlapBox(groundCheckpos.position, groundChecksize, 0, ground))
         // check if any block with layer groud has collide with the box
@@ -462,7 +478,7 @@ public class playermovement1 : MonoBehaviour
         gameObject.transform.localScale = theScale; //aplly the scale
         facingright = !facingright; // change the position
     }
-    
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -558,10 +574,10 @@ public class playermovement1 : MonoBehaviour
             }
             else
             {
-                  if (audioSource != null && deathSound != null)
-                        {
-                            audioSource.PlayOneShot(deathSound);
-                        }
+                if (audioSource != null && deathSound != null)
+                {
+                    audioSource.PlayOneShot(deathSound);
+                }
 
                 anim.SetTrigger("die");
                 currentHealth = maxHealth;
@@ -577,7 +593,7 @@ public class playermovement1 : MonoBehaviour
         }
 
         if (cangethurt) return; // for that time to get hurt
-        
+
 
 
 
@@ -597,7 +613,23 @@ public class playermovement1 : MonoBehaviour
             }
         }
     }
-    
+
     public Transform playerRoot; 
+    
+public void LoadPlayerData(playerdata data)
+{
+    currentHealth = data.health;
+    currentlives = data.lives;
+    coins = data.coins;
+    transform.position = data.position;
+    haskey = data.hasKey;
+    haskey2 = data.hasKey2;
+    atship = data.atShip;
+    atfinaldoor = data.atFinalDoor;
+    
+    bar.Sethealth(currentHealth);
+    updatevives();
+    cointext.text = coins.ToString("000");
+}
     
 }

@@ -36,14 +36,14 @@ public class playermovement2 : MonoBehaviour
     public float dashspeed = 50f;
     public float dashtime = 0.2f;
     public float dashcoldown = 8f;
-   
+
 
     public GameObject bulletref;
     public Transform FirePoint;
 
     private Animator anim;
     public int maxHealth = 2;
-    private int currentHealth;
+    public int currentHealth;
     private bool isDead = false;
 
     public healthbar bar;
@@ -78,7 +78,7 @@ public class playermovement2 : MonoBehaviour
 
     public bool isLevel3;
 
-  
+
 
 
 
@@ -140,14 +140,24 @@ public class playermovement2 : MonoBehaviour
         }
 
         startpos = transform.position;
-        
+
         anim = GetComponent<Animator>();
 
         bulletref = Resources.Load<GameObject>("Bullet"); // take the bullet form resoure folder
-        currentHealth = maxHealth;
+        gamedata savedata = savingsystem.loadingGame();
+
+        if (savedata.lastunlockedlevel > 1)
+        {
+            LoadPlayerData(savedata.player2Data);
+        }
+        else
+        {
+            currentHealth = maxHealth;
+            currentlives = maxlives;
+            coins = 0;
+        }
         bar.Setmaxhealth(maxHealth);
         bar.Sethealth(currentHealth);
-        currentlives = maxlives;
         updatelives();
     }
 
@@ -210,7 +220,7 @@ public class playermovement2 : MonoBehaviour
         }
         if (isDead) return;
 
-        if (isLevel3  && !isclimbing)
+        if (isLevel3 && !isclimbing)
         {
             rb.linearVelocity = new Vector2(horizontalmovement * movespeed, verticalmovement * movespeed);
         }
@@ -222,15 +232,15 @@ public class playermovement2 : MonoBehaviour
 
         groundcheck();
 
-        
+
         if (isLevel3)
         {
             Vector2 moveDirection = new Vector2(horizontalmovement, verticalmovement);
             anim.SetFloat("speed", moveDirection.magnitude); // شدت کلی حرکت
 
         }
-         if (!isLevel3)
-        {   
+        if (!isLevel3)
+        {
             anim.SetFloat("speed", Mathf.Abs(horizontalmovement));
             anim.SetBool("jump", !isgrounded()); //jump
         }
@@ -243,16 +253,16 @@ public class playermovement2 : MonoBehaviour
             float vertical = Input.GetAxis("Vertical");
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
         }
-        if(inwater)
+        if (inwater)
         {
             watertime += Time.deltaTime;
 
-        if(watertime >= 5f)
-        {
-            TakeDamage(currentHealth);
-            watertime = 0f;
+            if (watertime >= 5f)
+            {
+                TakeDamage(currentHealth);
+                watertime = 0f;
+            }
         }
-    }
 
     }
 
@@ -410,10 +420,10 @@ public class playermovement2 : MonoBehaviour
             }
             else
             {
-                  if (audioSource != null && deathSound != null)
-                        {
-                            audioSource.PlayOneShot(deathSound);
-                        }
+                if (audioSource != null && deathSound != null)
+                {
+                    audioSource.PlayOneShot(deathSound);
+                }
                 anim.SetTrigger("die");
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth);
@@ -459,26 +469,42 @@ public class playermovement2 : MonoBehaviour
 
         // اگر بخوای UI یا صحنه restart شه، اون رو هم اینجا اضافه کن
     }
+
+    public Transform playerRoot;
+
+    public void spawn()
+    {
+        StartCoroutine(RespawnWithDelay(0.5f));
+    }
+
+    private IEnumerator RespawnWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        playerRoot.position = startpos;
+        currentHealth = maxHealth;
+        bar.Sethealth(currentHealth);
+        anim.ResetTrigger("die");
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        gameObject.SetActive(true);
+    }
+
+    public void LoadPlayerData(playerdata data)
+{
+    currentHealth = data.health;
+    currentlives = data.lives;
+    coins = data.coins;
+    transform.position = data.position;
+    haskey = data.hasKey;
+    finalkey = data.hasKey2;
+    atship = data.atShip;
+    atfinaldoor = data.atFinalDoor;
     
-        public Transform playerRoot; 
-
-public void spawn()
-{
-    StartCoroutine(RespawnWithDelay(0.5f));
-}
-
-private IEnumerator RespawnWithDelay(float delay)
-{
-    yield return new WaitForSeconds(delay);
-
-    playerRoot.position = startpos;
-    currentHealth = maxHealth;
     bar.Sethealth(currentHealth);
-    anim.ResetTrigger("die");
-    rb.bodyType = RigidbodyType2D.Dynamic;
-    gameObject.SetActive(true);
+    updatelives();
+    cointext.text = coins.ToString("000");
 }
 
 
-   
+
 }

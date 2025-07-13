@@ -208,7 +208,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 519420031}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -446,7 +446,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 519420031}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ec81bbccc58364283bfcceb110955f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraToFollow: {fileID: 519420032}
+  cameraToFollow: {fileID: 0}
   scrollFactor: 0.001
 --- !u!23 &216853025
 MeshRenderer:
@@ -1688,8 +1688,8 @@ MonoBehaviour:
   finalChunk: {fileID: 1238312435943839533, guid: d5b169cc898fbeb4980e31cf12134b93, type: 3}
   player1: {fileID: 980659759}
   player2: {fileID: 421879639}
-  startPositionPlayer1: {x: 0, y: 0, z: 0}
-  startPositionPlayer2: {x: 0, y: 600, z: 0}
+  startp1: {x: -20, y: 0, z: 0}
+  startp2: {x: 20, y: 0, z: 0}
   chunkCount: 5
 --- !u!1 &490523508
 GameObject:
@@ -1780,7 +1780,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 575100285}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1796,11 +1796,6 @@ Canvas:
 --- !u!20 &519420031 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5621390603048739302, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
-  m_PrefabInstance: {fileID: 5855501083609205460}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &519420032 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7300546198448443291, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
   m_PrefabInstance: {fileID: 5855501083609205460}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &545080763
@@ -1955,11 +1950,6 @@ MonoBehaviour:
 --- !u!20 &575100285 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1010730171948160183, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
-  m_PrefabInstance: {fileID: 7048230521666037121}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &575100286 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8228025626504999625, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
   m_PrefabInstance: {fileID: 7048230521666037121}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &581689883
@@ -2126,7 +2116,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 519420031}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -2687,7 +2677,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 575100285}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3223,7 +3213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ec81bbccc58364283bfcceb110955f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraToFollow: {fileID: 519420032}
+  cameraToFollow: {fileID: 0}
   scrollFactor: 0.1
 --- !u!1 &769945690
 GameObject:
@@ -3330,7 +3320,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 519420031}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3465,7 +3455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ec81bbccc58364283bfcceb110955f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraToFollow: {fileID: 519420032}
+  cameraToFollow: {fileID: 0}
   scrollFactor: 0.001
 --- !u!23 &865600355
 MeshRenderer:
@@ -4572,7 +4562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ec81bbccc58364283bfcceb110955f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraToFollow: {fileID: 575100286}
+  cameraToFollow: {fileID: 0}
   scrollFactor: 0.1
 --- !u!1 &1176336323
 GameObject:
@@ -7479,6 +7469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 980659765}
   player2: {fileID: 421879645}
+  unloacked: 1
 --- !u!4 &2040009942
 Transform:
   m_ObjectHideFlags: 0
@@ -8247,11 +8238,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7575837057620858864, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7575837057620858864, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 600
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7575837057620858864, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_LocalPosition.z

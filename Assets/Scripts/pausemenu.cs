@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,6 +29,10 @@ public class pausemenu : MonoBehaviour
     public void mainmenu()
     {
         Time.timeScale = 1;
+        if (sencemanager.Instance != null)
+        {
+            sencemanager.Instance.savedgame();
+        }
         SceneManager.LoadScene("mianmenu");
     }
 

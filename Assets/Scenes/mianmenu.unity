@@ -1741,6 +1741,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelButtons: []
+  lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.7}
+  unlockedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1715373982
 GameObject:
   m_ObjectHideFlags: 0
