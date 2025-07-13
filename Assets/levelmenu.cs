@@ -3,25 +3,42 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class levelmenu : MonoBehaviour
+public class LevelMenu : MonoBehaviour
 {
-    public Button[] buttons;
-
-    private void Awake()
+    public Button[] levelButtons;
+    
+    private void Start()
     {
-        int unlockedlevel = PlayerPrefs.GetInt("unlockedlevel", 1);
-        for (int i = 0; i < buttons.Length; i++)
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        
+        for (int i = 0; i < levelButtons.Length; i++)
         {
-            buttons[i].interactable = false;
-        }
-        for (int i = 0; i < unlockedlevel; i++)
-        {
-            buttons[i].interactable = true;
+            if (i + 1 > unlockedLevel)
+            {
+                levelButtons[i].interactable = false;
+            }
         }
     }
-    public void openlevel(int level)
+    
+    public void OpenLevel(int level)
     {
-        String levelname = "level" + level;
-        SceneManager.LoadScene(levelname);
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        if (level > unlockedLevel)
+        {
+            Debug.Log("its locked");
+            return;
+        }
+        
+        string levelName = "level" + level;
+        SceneManager.LoadScene(levelName);
+    }
+    
+    public static void UnlockNextLevel(int currentLevel)
+    {
+        if (currentLevel >= PlayerPrefs.GetInt("UnlockedLevel", 1))
+        {
+            PlayerPrefs.SetInt("UnlockedLevel", currentLevel + 1);
+            PlayerPrefs.Save();
+        }
     }
 }

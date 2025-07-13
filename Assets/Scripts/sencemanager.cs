@@ -34,20 +34,19 @@ public class sencemanager : MonoBehaviour
         }
     }
 
-    public void ready() // for level on
+    public void ready()
     {
         if (player1.haskey && player1.atship && player2.haskey && player2.atship)
         {
-            LoadNextLevel();
+            LevelCompleted(1);
         }
     }
 
-    public void ready2() // for level  two
+    public void ready2()
     {
         if (player2.finalkey && player1.atfinaldoor && player2.atfinaldoor)
         {
-            Debug.Log("next");
-            SceneManager.LoadScene("nextlevel");
+            LevelCompleted(2);
         }
     }
 
@@ -62,7 +61,7 @@ public class sencemanager : MonoBehaviour
         SceneManager.LoadScene("gameover");
     }
 
-     public void LoadNextLevel()
+    public void LoadNextLevel()
     {
         StartCoroutine(loading("level2", 5f)); // show level 2 after 5 sec
     }
@@ -72,4 +71,12 @@ public class sencemanager : MonoBehaviour
         yield return new WaitForSeconds(delay); // wait 5 sec 
         SceneManager.LoadScene(sceneName);
     }
+    
+public void LevelCompleted(int index)
+{
+    
+    LevelMenu.UnlockNextLevel(index);
+    
+    SceneManager.LoadScene("mianmenu");
+}
 }

@@ -361,9 +361,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff66e81ef97e6724e93936317667cf13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxUI: {fileID: 0}
   rb: {fileID: 8571647271481567818}
+  startpos: {x: 0, y: 0, z: 0}
   horizontalmovement: 0
-  movespeed: 20
+  movespeed: 30
   facingright: 0
   jumpforce: 100
   groundCheckpos: {fileID: 655969157078873543}
@@ -371,6 +373,8 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 128
+  falling: 0
+  fally: 0
   maxjump: 2
   climbspeed: 5
   dashspeed: 50
@@ -387,9 +391,19 @@ MonoBehaviour:
   inactiveColor: {r: 1, g: 1, b: 1, a: 0.3}
   coins: 0
   cointext: {fileID: 0}
+  watericon: {fileID: 0}
   haskey: 0
   atship: 0
   keyicon: {fileID: 0}
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  jumpSound: {fileID: 0}
+  verticalmovement: 0
+  isLevel3: 0
+  finalkey: 0
+  atfinaldoor: 0
+  playerRoot: {fileID: 0}
 --- !u!95 &9152809850386142401
 Animator:
   serializedVersion: 7
