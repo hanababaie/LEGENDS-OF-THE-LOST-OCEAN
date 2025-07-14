@@ -174,24 +174,11 @@ public class playermovement1 : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
         p2 = GetComponent<playermovement2>(); // for having the script of the playermovement2
-
-        gamedata savedata = savingsystem.loadingGame();
-
-        if (savedata.lastunlockedlevel > 1 && savedata.player1Data != null)
-        {
-            LoadPlayerData(savedata.player1Data);
-        }
-        else
-        {
-            currentHealth = maxHealth;
-            currentlives = maxlives;
-            coins = 0;
-            haskey = false;
-            haskey2 = false;
-            atship = false;
-            atfinaldoor = false;
-        }
         
+
+          if (currentHealth <= 0) currentHealth = maxHealth;
+        if (currentlives <= 0) currentlives = maxlives;
+
         bar.Setmaxhealth(maxHealth);
         bar.Sethealth(currentHealth);
         updatevives();
@@ -503,7 +490,7 @@ public class playermovement1 : MonoBehaviour
         if (collision.CompareTag("ship"))
         {
             atship = true;
-            sencemanager.Instance.ready();
+            
         }
 
         if (collision.CompareTag("obstecle"))
@@ -616,20 +603,28 @@ public class playermovement1 : MonoBehaviour
 
     public Transform playerRoot; 
     
-public void LoadPlayerData(playerdata data)
-{
-    currentHealth = data.health;
-    currentlives = data.lives;
-    coins = data.coins;
+    public PlayerData GetPlayerData()
+    {
+        return new PlayerData
+        {
+            health = currentHealth,
+            lives = currentlives,
+            coins = coins,
+            hasKey = haskey,
+            hasKey2 = haskey2,
+            atShip = atship,
+            atFinalDoor = atfinaldoor
+        };
+    }
 
-    haskey = data.hasKey;
-    haskey2 = data.hasKey2;
-    atship = data.atShip;
-    atfinaldoor = data.atFinalDoor;
-    
-    bar.Sethealth(currentHealth);
-    updatevives();
-    cointext.text = coins.ToString("000");
-}
-    
+    public void LoadPlayerData(PlayerData data)
+    {
+        currentHealth = data.health;
+        currentlives = data.lives;
+        coins = data.coins;
+        haskey = data.hasKey;
+        haskey2 = data.hasKey2;
+        atship = data.atShip;
+        atfinaldoor = data.atFinalDoor;
+    }
 }

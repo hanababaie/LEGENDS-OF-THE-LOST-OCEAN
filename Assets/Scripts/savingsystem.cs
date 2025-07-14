@@ -1,19 +1,21 @@
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[Serializable]
-public class gamedata
-{
-    public int lastunlockedlevel;
-    public playerdata player1Data;
-    public playerdata player2Data;
-    public string currentscene;
-    public bool isLevel3;
-}
 
 [Serializable]
-public class playerdata
+public class GameData
+{
+    public int lastUnlockedLevel;
+    public string currentScene;
+    public bool isLevel3;
+
+    public PlayerData player1Data;
+    public PlayerData player2Data;
+}
+[Serializable]
+public class PlayerData
 {
     public int health;
     public int lives;
@@ -25,35 +27,43 @@ public class playerdata
 }
 
 
-public class savingsystem : MonoBehaviour
+public static class SaveManager
 {
-    public const String savingkey = "GameSaveData";
+    private static readonly string savePath = Application.persistentDataPath + "/save.json";
 
-    public static void savinGame(gamedata data)
+    public static void SaveGame(GameData data)
     {
-        Debug.Log("Saving game...");
-        String jsonData = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString(savingkey, jsonData);
-        PlayerPrefs.Save();
-        Debug.Log("Saved JSON: " + jsonData); // تست
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(savePath, json);
+        Debug.Log("Game saved to: " + savePath);
     }
 
-    public static gamedata loadingGame()
+    public static GameData LoadGame()
     {
-        if (PlayerPrefs.HasKey(savingkey))
+        if (File.Exists(savePath))
         {
-            String jsonData = PlayerPrefs.GetString(savingkey);
-            return JsonUtility.FromJson<gamedata>(jsonData);
+            string json = File.ReadAllText(savePath);
+            return JsonUtility.FromJson<GameData>(json);
         }
 
-        return new gamedata()
+        Debug.LogWarning("No save file found. Returning default GameData.");
+        return new GameData
         {
-            lastunlockedlevel = 1 //default
+            lastUnlockedLevel = 1
         };
     }
 
-    public static void deleteData()
+    public static void DeleteSave()
     {
-        PlayerPrefs.DeleteKey(savingkey);
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+            Debug.Log("Save file deleted.");
+        }
+    }
+
+    public static bool SaveExists()
+    {
+        return File.Exists(savePath);
     }
 }

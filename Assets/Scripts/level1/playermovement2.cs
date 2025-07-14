@@ -144,21 +144,13 @@ public class playermovement2 : MonoBehaviour
         anim = GetComponent<Animator>();
 
         bulletref = Resources.Load<GameObject>("Bullet"); // take the bullet form resoure folder
-        gamedata savedata = savingsystem.loadingGame();
+        if (currentHealth <= 0) currentHealth = maxHealth;
+        if (currentlives <= 0) currentlives = maxlives;
 
-        if (savedata.lastunlockedlevel > 1)
-        {
-            LoadPlayerData(savedata.player2Data);
-        }
-        else
-        {
-            currentHealth = maxHealth;
-            currentlives = maxlives;
-            coins = 0;
-        }
         bar.Setmaxhealth(maxHealth);
         bar.Sethealth(currentHealth);
         updatelives();
+        cointext.text = coins.ToString("000");
     }
 
     public void onmove(InputAction.CallbackContext context)
@@ -335,7 +327,7 @@ public class playermovement2 : MonoBehaviour
         if (collision.CompareTag("ship"))
         {
             atship = true;
-            sencemanager.Instance.ready();
+
         }
 
         if (collision.CompareTag("obstecle"))
@@ -489,21 +481,28 @@ public class playermovement2 : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void LoadPlayerData(playerdata data)
-{
-    currentHealth = data.health;
-    currentlives = data.lives;
-    coins = data.coins;
-    haskey = data.hasKey;
-    finalkey = data.hasKey2;
-    atship = data.atShip;
-    atfinaldoor = data.atFinalDoor;
-    
-    bar.Sethealth(currentHealth);
-    updatelives();
-    cointext.text = coins.ToString("000");
-}
+    public PlayerData GetPlayerData()
+    {
+        return new PlayerData
+        {
+            health = currentHealth,
+            lives = currentlives,
+            coins = coins,
+            hasKey = haskey,
+            hasKey2 = finalkey,
+            atShip = atship,
+            atFinalDoor = atfinaldoor
+        };
+    }
 
-
-
+    public void LoadPlayerData(PlayerData data)
+    {
+        currentHealth = data.health;
+        currentlives = data.lives;
+        coins = data.coins;
+        haskey = data.hasKey;
+        finalkey = data.hasKey2;
+        atship = data.atShip;
+        atfinaldoor = data.atFinalDoor;
+    }
 }

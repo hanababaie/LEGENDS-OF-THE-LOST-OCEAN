@@ -12,6 +12,9 @@ public class LevelMenu : MonoBehaviour
     private void Start()
     
     {
+        // SaveManager.DeleteSave();
+        // PlayerPrefs.DeleteAll();
+
         Debug.Log("UnlockedLevel from PlayerPrefs: " + GetUnlockedLevel());
         int unlockedLevel = GetUnlockedLevel();
 
