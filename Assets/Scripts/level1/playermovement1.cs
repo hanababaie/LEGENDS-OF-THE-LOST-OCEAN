@@ -621,7 +621,7 @@ public void LoadPlayerData(playerdata data)
     currentHealth = data.health;
     currentlives = data.lives;
     coins = data.coins;
-    transform.position = data.position;
+
     haskey = data.hasKey;
     haskey2 = data.hasKey2;
     atship = data.atShip;

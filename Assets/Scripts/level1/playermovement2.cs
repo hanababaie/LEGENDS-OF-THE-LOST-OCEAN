@@ -494,7 +494,6 @@ public class playermovement2 : MonoBehaviour
     currentHealth = data.health;
     currentlives = data.lives;
     coins = data.coins;
-    transform.position = data.position;
     haskey = data.hasKey;
     finalkey = data.hasKey2;
     atship = data.atShip;

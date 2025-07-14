@@ -18,7 +18,6 @@ public class playerdata
     public int health;
     public int lives;
     public int coins;
-    public Vector3 position;
     public bool hasKey;
     public bool hasKey2;
     public bool atShip;
@@ -32,9 +31,11 @@ public class savingsystem : MonoBehaviour
 
     public static void savinGame(gamedata data)
     {
+        Debug.Log("Saving game...");
         String jsonData = JsonUtility.ToJson(data);
         PlayerPrefs.SetString(savingkey, jsonData);
         PlayerPrefs.Save();
+        Debug.Log("Saved JSON: " + jsonData); // تست
     }
 
     public static gamedata loadingGame()
