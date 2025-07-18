@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 442681706678348316}
   - component: {fileID: 5045428049545711920}
   - component: {fileID: 8425327449538079773}
+  - component: {fileID: 2955209629397016014}
   m_Layer: 8
   m_Name: Boss Fight
   m_TagString: enemy
@@ -979,9 +980,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 80
-  healthUI: {fileID: 0}
-  moveSpeed: 3
-  attackCooldown: 2
+  healthUI: {fileID: 2072377033592731691}
+  moveSpeed: 10
+  attackCooldown: 20
   minionSpawnPoints:
   - {fileID: 4232812300216327844}
   - {fileID: 5961495569210299504}
@@ -991,6 +992,33 @@ MonoBehaviour:
   - {fileID: 2957738038926114979, guid: e8f478472e4724e4e97403f7baaa5ff0, type: 3}
   - {fileID: 6539763524536066110, guid: 576213f6403fd3749b33d682231719a4, type: 3}
   minionSpawnCooldown: 5
+--- !u!50 &2955209629397016014
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316839522292023943}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3366463821073163530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,7 +1238,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &7848320771924426198
 MonoBehaviour:

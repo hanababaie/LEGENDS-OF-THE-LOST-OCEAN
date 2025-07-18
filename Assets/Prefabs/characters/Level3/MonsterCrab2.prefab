@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34d5e5ade6ae52419d3ed30431bc442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 7
+  damage: 2
   speed: 2
   patrolRange: 5
   maxHealth: 10

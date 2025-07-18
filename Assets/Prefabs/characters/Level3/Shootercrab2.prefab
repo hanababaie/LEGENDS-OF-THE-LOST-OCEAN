@@ -239,7 +239,6 @@ GameObject:
   - component: {fileID: 860063187160074554}
   - component: {fileID: 8204399867230420720}
   - component: {fileID: 1650777002095624145}
-  - component: {fileID: 4877295072900658428}
   - component: {fileID: 5646806362535786458}
   - component: {fileID: 4926178282772870959}
   - component: {fileID: 8210280931698383938}
@@ -372,26 +371,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4877295072900658428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539763524536066110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06e9c39066c01944e97654cd63229b10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 6
-  bullet: {fileID: 782628016683332379, guid: 0ef5936050409074abc9aaa817392846, type: 3}
-  bulletPos: {fileID: 6652425215819759802}
-  healthUI: {fileID: 3409523978576064047}
-  shootSound: {fileID: 8300000, guid: 6646b64f6e2ac994f80c7fe0f1388582, type: 3}
-  deathSound: {fileID: 8300000, guid: 0a0121b9ab649814f9388f1ac70983b4, type: 3}
-  leftViewLimit: {fileID: 0}
-  rightViewLimit: {fileID: 0}
 --- !u!114 &5646806362535786458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,7 +1411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ff1f087fc31fa4382a32f1af87e76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 2
   bullet: {fileID: 1903116115136605084, guid: 667d0c177c4ae6b4789214c72f4678ea, type: 3}
   bulletPos: {fileID: 6652425215819759802}
   detectionRadius: 20

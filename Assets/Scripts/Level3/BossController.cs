@@ -11,7 +11,7 @@ public class BossController : MonoBehaviour
     private AudioSource audioSource;
 
     public float moveSpeed = 3f;
-    public float attackCooldown = 2f;
+    public float attackCooldown = 0.5f;
     private float attackTimer;
 
     private bool isDead = false;
@@ -21,12 +21,14 @@ public class BossController : MonoBehaviour
     private float targetSwitchTime;
 
     public Transform[] minionSpawnPoints;
-
-    // اینجا آرایه مینیون‌ها
     public GameObject[] minionPrefabs;
 
     public float minionSpawnCooldown = 10f;
     private float minionSpawnTimer;
+
+    public int damage = 5; // اضافه کردم
+
+    private bool isAttacking = false;
 
     void Start()
     {
@@ -81,17 +83,30 @@ public class BossController : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, currentTarget.transform.position);
 
-        if (distance > 1.5f)
+        if (distance <= 5f)
         {
-            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
-            transform.Translate(direction * moveSpeed * Time.deltaTime);
-            if (animator != null)
-                animator.SetBool("isMoving", true);
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                if (animator != null)
+                {
+                    animator.SetTrigger("attack");
+                    animator.SetBool("isMoving", false);
+                }
+            }
+            return;
         }
         else
         {
-            if (animator != null)
-                animator.SetBool("isMoving", false);
+            if (isAttacking)
+            {
+                isAttacking = false;
+                if (animator != null)
+                    animator.SetBool("isMoving", true);
+            }
+
+            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
+            transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
     }
 
@@ -100,17 +115,30 @@ public class BossController : MonoBehaviour
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackCooldown)
         {
-            attackTimer = 0;
+            attackTimer = 0f;
             if (animator != null)
                 animator.SetTrigger("attack");
+        }
+    }
 
-            var playerScript = currentTarget.GetComponent<playermovement2>();
-            if (playerScript != null)
-                playerScript.TakeDamage(1);
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isDead) return;
 
-            var playerScript1 = currentTarget.GetComponent<playermovement1>();
-            if (playerScript1 != null)
-                playerScript1.TakeDamage(1);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playermovement1 pm1 = collision.gameObject.GetComponent<playermovement1>();
+            if (pm1 != null)
+            {
+                pm1.TakeDamage(damage);
+                return;
+            }
+
+            playermovement2 pm2 = collision.gameObject.GetComponent<playermovement2>();
+            if (pm2 != null)
+            {
+                pm2.TakeDamage(damage);
+            }
         }
     }
 
@@ -140,12 +168,10 @@ public class BossController : MonoBehaviour
 
     void SpawnMinions()
     {
-        if(minionPrefabs.Length == 0 || minionSpawnPoints.Length == 0) return;
+        if (minionPrefabs.Length == 0 || minionSpawnPoints.Length == 0) return;
 
-        // تعداد مینیون ها و نقاط باید برابر باشه
         int count = Mathf.Min(minionPrefabs.Length, minionSpawnPoints.Length);
 
-        // آرایه مینیون‌ها رو کپی و مخلوط کن (Shuffle)
         List<GameObject> shuffledMinions = new List<GameObject>(minionPrefabs);
         for (int i = 0; i < shuffledMinions.Count; i++)
         {
@@ -155,7 +181,6 @@ public class BossController : MonoBehaviour
             shuffledMinions[i] = temp;
         }
 
-        // اسپاون مینیون‌ها در نقاط به ترتیب
         for (int i = 0; i < count; i++)
         {
             Instantiate(shuffledMinions[i], minionSpawnPoints[i].position, Quaternion.identity);
