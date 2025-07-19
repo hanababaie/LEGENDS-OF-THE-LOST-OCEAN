@@ -9,7 +9,7 @@ public class TopDownEnemyShooting : MonoBehaviour
     public Transform bulletPos;
     private float shootTimer;
 
-    public float detectionRadius = 5f;
+    public float detectionRadius = 20f;
     public float shootInterval = 3f;
 
     public AudioClip shootSound;
