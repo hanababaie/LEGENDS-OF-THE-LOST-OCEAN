@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 212808674132301706}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.72, y: -4.57, z: 0}
+  m_LocalPosition: {x: 6.8, y: 0.73, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4286, y: -953.09204, z: 20.114286}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalScale: {x: 40, y: 40, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4232812300216327844}
@@ -982,7 +982,7 @@ MonoBehaviour:
   maxHealth: 80
   healthUI: {fileID: 2072377033592731691}
   moveSpeed: 10
-  attackCooldown: 20
+  attackCooldown: 0.5
   minionSpawnPoints:
   - {fileID: 4232812300216327844}
   - {fileID: 5961495569210299504}
@@ -992,6 +992,7 @@ MonoBehaviour:
   - {fileID: 2957738038926114979, guid: e8f478472e4724e4e97403f7baaa5ff0, type: 3}
   - {fileID: 6539763524536066110, guid: 576213f6403fd3749b33d682231719a4, type: 3}
   minionSpawnCooldown: 5
+  damage: 5
 --- !u!50 &2955209629397016014
 Rigidbody2D:
   serializedVersion: 5
@@ -1018,7 +1019,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &3366463821073163530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,7 +1172,7 @@ Transform:
   m_GameObject: {fileID: 4306021949410462145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.85, y: -4.19, z: 0}
+  m_LocalPosition: {x: -5.57, y: 6.01, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

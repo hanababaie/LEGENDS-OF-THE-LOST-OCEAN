@@ -10,7 +10,7 @@ public class BossController : MonoBehaviour
     private Animator animator;
     private AudioSource audioSource;
 
-    public float moveSpeed = 3f;
+    public float moveSpeed = 10f;
     public float attackCooldown = 0.5f;
     private float attackTimer;
 
@@ -23,7 +23,7 @@ public class BossController : MonoBehaviour
     public Transform[] minionSpawnPoints;
     public GameObject[] minionPrefabs;
 
-    public float minionSpawnCooldown = 10f;
+    public float minionSpawnCooldown = 100f;
     private float minionSpawnTimer;
 
     public int damage = 5; // اضافه کردم
@@ -76,8 +76,36 @@ public class BossController : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (players.Length == 0) return;
 
-        currentTarget = players[Random.Range(0, players.Length)];
+        if (players.Length == 1)
+        {
+            currentTarget = players[0];
+            return;
+        }
+
+        GameObject newTarget = currentTarget;
+        int attempts = 0;
+        while (newTarget == currentTarget && attempts < 10)
+        {
+            newTarget = players[Random.Range(0, players.Length)];
+            attempts++;
+        }
+
+        currentTarget = newTarget;
+
+        // ✅ بعد از سوییچ هدف، Boss باید از حالت attack خارج بشه و شروع به حرکت کنه
+        isAttacking = false;
+
+        if (animator != null)
+        {
+            animator.ResetTrigger("attack");     // اطمینان از ریست حمله
+            animator.SetBool("isMoving", true);  // شروع حرکت
+        }
+
+        // (اختیاری) برای دیباگ
+        Debug.Log("Switched to target: " + currentTarget.name);
     }
+
+
 
     void MoveTowardsTarget()
     {
