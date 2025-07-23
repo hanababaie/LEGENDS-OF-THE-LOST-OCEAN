@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class BossController : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class BossController : MonoBehaviour
     public int damage = 5; // اضافه کردم
 
     private bool isAttacking = false;
+
+    public int maxMinions = 5;
+    private List<GameObject> activeMinions = new List<GameObject>();
+
 
     void Start()
     {
@@ -61,7 +66,7 @@ public class BossController : MonoBehaviour
         minionSpawnTimer += Time.deltaTime;
         if (minionSpawnTimer >= minionSpawnCooldown)
         {
-            SpawnMinions();
+            StartCoroutine(SpawnMinions());
             minionSpawnTimer = 0f;
         }
     }
@@ -191,14 +196,17 @@ public class BossController : MonoBehaviour
         if (animator != null)
             animator.SetTrigger("die");
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
+        DestroyAllEnemies();
     }
 
-    void SpawnMinions()
+    IEnumerator SpawnMinions()
     {
-        if (minionPrefabs.Length == 0 || minionSpawnPoints.Length == 0) return;
+        activeMinions.RemoveAll(m => m == null);
 
-        int count = Mathf.Min(minionPrefabs.Length, minionSpawnPoints.Length);
+        if (activeMinions.Count >= maxMinions) yield break;
+
+        int count = Mathf.Min(minionPrefabs.Length, minionSpawnPoints.Length, maxMinions - activeMinions.Count);
 
         List<GameObject> shuffledMinions = new List<GameObject>(minionPrefabs);
         for (int i = 0; i < shuffledMinions.Count; i++)
@@ -211,7 +219,42 @@ public class BossController : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            Instantiate(shuffledMinions[i], minionSpawnPoints[i].position, Quaternion.identity);
+            if (Vector2.Distance(minionSpawnPoints[i].position, transform.position) < 1.5f)
+                continue;
+
+            bool tooClose = false;
+            foreach (GameObject other in activeMinions)
+            {
+                if (other == null) continue;
+                float dist = Vector2.Distance(minionSpawnPoints[i].position, other.transform.position);
+                if (dist < 30f)
+                {
+                    tooClose = true;
+                    break;
+                }
+            }
+
+            if (tooClose) continue;
+
+            GameObject minion = Instantiate(shuffledMinions[i], minionSpawnPoints[i].position, Quaternion.identity);
+            activeMinions.Add(minion);
+
+            yield return new WaitForSeconds(4f);
         }
     }
+
+    public void DestroyAllEnemies()
+    {
+        foreach (GameObject enemy in activeMinions)
+        {
+            if (enemy != null)
+            {
+                Destroy(enemy);
+            }
+        }
+
+        activeMinions.Clear();
+    }
+
+
 }

@@ -164,7 +164,7 @@ public class playermovement1 : MonoBehaviour
     private void Start()
     {
 
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "boss fight")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "level3")
         {
             isLevel3 = true;
         }
