@@ -3,10 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
+    //احتمالا مدل پایین حذف شود//
     public void StartOfflineMode()
     {
         // به صحنه بازی آفلاین برو
-        SceneManager.LoadScene("OfflineGameScene");
+        SceneManager.LoadScene("level1");
     }
 
     public void StartOnlineMode()
