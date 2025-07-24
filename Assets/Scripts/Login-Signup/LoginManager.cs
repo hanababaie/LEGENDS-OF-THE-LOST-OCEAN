@@ -47,6 +47,6 @@ public class LoginManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("mianmenu");
     }
 }
