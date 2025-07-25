@@ -34,6 +34,8 @@ public class BossController : MonoBehaviour
     public int maxMinions = 5;
     private List<GameObject> activeMinions = new List<GameObject>();
 
+    public GameObject ob;
+
 
     void Start()
     {
@@ -198,6 +200,7 @@ public class BossController : MonoBehaviour
 
         Destroy(gameObject, 1f);
         DestroyAllEnemies();
+        Destroy(ob);
     }
 
     IEnumerator SpawnMinions()
