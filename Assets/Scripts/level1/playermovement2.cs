@@ -78,6 +78,8 @@ public class playermovement2 : MonoBehaviour
 
     public bool isLevel3;
 
+    public int totalcoins;
+
 
 
 
@@ -500,9 +502,21 @@ public class playermovement2 : MonoBehaviour
         currentHealth = data.health;
         currentlives = data.lives;
         coins = data.coins;
+        totalcoins = data.totalcoins;
         haskey = data.hasKey;
         finalkey = data.hasKey2;
         atship = data.atShip;
         atfinaldoor = data.atFinalDoor;
     }
+
+    public void ResetLevelStats()
+{
+    currentHealth = maxHealth;
+    currentlives = maxlives;  
+    coins = 0;
+    haskey = false;
+    finalkey = false;
+    atship = false;
+    atfinaldoor = false;
+}
 }

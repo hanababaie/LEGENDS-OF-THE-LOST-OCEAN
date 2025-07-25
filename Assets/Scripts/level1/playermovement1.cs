@@ -102,6 +102,8 @@ public class playermovement1 : MonoBehaviour
 
     public bool isLevel3;
 
+    public int totalcoins;
+
 
 
 
@@ -174,9 +176,9 @@ public class playermovement1 : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
         p2 = GetComponent<playermovement2>(); // for having the script of the playermovement2
-        
 
-          if (currentHealth <= 0) currentHealth = maxHealth;
+
+        if (currentHealth <= 0) currentHealth = maxHealth;
         if (currentlives <= 0) currentlives = maxlives;
 
         bar.Setmaxhealth(maxHealth);
@@ -490,7 +492,7 @@ public class playermovement1 : MonoBehaviour
         if (collision.CompareTag("ship"))
         {
             atship = true;
-            
+
         }
 
         if (collision.CompareTag("obstecle"))
@@ -601,8 +603,8 @@ public class playermovement1 : MonoBehaviour
         }
     }
 
-    public Transform playerRoot; 
-    
+    public Transform playerRoot;
+
     public PlayerData GetPlayerData()
     {
         return new PlayerData
@@ -622,9 +624,20 @@ public class playermovement1 : MonoBehaviour
         currentHealth = data.health;
         currentlives = data.lives;
         coins = data.coins;
+        totalcoins = data.totalcoins;
         haskey = data.hasKey;
         haskey2 = data.hasKey2;
         atship = data.atShip;
         atfinaldoor = data.atFinalDoor;
+    }
+    public void ResetLevelStats()
+    {
+        currentHealth = maxHealth;
+        currentlives = maxlives;  
+        coins = 0;      
+        haskey = false;
+        haskey2 = false;
+        atship = false;
+        atfinaldoor = false;
     }
 }

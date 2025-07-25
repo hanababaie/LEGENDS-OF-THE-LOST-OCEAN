@@ -227,7 +227,7 @@ public class BossController : MonoBehaviour
             {
                 if (other == null) continue;
                 float dist = Vector2.Distance(minionSpawnPoints[i].position, other.transform.position);
-                if (dist < 30f)
+                if (dist < 50f)
                 {
                     tooClose = true;
                     break;

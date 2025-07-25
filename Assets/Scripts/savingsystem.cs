@@ -20,6 +20,7 @@ public class PlayerData
     public int health;
     public int lives;
     public int coins;
+    public int totalcoins;
     public bool hasKey;
     public bool hasKey2;
     public bool atShip;

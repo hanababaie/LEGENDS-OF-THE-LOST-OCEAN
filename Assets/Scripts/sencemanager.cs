@@ -1,3 +1,5 @@
+using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,11 +12,14 @@ public class sencemanager : MonoBehaviour
 
     private bool isGameOver = false;
 
+
     private void Awake()
     {
+        
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
             LoadGameState();
         }
         else
@@ -22,6 +27,8 @@ public class sencemanager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 
     private void Update()
     {
@@ -36,18 +43,28 @@ public class sencemanager : MonoBehaviour
     }
 
     private void CheckLevelProgression()
+
     {
+
         if ((player1.haskey || player2.haskey) && player1.atship && player2.atship)
         {
             LevelCompleted(1);
-            SceneManager.LoadScene("level2");
+            ResetLevelFlags();
+            StartCoroutine(LoadSceneDelayed("level2"));
         }
 
         if (player2.finalkey && player1.atfinaldoor && player2.atfinaldoor)
         {
             LevelCompleted(2);
-            SceneManager.LoadScene("level3");
+            ResetLevelFlags();
+            StartCoroutine(LoadSceneDelayed("level3"));
         }
+    }
+
+    private IEnumerator LoadSceneDelayed(string sceneName)
+    {
+        yield return new WaitForSeconds(1f); // می‌تونی این رو هم حذف کنی یا کمترش کنی
+        SceneManager.LoadScene(sceneName);
     }
 
     public void GameOver()
@@ -55,6 +72,8 @@ public class sencemanager : MonoBehaviour
         if (isGameOver) return;
 
         isGameOver = true;
+        player1.ResetLevelStats();
+        player2.ResetLevelStats();
         SaveGame();
         SceneManager.LoadScene("gameover");
     }
@@ -88,5 +107,45 @@ public class sencemanager : MonoBehaviour
         GameData data = SaveManager.LoadGame();
         player1.LoadPlayerData(data.player1Data);
         player2.LoadPlayerData(data.player2Data);
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        player1 = FindObjectOfType<playermovement1>();
+        player2 = FindObjectOfType<playermovement2>();
+
+        if (player1 != null && player2 != null)
+        {
+            LoadGameState();
+            ResetLevelFlags();
+        }
+    }
+    
+    private void ResetLevelFlags()
+    {
+        if (player1 != null)
+        {
+            player1.haskey = false;
+            player1.atship = false;
+            player1.atfinaldoor = false;
+        }
+
+        if (player2 != null)
+        {
+            player2.haskey = false;
+            player2.atship = false;
+            player2.atfinaldoor = false;
+            player2.finalkey = false;
+        }
     }
 }
