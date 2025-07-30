@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 9162308678256910103}
   - component: {fileID: 151486952611751770}
   - component: {fileID: 7610647035312507620}
+  - component: {fileID: 6863121083116308835}
   m_Layer: 0
   m_Name: jack
   m_TagString: player1
@@ -324,7 +325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc2c756b574a084cad8e47668448f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  p2: {fileID: 0}
+  boxUI: {fileID: 0}
   rb: {fileID: 3263095716796755643}
+  startpos: {x: 0, y: 0, z: 0}
+  orstartpos: {fileID: 0}
   horizontalmovement: 0
   movespeed: 20
   facingright: 1
@@ -334,9 +339,14 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 128
+  falling: 0
+  fally: 0
   dashspeed: 50
   dashtime: 0.2
   dashcoldown: 8
+  isDashing: 0
+  canDash: 1
+  dashicon: {fileID: 0}
   climbspeed: 5
   attackpoint: {fileID: 8004335333808349730}
   attackrange: 20
@@ -344,6 +354,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   maxHealth: 10
+  currentHealth: 0
   maxlives: 3
   currentlives: 0
   lifeimages: []
@@ -355,6 +366,18 @@ MonoBehaviour:
   haskey: 0
   atship: 0
   keyicon: {fileID: 0}
+  haskey2: 0
+  Keyicon2: {fileID: 0}
+  watericon: {fileID: 0}
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 0}
+  atfinaldoor: 0
+  deathSound: {fileID: 0}
+  jumpSound: {fileID: 0}
+  verticalmovement: 0
+  isLevel3: 0
+  totalcoins: 0
+  playerRoot: {fileID: 0}
 --- !u!114 &151486952611751770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,3 +494,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6863121083116308835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7912140174210007998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2752300963
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0

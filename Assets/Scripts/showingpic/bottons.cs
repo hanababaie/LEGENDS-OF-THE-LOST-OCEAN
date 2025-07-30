@@ -10,7 +10,6 @@ public class bottons : MonoBehaviour
 
     public void options()
     {
-        
         Debug.Log("Options Clicked");
     }
 
@@ -19,14 +18,16 @@ public class bottons : MonoBehaviour
         Debug.Log("Exit Clicked");
         Application.Quit();
     }
+
     public void OfflineMode()
     {
-        SceneManager.LoadScene("level1"); // مرحله اول
+        GameMode.isOnline = false; // مشخص می‌کنیم بازی آفلاینه
+        SceneManager.LoadScene("level1");
     }
 
     public void OnlineMode()
     {
-        SceneManager.LoadScene("LoginMenu"); // می‌ریم به صفحه لاگین/ثبت‌نام
+        GameMode.isOnline = true; // مشخص می‌کنیم بازی آنلاین است
+        SceneManager.LoadScene("LoginMenu");
     }
-
 }

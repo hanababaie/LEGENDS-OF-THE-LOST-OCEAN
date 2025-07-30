@@ -1,23 +1,27 @@
+using Mirror;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    //احتمالا مدل پایین حذف شود//
-    public void StartOfflineMode()
+    public TMP_InputField ipInputField;
+
+    public void HostGame()
     {
-        // به صحنه بازی آفلاین برو
-        SceneManager.LoadScene("level1");
+        NetworkManager.singleton.StartHost();
+        SceneManager.LoadScene("level1"); // چون Online Scene خالیه
     }
 
-    public void StartOnlineMode()
+    public void JoinGame()
     {
-        // به صحنه بازی آنلاین برو
-        SceneManager.LoadScene("OnlineGameScene");
+        NetworkManager.singleton.networkAddress = ipInputField.text;
+        NetworkManager.singleton.StartClient();
+        // صحنه level1 توسط سرور لود خواهد شد
     }
 
-    public void BackToLogin()
+    public void BackToMenu()
     {
-        SceneManager.LoadScene("LoginMenu");
+        SceneManager.LoadScene("mianmenu");
     }
 }
