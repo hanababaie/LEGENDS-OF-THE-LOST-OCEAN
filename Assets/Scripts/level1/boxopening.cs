@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class boxopening : MonoBehaviour
 {
     public List<lootsystem> items;

@@ -1,0 +1,67 @@
+name: Run Unity Tests
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  RunUnityTests:
+    name: Run Unity Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        unityVersion:
+          # - 2019.4.40f1
+          - 2020.3.48f1
+          - 2021.3.45f1
+          - 2022.3.62f1
+          - 2023.2.20f1
+          - 6000.0.51f1
+          - 6000.1.9f1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Do Not Enable Caching --- Library needs to be recompiled every time because Weaver
+      # Leaving this here for posterity to ensure we never turn this on.
+      #- name: Cache Library
+      #  id: cache-library
+      #  uses: actions/cache@v3
+      #  with:
+      #    path: Library
+      #    key: Library-${{ matrix.unityVersion }}
+
+      - name: Run editor Tests
+        uses: game-ci/unity-test-runner@v4
+
+        # We can use the same license for all Unity versions
+        # See https://game.ci/docs/github/activation/
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
+        # testMode is set to editMode (editor tests only) until we fix playmode tests (or eliminate them)
+        # `-stackTraceLogType None` speeds up the job and vastly shrinks the log output
+        # If a test actually fails, we'll diagnose it locally anyway, so the stacktrace doesn't really help
+        with:
+          projectPath: ./
+          testMode: editmode
+          unityVersion: ${{ matrix.unityVersion }}
+          customParameters: -stackTraceLogType None
+        
+      - name: Archive test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Test Results ${{ matrix.unityVersion }}
+          path: artifacts
+
+      - name: Publish test results
+        uses: MirrorNetworking/nunit-reporter@master
+        if: always()
+        with:
+          reportTitle: Test Report ${{ matrix.unityVersion }}
+          path: "artifacts/*.xml"
+          access-token: ${{ secrets.GITHUB_TOKEN }}
