@@ -6,18 +6,25 @@ using UnityEngine.SceneManagement;
 public class LobbyManager : MonoBehaviour
 {
     public TMP_InputField ipInputField;
+    public CustomNetworkManager customNetworkManager; // اینجا تغییر کرد
+
+    void Start()
+    {
+        // NetworkManager.singleton رو به CustomNetworkManager تبدیل کن
+        customNetworkManager = (CustomNetworkManager)NetworkManager.singleton;
+    }
 
     public void HostGame()
     {
-        NetworkManager.singleton.StartHost();
-        SceneManager.LoadScene("level1"); // چون Online Scene خالیه
+        customNetworkManager.StartHost();
+        SceneManager.LoadScene("level1online");
     }
 
     public void JoinGame()
     {
-        NetworkManager.singleton.networkAddress = ipInputField.text;
-        NetworkManager.singleton.StartClient();
-        // صحنه level1 توسط سرور لود خواهد شد
+        customNetworkManager.networkAddress = ipInputField.text;
+        customNetworkManager.StartClient();
+        // صحنه توسط سرور لود خواهد شد
     }
 
     public void BackToMenu()
