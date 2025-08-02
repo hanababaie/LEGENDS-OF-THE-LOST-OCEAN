@@ -2052,6 +2052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4803255993913574396}
+  - component: {fileID: 4194174469856739666}
   m_Layer: 6
   m_Name: player1
   m_TagString: Player
@@ -2079,6 +2080,23 @@ Transform:
   - {fileID: 7611213879572245752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4194174469856739666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5211958857476060216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2995419002
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &5731077313751352638
 GameObject:
   m_ObjectHideFlags: 0

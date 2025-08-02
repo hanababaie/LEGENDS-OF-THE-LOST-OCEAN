@@ -17,7 +17,7 @@ public class LobbyManager : MonoBehaviour
     public void HostGame()
     {
         customNetworkManager.StartHost();
-        SceneManager.LoadScene("level1online");
+      
     }
 
     public void JoinGame()

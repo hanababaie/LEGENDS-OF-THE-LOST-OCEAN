@@ -1636,7 +1636,7 @@ MonoBehaviour:
   exceptionsDisconnect: 1
   authenticator: {fileID: 0}
   offlineScene: 
-  onlineScene: 
+  onlineScene: Assets/Scenes/level1online.unity
   offlineSceneLoadDelay: 0
   playerPrefab: {fileID: 0}
   autoCreatePlayer: 1
@@ -1660,13 +1660,21 @@ MonoBehaviour:
   - sceneName: level1online
     playerSetups:
     - playerPrefab: {fileID: 4115998828729532276, guid: dc5b376a19c996744b6f24cab59c2828, type: 3}
-      spawnPoint: {fileID: 0}
+      spawnPoint: {fileID: 5427821256638016382, guid: f92e7cedd92257646a3a4d8e37b902fe, type: 3}
     - playerPrefab: {fileID: 1144332161217521129, guid: 91d23f1d3be09aa4e9cae6a5412cd7b6, type: 3}
-      spawnPoint: {fileID: 0}
-  - sceneName: 
-    playerSetups: []
-  - sceneName: 
-    playerSetups: []
+      spawnPoint: {fileID: 2393478155618120720, guid: 8352cf88cc7be92429a4874851b815fa, type: 3}
+  - sceneName: level2online
+    playerSetups:
+    - playerPrefab: {fileID: 5211958857476060216, guid: 8bf73bbcc752a9843b08ccaaaf83353a, type: 3}
+      spawnPoint: {fileID: 7590282628063510028, guid: 946f223b91f311f43980e289777da775, type: 3}
+    - playerPrefab: {fileID: 5292785983001688794, guid: 5dcba24da7730ea4b9aad184cc7f7263, type: 3}
+      spawnPoint: {fileID: 3736171846531881099, guid: c68535a032ddacc48b0fb80578fa435f, type: 3}
+  - sceneName: level3online
+    playerSetups:
+    - playerPrefab: {fileID: 7960620028794129927, guid: 8c2e713ea77ece64b99d214af075b88a, type: 3}
+      spawnPoint: {fileID: 636448756417116979, guid: 7535e2e454470734a922351a14de5a9e, type: 3}
+    - playerPrefab: {fileID: 2097521367638274466, guid: e8f66dc56b9822e4ab8ca51512759597, type: 3}
+      spawnPoint: {fileID: 3397396850671852585, guid: 104933dc062778b4d83ba589448e52d2, type: 3}
 --- !u!4 &1378190676
 Transform:
   m_ObjectHideFlags: 0
