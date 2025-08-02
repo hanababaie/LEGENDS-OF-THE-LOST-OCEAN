@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using Mirror;
 
-public class playermovement2 : MonoBehaviour
+public class playermovement2 : NetworkBehaviour
 {
 
 
@@ -157,6 +158,7 @@ public class playermovement2 : MonoBehaviour
 
     public void onmove(InputAction.CallbackContext context)
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         if (!isDead)
         {
             horizontalmovement = context.ReadValue<Vector2>().x;
@@ -166,6 +168,7 @@ public class playermovement2 : MonoBehaviour
 
     public void onjump(InputAction.CallbackContext context)
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         if (isDead) return;
 
         if (jumpremaining > 0) // check if we still can jump(we can jump 2 times)
@@ -191,6 +194,7 @@ public class playermovement2 : MonoBehaviour
 
     void Update()
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         if (!isgrounded())
         {
             if (!falling)
@@ -372,6 +376,7 @@ public class playermovement2 : MonoBehaviour
 
     public void onattack(InputAction.CallbackContext context)
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         if (context.performed)
         {
             anim.SetTrigger("attack");

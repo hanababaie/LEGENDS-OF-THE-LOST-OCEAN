@@ -7,8 +7,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Mirror;
 
-public class playermovement1 : MonoBehaviour
+public class playermovement1 :NetworkBehaviour
 {
     public playermovement2 p2;
 
@@ -189,6 +190,7 @@ public class playermovement1 : MonoBehaviour
 
     public void onmove(InputAction.CallbackContext context)
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         horizontalmovement = context.ReadValue<Vector2>().x; // for moving horizontally
                                                              // reads the value from the keyboard and then as long as its x is important and then update horizontal movement
         verticalmovement = context.ReadValue<Vector2>().y;
@@ -196,6 +198,7 @@ public class playermovement1 : MonoBehaviour
 
     public void onjump(InputAction.CallbackContext context) // for jumping
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         if (isgrounded()) // checks if we are at ground
         {
             if (context.performed) // if we hit the key
@@ -218,6 +221,7 @@ public class playermovement1 : MonoBehaviour
 
     public void ondash(InputAction.CallbackContext context)
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         if (context.performed && canDash) // if key is pressed and we can dash
         {
             StartCoroutine("dashroutine"); // start the coroutine
@@ -289,6 +293,7 @@ public class playermovement1 : MonoBehaviour
 
     void Update()
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
 
         if (!isgrounded()) //if we are not on the ground
         {
@@ -406,6 +411,7 @@ public class playermovement1 : MonoBehaviour
 
     public void onattack(InputAction.CallbackContext context)
     {
+        if (NetworkClient.active && !isLocalPlayer) return;
         Debug.Log("Attack Input Received");
 
         if (context.performed)
