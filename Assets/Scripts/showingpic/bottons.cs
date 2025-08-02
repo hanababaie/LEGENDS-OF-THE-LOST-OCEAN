@@ -21,13 +21,13 @@ public class bottons : MonoBehaviour
 
     public void OfflineMode()
     {
-        GameMode.isOnline = false; // مشخص می‌کنیم بازی آفلاینه
+        
         SceneManager.LoadScene("level1");
     }
 
     public void OnlineMode()
     {
-        GameMode.isOnline = true; // مشخص می‌کنیم بازی آنلاین است
+      
         SceneManager.LoadScene("LoginMenu");
     }
 }
