@@ -438,7 +438,7 @@ public class playermovement2 : NetworkBehaviour
             }
         }
     }
-    private void updatelives()
+    public void updatelives()
     {
         for (int i = 0; i < lifeimages.Length; i++)
         {
@@ -512,6 +512,8 @@ public class playermovement2 : NetworkBehaviour
         finalkey = data.hasKey2;
         atship = data.atShip;
         atfinaldoor = data.atFinalDoor;
+        maxHealth = data.maxhealth > 0 ? data.maxhealth : maxHealth;
+        movespeed = data.maxspeed > 0 ? data.maxspeed : movespeed;
     }
 
     public void ResetLevelStats()

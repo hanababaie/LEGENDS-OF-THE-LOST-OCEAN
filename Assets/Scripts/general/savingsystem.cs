@@ -25,6 +25,10 @@ public class PlayerData
     public bool hasKey2;
     public bool atShip;
     public bool atFinalDoor;
+
+    public int maxhealth;
+    public float maxspeed;
+    public int extraLife;
 }
 
 
