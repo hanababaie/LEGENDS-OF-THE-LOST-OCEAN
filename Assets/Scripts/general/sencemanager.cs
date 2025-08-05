@@ -103,7 +103,6 @@ public class sencemanager : MonoBehaviour
     public void LoadGameState()
     {
         if (!SaveManager.SaveExists()) return;
-
         GameData data = SaveManager.LoadGame();
         player1.LoadPlayerData(data.player1Data);
         player2.LoadPlayerData(data.player2Data);

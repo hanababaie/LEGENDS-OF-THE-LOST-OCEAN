@@ -88,6 +88,7 @@ public class playermovement2 : NetworkBehaviour
     public void addcoin(int value)
     {
         coins += value;
+        totalcoins += value;
         cointext.text = coins.ToString("000");
     }
 
@@ -498,7 +499,8 @@ public class playermovement2 : NetworkBehaviour
             hasKey = haskey,
             hasKey2 = finalkey,
             atShip = atship,
-            atFinalDoor = atfinaldoor
+            atFinalDoor = atfinaldoor,
+            totalcoins = totalcoins
         };
     }
 

@@ -119,6 +119,7 @@ public class playermovement1 :NetworkBehaviour
     public void addcoin(int value)
     {
         coins += value;
+        totalcoins += value;
         cointext.text = coins.ToString("000"); // it changes the text
     }
 
@@ -621,7 +622,10 @@ public class playermovement1 :NetworkBehaviour
             hasKey = haskey,
             hasKey2 = haskey2,
             atShip = atship,
-            atFinalDoor = atfinaldoor
+            atFinalDoor = atfinaldoor,
+            totalcoins = totalcoins,
+            maxhealth = maxHealth,
+            maxspeed = movespeed
         };
     }
 
@@ -635,6 +639,7 @@ public class playermovement1 :NetworkBehaviour
         haskey2 = data.hasKey2;
         atship = data.atShip;
         atfinaldoor = data.atFinalDoor;
+        
 
         maxHealth = data.maxhealth > 0 ? data.maxhealth : maxHealth;
         movespeed = data.maxspeed > 0 ? data.maxspeed : movespeed;

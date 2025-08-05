@@ -1,8 +1,7 @@
-
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.UI;
-using UnityEngine.Rendering;
+using TMPro;
+using Mirror.BouncyCastle.Asn1.Misc;
 
 public class shop : MonoBehaviour
 {
@@ -11,12 +10,11 @@ public class shop : MonoBehaviour
     public Transform player2ItemsParent;
     public GameObject shopItemPrefab;
 
-
     public GameObject player1panel;
     public GameObject player2panel;
 
-    public TMPro.TextMeshProUGUI player1CoinsText;
-    public TMPro.TextMeshProUGUI player2CoinsText;
+    public TextMeshProUGUI player1CoinsText;
+    public TextMeshProUGUI player2CoinsText;
 
     private PlayerData playerData1;
     private PlayerData playerData2;
@@ -28,47 +26,59 @@ public class shop : MonoBehaviour
 
     void Start()
     {
-        loadPlayerData();
+        LoadPlayerData();       // 🔄 load از فایل ذخیره
         showpanel(1);
-        showUIpanel();
+        showUIpanel();          // 🛍️ ساخت UI آیتم‌ها
+        updatecoins();          // 💰 آپدیت سکه در UI
+    }
+
+    public void  Update()
+    {
         updatecoins();
-
     }
 
-    public void loadPlayerData()
+    public void LoadPlayerData()
     {
-        playerData1 = new PlayerData()
+        if (SaveManager.SaveExists())
         {
-            coins = PlayerPrefs.GetInt("Player1_Coins", p1.coins),
-            maxhealth = PlayerPrefs.GetInt("Player1_MaxHealth", p1.maxHealth),
-            maxspeed = PlayerPrefs.GetFloat("Player1_MoveSpeed", p1.movespeed),
-            extraLife = PlayerPrefs.GetInt("Player1_ExtraLives", 0)
+            GameData data = SaveManager.LoadGame();
+            playerData1 = data.player1Data;
+            playerData2 = data.player2Data;
+        }
+        else
+        {
+            playerData1 = new PlayerData()
+            {
+                coins = p1.totalcoins,
+                maxhealth = p1.maxHealth,
+                maxspeed = p1.movespeed,
+                extraLife = 0
+            };
+
+            playerData2 = new PlayerData()
+            {
+                coins = p2.totalcoins,
+                maxhealth = p2.maxHealth,
+                maxspeed = p2.movespeed,
+                extraLife = 0
+            };
+        }
+    }
+
+    public void SavePlayerData()
+    {
+        
+        GameData data = new GameData
+        {
+            lastUnlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1),
+            currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
+            isLevel3 = p1.isLevel3 || p2.isLevel3,
+            player1Data = playerData1,
+            player2Data = playerData2
         };
 
-        playerData2 = new PlayerData()
-        {
-            coins = PlayerPrefs.GetInt("Player2_Coins", p2.coins),
-            maxhealth = PlayerPrefs.GetInt("Player2_MaxHealth", p2.maxHealth),
-            maxspeed = PlayerPrefs.GetFloat("Player2_MoveSpeed", p2.movespeed),
-            extraLife = PlayerPrefs.GetInt("Player2_ExtraLives", 0)
-        };
+        SaveManager.SaveGame(data);
     }
-
-    void SavePlayerData()
-    {
-        PlayerPrefs.SetInt("Player1_Coins", playerData1.coins);
-        PlayerPrefs.SetInt("Player1_MaxHealth", playerData1.maxhealth);
-        PlayerPrefs.SetFloat("Player1_MoveSpeed", playerData1.maxspeed);
-        PlayerPrefs.SetInt("Player1_ExtraLives", playerData1.extraLife);
-
-        PlayerPrefs.SetInt("Player2_Coins", playerData2.coins);
-        PlayerPrefs.SetInt("Player2_MaxHealth", playerData2.maxhealth);
-        PlayerPrefs.SetFloat("Player2_MoveSpeed", playerData2.maxspeed);
-        PlayerPrefs.SetInt("Player2_ExtraLives", playerData2.extraLife);
-
-        PlayerPrefs.Save();
-    }
-
 
     public void showpanel(int playernum)
     {
@@ -98,9 +108,14 @@ public class shop : MonoBehaviour
     {
         PlayerData playerData = playernum == 1 ? playerData1 : playerData2;
 
-        if (playerData.coins >= item.price)
+        if (playerData.totalcoins >= item.price)
         {
-            playerData.coins -= item.price;
+            playerData.totalcoins -= item.price;
+            if (playerData.coins >= item.price)
+            {
+                playerData.coins -= item.price;
+
+            }
 
             switch (item.itemtype)
             {
@@ -117,8 +132,8 @@ public class shop : MonoBehaviour
 
             if (playernum == 1)
             {
-                p1.maxHealth = playerData1.maxhealth;
-                p1.movespeed = playerData1.maxspeed;
+                p1.maxHealth = playerData.maxhealth;
+                p1.movespeed = playerData.maxspeed;
                 p1.currentHealth = p1.maxHealth;
                 p1.bar.Setmaxhealth(p1.maxHealth);
                 p1.bar.Sethealth(p1.currentHealth);
@@ -127,8 +142,8 @@ public class shop : MonoBehaviour
             }
             else
             {
-                p2.maxHealth = playerData2.maxhealth;
-                p2.movespeed = playerData2.maxspeed;
+                p2.maxHealth = playerData.maxhealth;
+                p2.movespeed = playerData.maxspeed;
                 p2.currentHealth = p2.maxHealth;
                 p2.bar.Setmaxhealth(p2.maxHealth);
                 p2.bar.Sethealth(p2.currentHealth);
@@ -137,8 +152,7 @@ public class shop : MonoBehaviour
             }
 
             SavePlayerData();
-            updatecoins();
-            Debug.Log($"Player {playernum} bought {item.itemname}");
+            updatecoins();      
         }
         else
         {
@@ -148,29 +162,17 @@ public class shop : MonoBehaviour
 
     void updatecoins()
     {
-        player1CoinsText.text = $"{playerData1.coins}";
-        player2CoinsText.text = $"{playerData2.coins}";
+        player1CoinsText.text = playerData1.totalcoins.ToString();
+        player2CoinsText.text = playerData2.totalcoins.ToString();
     }
 
     public void NextPanel()
     {
-        // اگر روی Player1 هستی، برو Player2
-        if (currentPanel == 1)
-            showpanel(2);
-        else
-            showpanel(1);
+        showpanel(currentPanel == 1 ? 2 : 1);
     }
 
     public void PreviousPanel()
     {
-        // اگر روی Player2 هستی، برگرد Player1
-        if (currentPanel == 2)
-            showpanel(1);
-        else
-            showpanel(2);
+        showpanel(currentPanel == 2 ? 1 : 2);
     }
-
-
-
-
 }
