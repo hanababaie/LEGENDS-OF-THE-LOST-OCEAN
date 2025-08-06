@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Mirror.BouncyCastle.Asn1.Misc;
+using UnityEngine.SceneManagement;
 
 public class shop : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class shop : MonoBehaviour
         updatecoins();          // 💰 آپدیت سکه در UI
     }
 
-    public void  Update()
+    public void Update()
     {
         updatecoins();
     }
@@ -67,7 +68,7 @@ public class shop : MonoBehaviour
 
     public void SavePlayerData()
     {
-        
+
         GameData data = new GameData
         {
             lastUnlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1),
@@ -152,7 +153,7 @@ public class shop : MonoBehaviour
             }
 
             SavePlayerData();
-            updatecoins();      
+            updatecoins();
         }
         else
         {
@@ -174,5 +175,10 @@ public class shop : MonoBehaviour
     public void PreviousPanel()
     {
         showpanel(currentPanel == 2 ? 1 : 2);
+    }
+
+    public void backtomain()
+    {
+        SceneManager.LoadScene("mianmenu");
     }
 }
