@@ -1635,13 +1635,18 @@ MonoBehaviour:
   disconnectInactiveTimeout: 60
   exceptionsDisconnect: 1
   authenticator: {fileID: 0}
-  offlineScene: 
+  offlineScene: Assets/Scenes/Lobby.unity
   onlineScene: Assets/Scenes/level1online.unity
   offlineSceneLoadDelay: 0
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 4115998828729532276, guid: dc5b376a19c996744b6f24cab59c2828, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 5211958857476060216, guid: 8bf73bbcc752a9843b08ccaaaf83353a, type: 3}
+  - {fileID: 7960620028794129927, guid: 8c2e713ea77ece64b99d214af075b88a, type: 3}
+  - {fileID: 1144332161217521129, guid: 91d23f1d3be09aa4e9cae6a5412cd7b6, type: 3}
+  - {fileID: 5292785983001688794, guid: 5dcba24da7730ea4b9aad184cc7f7263, type: 3}
+  - {fileID: 2097521367638274466, guid: e8f66dc56b9822e4ab8ca51512759597, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     bufferLimit: 32

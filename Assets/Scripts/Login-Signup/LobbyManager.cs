@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LobbyManager : MonoBehaviour
 {
     public TMP_InputField ipInputField;
-    public CustomNetworkManager customNetworkManager; // اینجا تغییر کرد
+    private CustomNetworkManager customNetworkManager;
 
     void Start()
     {

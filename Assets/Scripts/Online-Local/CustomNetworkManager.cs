@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-
+using System.IO;
 public class CustomNetworkManager : NetworkManager
 {
     [System.Serializable]
@@ -27,13 +27,16 @@ public class CustomNetworkManager : NetworkManager
     {
         base.OnServerSceneChanged(sceneName);
 
-        // صحنه فعلی رو پیدا کن و لیست پلیرهاش رو بردار
+        string justSceneName = Path.GetFileNameWithoutExtension(sceneName);
+        Debug.Log("Scene Changed To: " + justSceneName);
+
         foreach (var setup in sceneSetups)
         {
-            if (setup.sceneName == sceneName)
+            if (setup.sceneName == justSceneName)
             {
                 currentPlayerSetups = setup.playerSetups;
                 connectionIndex = 0;
+                Debug.Log("Setup found for scene: " + justSceneName);
                 break;
             }
         }
