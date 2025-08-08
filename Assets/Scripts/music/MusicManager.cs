@@ -8,6 +8,8 @@ public class MusicManager : MonoBehaviour
     public AudioClip menuMusic;
     public AudioClip level1Music;
     public AudioClip level2Music;
+    public AudioClip level3Music;
+
 
     private AudioSource audioSource;
 
@@ -40,6 +42,10 @@ public class MusicManager : MonoBehaviour
             case "level2":
                 PlayMusic(level2Music);
                 break;
+            case "level3":
+                PlayMusic(level3Music);
+                break;
+
         }
     }
 
@@ -68,6 +74,10 @@ public class MusicManager : MonoBehaviour
             case "level2":
                 PlayMusic(level2Music);
                 break;
+            case "level3":
+                PlayMusic(level3Music);
+                break;
+
         }
     }
 
