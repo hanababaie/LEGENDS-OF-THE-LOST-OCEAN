@@ -20,10 +20,25 @@ public class MusicManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             audioSource = GetComponent<AudioSource>();
+
+            string currentScene = SceneManager.GetActiveScene().name;
+            Debug.Log("MusicManager Awake in scene: " + currentScene);
+            switch (currentScene)
+            {
+                case "level1online":
+                    PlayMusic(level1Music);
+                    break;
+                case "level2online":
+                    PlayMusic(level2Music);
+                    break;
+                case "level3online":
+                    PlayMusic(level3Music);
+                    break;
+            }
         }
-        else if (instance != this)
+        else
         {
-            Destroy(gameObject); // نابود کردن نسخه‌های اضافی
+            Destroy(gameObject);
         }
     }
 
@@ -37,15 +52,17 @@ public class MusicManager : MonoBehaviour
                 PlayMusic(menuMusic);
                 break;
             case "level1":
+            case "level1online": 
                 PlayMusic(level1Music);
                 break;
             case "level2":
+            case "level2online": 
                 PlayMusic(level2Music);
                 break;
             case "level3":
+            case "level3online":  
                 PlayMusic(level3Music);
                 break;
-
         }
     }
 
@@ -69,12 +86,15 @@ public class MusicManager : MonoBehaviour
                 PlayMusic(menuMusic);
                 break;
             case "level1":
+            case "level1online":  
                 PlayMusic(level1Music);
                 break;
             case "level2":
+            case "level2online":  
                 PlayMusic(level2Music);
                 break;
             case "level3":
+            case "level3online":  
                 PlayMusic(level3Music);
                 break;
 
