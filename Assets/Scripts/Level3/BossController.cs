@@ -49,6 +49,8 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Time until next switch: " + (targetSwitchTime - targetSwitchTimer));
+
         if (isDead) return;
 
         targetSwitchTimer += Time.deltaTime;
@@ -75,42 +77,42 @@ public class BossController : MonoBehaviour
 
     void SetRandomTargetSwitchTime()
     {
-        targetSwitchTime = Random.Range(5f, 10f);
+        targetSwitchTime = 20f;
     }
-
     void SwitchTarget()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (players.Length == 0) return;
 
+        // فقط یک بازیکن هست
         if (players.Length == 1)
         {
             currentTarget = players[0];
             return;
         }
 
-        GameObject newTarget = currentTarget;
-        int attempts = 0;
-        while (newTarget == currentTarget && attempts < 10)
+        // ایجاد لیست بازیکن‌ها و حذف هدف فعلی
+        List<GameObject> possibleTargets = new List<GameObject>(players);
+        possibleTargets.Remove(currentTarget);
+
+        // انتخاب هدف جدید از لیست باقی‌مانده
+        if (possibleTargets.Count > 0)
         {
-            newTarget = players[Random.Range(0, players.Length)];
-            attempts++;
+            currentTarget = possibleTargets[Random.Range(0, possibleTargets.Count)];
         }
 
-        currentTarget = newTarget;
-
-        // ✅ بعد از سوییچ هدف، Boss باید از حالت attack خارج بشه و شروع به حرکت کنه
+        // قطع حمله و شروع حرکت به سمت هدف جدید
         isAttacking = false;
 
         if (animator != null)
         {
-            animator.ResetTrigger("attack");     // اطمینان از ریست حمله
-            animator.SetBool("isMoving", true);  // شروع حرکت
+            animator.ResetTrigger("attack");
+            animator.SetBool("isMoving", true);
         }
 
-        // (اختیاری) برای دیباگ
         Debug.Log("Switched to target: " + currentTarget.name);
     }
+
 
 
 
