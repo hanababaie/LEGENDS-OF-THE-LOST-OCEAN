@@ -6,6 +6,7 @@ public class bottons : MonoBehaviour
 {
     public GameObject mainpanel;
     public GameObject levelmenu;
+    public GameObject optionmenu;
 
     public void StartGame()
     {
@@ -15,6 +16,8 @@ public class bottons : MonoBehaviour
     public void options()
     {
         Debug.Log("Options Clicked");
+        mainpanel.SetActive(false);
+        optionmenu.SetActive(true);
     }
 
     public void exit()
@@ -39,6 +42,7 @@ public class bottons : MonoBehaviour
     {
         mainpanel.SetActive(true);
         levelmenu.SetActive(false);
-        SceneManager.LoadScene("mianmenu");
+        optionmenu.SetActive(false);
+        
     }
 }
