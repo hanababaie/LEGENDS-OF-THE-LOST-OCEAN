@@ -65,6 +65,11 @@ public static class SaveManager
             File.Delete(savePath);
             Debug.Log("Save file deleted.");
         }
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        Debug.Log("deleted");
+
     }
 
     public static bool SaveExists()

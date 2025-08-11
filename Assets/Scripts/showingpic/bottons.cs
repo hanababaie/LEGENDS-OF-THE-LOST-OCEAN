@@ -43,6 +43,12 @@ public class bottons : MonoBehaviour
         mainpanel.SetActive(true);
         levelmenu.SetActive(false);
         optionmenu.SetActive(false);
-        
+
+    }
+    
+    public void ResetProgress()
+    {
+        SaveManager.DeleteSave();
+        Debug.Log("Progress has been reset.");
     }
 }
