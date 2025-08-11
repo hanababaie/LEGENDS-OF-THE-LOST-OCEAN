@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae4141fc8b66274c92a0ad6278ec3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 8
+  force: 12
   explosionEffect: {fileID: 7090064668159823623, guid: 91662398050f2b4478c805a9e042fc2e, type: 3}
 --- !u!60 &3907122557379329567
 PolygonCollider2D:
