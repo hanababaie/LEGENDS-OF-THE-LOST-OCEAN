@@ -215,6 +215,10 @@ public class sencemanager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        if (player1 != null) player1.coins = 0;
+        if (player2 != null) player2.coins = 0;
+
+
         SaveGame();
     }
 }

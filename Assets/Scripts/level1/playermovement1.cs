@@ -107,6 +107,8 @@ public class playermovement1 :NetworkBehaviour
 
     public Transform spawnPoint;
 
+    public GameObject deadsprite;
+
 
 
 
@@ -580,13 +582,13 @@ public class playermovement1 :NetworkBehaviour
                 anim.SetTrigger("die");
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth); //reset the health bar
-
+                if (deadsprite != null)
+                {
+                    deadsprite.SetActive(true);
+                }
                 if (!isLevel3)
                 {
-                    Transform originalParent = transform.parent; //store the parent of the player
-                    transform.SetParent(null); // set free the player from any parent
-                    transform.position = spawnPoint.position; // change the positon to the begining
-                    transform.SetParent(originalParent); // set the parent
+                    StartCoroutine(backtospawn(1.5f));
                 }
 
             }
@@ -597,6 +599,17 @@ public class playermovement1 :NetworkBehaviour
 
 
 
+    }
+
+    private IEnumerator backtospawn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Transform originalParent = transform.parent;
+        transform.SetParent(null);
+        transform.position = spawnPoint.position;
+        transform.SetParent(originalParent);
+        deadsprite.SetActive(false);
     }
 
     public void updatevives()

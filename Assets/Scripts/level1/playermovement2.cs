@@ -80,6 +80,8 @@ public class playermovement2 : NetworkBehaviour
     public int totalcoins;
     public Transform spawnPoint;
 
+    public GameObject deadsprite; 
+
 
 
 
@@ -425,19 +427,30 @@ public class playermovement2 : NetworkBehaviour
                 anim.SetTrigger("die");
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth);
+                
 
 
-                if(!isLevel3){
-                    Transform originalParent = transform.parent;
-                    transform.SetParent(null);
-                    transform.position = spawnPoint.position;
-                    transform.SetParent(originalParent);
+                if (!isLevel3)
+                {
+                    StartCoroutine(backtospawn(1.5f));
                 }
 
                 rb.bodyType = RigidbodyType2D.Dynamic;
 
             }
         }
+    }
+
+    private IEnumerator backtospawn(float delay)
+    {
+        
+        yield return new WaitForSeconds(delay);
+
+        Transform originalParent = transform.parent;
+        transform.SetParent(null);
+        transform.position = spawnPoint.position;
+        transform.SetParent(originalParent);
+        deadsprite.SetActive(false);
     }
     public void updatelives()
     {

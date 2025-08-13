@@ -227,7 +227,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 46.3125, y: 54.864452}
+    oldSize: {x: 46.3125, y: 54.75}
     newSize: {x: 46.32412, y: 54.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -325,6 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc2c756b574a084cad8e47668448f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMethod: 0
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   p2: {fileID: 0}
   boxUI: {fileID: 0}
   rb: {fileID: 3263095716796755643}
@@ -377,6 +381,8 @@ MonoBehaviour:
   verticalmovement: 0
   isLevel3: 0
   totalcoins: 0
+  spawnPoint: {fileID: 0}
+  deadsprite: {fileID: 0}
   playerRoot: {fileID: 0}
 --- !u!114 &151486952611751770
 MonoBehaviour:

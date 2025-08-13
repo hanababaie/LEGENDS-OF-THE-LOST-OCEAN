@@ -163,7 +163,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 51.375004, y: 52.816628}
+    oldSize: {x: 51.375, y: 52.75}
     newSize: {x: 6.87, y: 8.34}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -361,6 +361,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff66e81ef97e6724e93936317667cf13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMethod: 0
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   boxUI: {fileID: 0}
   rb: {fileID: 8571647271481567818}
   startpos: {x: 0, y: 0, z: 0}
@@ -383,6 +387,7 @@ MonoBehaviour:
   bulletref: {fileID: 1363656916886568770, guid: 643413ca19f68104a935ec94818f1579, type: 3}
   FirePoint: {fileID: 0}
   maxHealth: 5
+  currentHealth: 0
   bar: {fileID: 0}
   maxlives: 3
   currentlives: 0
@@ -401,6 +406,9 @@ MonoBehaviour:
   jumpSound: {fileID: 0}
   verticalmovement: 0
   isLevel3: 0
+  totalcoins: 0
+  spawnPoint: {fileID: 0}
+  deadsprite: {fileID: 0}
   finalkey: 0
   atfinaldoor: 0
   playerRoot: {fileID: 0}
