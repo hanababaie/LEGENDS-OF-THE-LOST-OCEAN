@@ -4,54 +4,56 @@ using UnityEngine;
 public class ChunkGenerator : MonoBehaviour
 {
     [Header("Chunks")]
-    public GameObject beggingChunk; //start chuck
+    public GameObject beggingChunk; // start chunk
     public GameObject[] randomChunks;  
-    public GameObject finalChunk;   //final chuck
+    public GameObject finalChunk;   // final chunk
 
-    [Header("Players")] // for players
+    [Header("Players")]
     public Transform player1;
     public Transform player2;
 
-    [Header("Settings")] // for setting of  the chucks 
-    public Vector3 startp1 = new Vector3(-20, 0, 0); //staring for player 1
-    public Vector3 startp2 = new Vector3(20, 0, 0);  //starting for player 2
-    public int chunkCount = 5; //number of random chucks
+    [Header("Settings")]
+    public Vector3 startp1 = new Vector3(-20, 0, 0);
+    public Vector3 startp2 = new Vector3(20, 0, 0);
+    public int chunkCount = 5;
 
-    private void Start()
+    private List<int> chunkSequence = new List<int>();
+
+    public void GenerateChunksAtStart(Vector3 startPos)
     {
-        List<int> chunkSequence = generate();
-
-        generateforplayers(startp1, chunkSequence);
+        if (chunkSequence == null || chunkSequence.Count == 0)
+        {
+            chunkSequence = GenerateNewSequence();
+        }
+        generateforplayers(startPos, chunkSequence);
     }
 
-    List<int> generate()
+    List<int> GenerateNewSequence()
     {
-        List<int> sequence = new List<int>(); // we create a lost for random chucks 
+        List<int> sequence = new List<int>();
         for (int i = 0; i < chunkCount; i++)
         {
-            int rand = Random.Range(0, randomChunks.Length); 
-            sequence.Add(rand); // add it to the list
+            int rand = Random.Range(0, randomChunks.Length);
+            sequence.Add(rand);
         }
         return sequence;
     }
 
-    void generateforplayers(Vector3 startPos, List<int> chucklist)
+    void generateforplayers(Vector3 startPos, List<int> chunkList)
     {
         Vector3 spawnPos = startPos;
-        GameObject startchuck = Instantiate(beggingChunk, spawnPos, Quaternion.identity);
-        //instantiate chuck1
-        Transform endpoint = startchuck.transform.Find("endpoint"); // find the location of the end point in the start chuck
+        GameObject startChunk = Instantiate(beggingChunk, spawnPos, Quaternion.identity);
+
+        Transform endpoint = startChunk.transform.Find("endpoint");
         if (endpoint != null)
         {
             Vector3 localOffset = endpoint.localPosition;
             spawnPos += localOffset;
-            //move the spawn position to the end point of the chuck
         }
 
-        foreach (int index in chucklist)
+        foreach (int index in chunkList)
         {
             GameObject chunk = Instantiate(randomChunks[index], spawnPos, Quaternion.identity);
-            //instantiate the random chuck
 
             Transform endPoint = chunk.transform.Find("endpoint");
             if (endPoint != null)
@@ -59,12 +61,23 @@ public class ChunkGenerator : MonoBehaviour
                 Vector3 localOffset = endPoint.localPosition;
                 spawnPos += localOffset;
             }
-
-            //find the endpoint and move the spawn pos to there 
-
         }
 
-        GameObject final = Instantiate(finalChunk, spawnPos, Quaternion.identity);
-        // instatiate the final chuck
+        Instantiate(finalChunk, spawnPos, Quaternion.identity);
+    }
+
+    public List<int> GetChunkSequence()
+    {
+        return chunkSequence;
+    }
+
+    public void SetChunkSequence(List<int> sequence)
+    {
+        chunkSequence = sequence;
+    }
+
+    public void ClearChunks()
+    {
+        chunkSequence.Clear();
     }
 }

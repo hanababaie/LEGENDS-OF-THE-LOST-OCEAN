@@ -29,9 +29,9 @@ public class pausemenu : MonoBehaviour
         Time.timeScale = 0;
     }
     public void mainmenu()
-{
+    {
         Time.timeScale = 1f;
-    if (sencemanager.Instance != null)
+        if (sencemanager.Instance != null)
         {
             sencemanager.Instance.SaveGame();
         }
@@ -40,8 +40,8 @@ public class pausemenu : MonoBehaviour
             Debug.LogWarning("Sencemanager.Instance is null in pausemenu");
         }
 
-    SceneManager.LoadScene("mianmenu");
-}
+        SceneManager.LoadScene("mianmenu");
+    }
 
 
     public void resume()
@@ -64,6 +64,11 @@ public class pausemenu : MonoBehaviour
             muteButtonIcon.sprite = soundOffIcon;
 
         }
+    }
+    
+    public void backtomain()
+    {
+        SceneManager.LoadScene("mianmenu");
     }
     
 

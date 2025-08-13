@@ -105,6 +105,8 @@ public class playermovement1 :NetworkBehaviour
 
     public int totalcoins;
 
+    public Transform spawnPoint;
+
 
 
 
@@ -173,7 +175,7 @@ public class playermovement1 :NetworkBehaviour
             isLevel3 = true;
         }
 
-        startpos = transform.position;
+        
         orstartpos = transform.parent;
         trail = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
@@ -579,11 +581,13 @@ public class playermovement1 :NetworkBehaviour
                 currentHealth = maxHealth;
                 bar.Sethealth(currentHealth); //reset the health bar
 
-
-                Transform originalParent = transform.parent; //store the parent of the player
-                transform.SetParent(null); // set free the player from any parent
-                transform.position = startpos; // change the positon to the begining
-                transform.SetParent(originalParent); // set the parent
+                if (!isLevel3)
+                {
+                    Transform originalParent = transform.parent; //store the parent of the player
+                    transform.SetParent(null); // set free the player from any parent
+                    transform.position = spawnPoint.position; // change the positon to the begining
+                    transform.SetParent(originalParent); // set the parent
+                }
 
             }
         }
@@ -614,6 +618,8 @@ public class playermovement1 :NetworkBehaviour
 
     public PlayerData GetPlayerData()
     {
+        Vector3 pos = transform.position;
+
         return new PlayerData
         {
             health = currentHealth,
@@ -625,7 +631,12 @@ public class playermovement1 :NetworkBehaviour
             atFinalDoor = atfinaldoor,
             totalcoins = totalcoins,
             maxhealth = maxHealth,
-            maxspeed = movespeed
+            maxspeed = movespeed,
+            posX = pos.x,         
+            posY = pos.y,
+            posZ = pos.z
+        
+
         };
     }
 
@@ -639,10 +650,20 @@ public class playermovement1 :NetworkBehaviour
         haskey2 = data.hasKey2;
         atship = data.atShip;
         atfinaldoor = data.atFinalDoor;
-        
+
 
         maxHealth = data.maxhealth > 0 ? data.maxhealth : maxHealth;
         movespeed = data.maxspeed > 0 ? data.maxspeed : movespeed;
+        transform.position = new Vector3(data.posX, data.posY, data.posZ);
+        
+        
+        cointext.text = coins.ToString("000");
+        updatevives();
+        bar.Sethealth(currentHealth);
+
+        Debug.Log($"[LoadPlayerData] Health: {currentHealth}, Lives: {currentlives}, Coins: {coins}");
+            
+
     }
     public void ResetLevelStats()
     {

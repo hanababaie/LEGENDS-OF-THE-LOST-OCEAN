@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -13,6 +14,8 @@ public class GameData
 
     public PlayerData player1Data;
     public PlayerData player2Data;
+
+    public List<int> chunkSequence;
 }
 [Serializable]
 public class PlayerData
@@ -29,6 +32,12 @@ public class PlayerData
     public int maxhealth;
     public float maxspeed;
     public int extraLife;
+
+    public float posX;
+    public float posY;
+    public float posZ;
+
+    
 }
 
 
@@ -76,4 +85,6 @@ public static class SaveManager
     {
         return File.Exists(savePath);
     }
+
+
 }

@@ -902,6 +902,7 @@ MonoBehaviour:
   verticalmovement: 0
   isLevel3: 0
   totalcoins: 0
+  spawnPoint: {fileID: 0}
   playerRoot: {fileID: 0}
 --- !u!1 &866866807
 GameObject:
@@ -1132,6 +1133,7 @@ MonoBehaviour:
   verticalmovement: 0
   isLevel3: 0
   totalcoins: 0
+  spawnPoint: {fileID: 0}
   finalkey: 0
   atfinaldoor: 0
   playerRoot: {fileID: 0}
@@ -1634,27 +1636,27 @@ MonoBehaviour:
   - itemname: +10 HEALTH
     itemtype: 0
     price: 50
-    value: 10
+    value: 1
     itemIcon: {fileID: -6343642932647356959, guid: 9c426347551157242b1063d88b24982b, type: 3}
-  - itemname: +15 HEALTH
-    itemtype: 0
-    price: 75
-    value: 15
-    itemIcon: {fileID: -8720278323364626428, guid: 9c426347551157242b1063d88b24982b, type: 3}
   - itemname: +20 HEALTH
     itemtype: 0
+    price: 75
+    value: 2
+    itemIcon: {fileID: -8720278323364626428, guid: 9c426347551157242b1063d88b24982b, type: 3}
+  - itemname: +30 HEALTH
+    itemtype: 0
     price: 100
-    value: 20
+    value: 3
     itemIcon: {fileID: 5670999502947714884, guid: 9c426347551157242b1063d88b24982b, type: 3}
-  - itemname: +20 SPEED
+  - itemname: +10 SPEED
     itemtype: 1
     price: 50
-    value: 20
+    value: 10
     itemIcon: {fileID: -5670111455544660227, guid: 9c426347551157242b1063d88b24982b, type: 3}
-  - itemname: +50 SPEED
+  - itemname: +25 SPEED
     itemtype: 1
     price: 100
-    value: 50
+    value: 25
     itemIcon: {fileID: -5707684832703864488, guid: 9c426347551157242b1063d88b24982b, type: 3}
   player1ItemsParent: {fileID: 133940338}
   player2ItemsParent: {fileID: 366632673}
@@ -1662,7 +1664,7 @@ MonoBehaviour:
   player1panel: {fileID: 2052771354}
   player2panel: {fileID: 2131208214}
   player1CoinsText: {fileID: 290155965}
-  player2CoinsText: {fileID: 0}
+  player2CoinsText: {fileID: 1723965130}
   currentPanel: 1
   p1: {fileID: 751657760}
   p2: {fileID: 1268836381}

@@ -27,10 +27,10 @@ public class shop : MonoBehaviour
 
     void Start()
     {
-        LoadPlayerData();       // 🔄 load از فایل ذخیره
+        LoadPlayerData();
         showpanel(1);
-        showUIpanel();          // 🛍️ ساخت UI آیتم‌ها
-        updatecoins();          // 💰 آپدیت سکه در UI
+        showUIpanel();     
+        updatecoins();        
     }
 
     public void Update()
@@ -112,11 +112,7 @@ public class shop : MonoBehaviour
         if (playerData.totalcoins >= item.price)
         {
             playerData.totalcoins -= item.price;
-            if (playerData.coins >= item.price)
-            {
-                playerData.coins -= item.price;
-
-            }
+            
 
             switch (item.itemtype)
             {
@@ -133,6 +129,7 @@ public class shop : MonoBehaviour
 
             if (playernum == 1)
             {
+                p1.totalcoins = playerData.totalcoins; // coins player update
                 p1.maxHealth = playerData.maxhealth;
                 p1.movespeed = playerData.maxspeed;
                 p1.currentHealth = p1.maxHealth;
@@ -143,6 +140,7 @@ public class shop : MonoBehaviour
             }
             else
             {
+                p2.totalcoins = playerData.totalcoins; // coins player update
                 p2.maxHealth = playerData.maxhealth;
                 p2.movespeed = playerData.maxspeed;
                 p2.currentHealth = p2.maxHealth;
@@ -152,7 +150,7 @@ public class shop : MonoBehaviour
                 p2.updatelives();
             }
 
-            SavePlayerData();
+            SavePlayerData(); // save after applying changes to real players
             updatecoins();
         }
         else
@@ -179,6 +177,7 @@ public class shop : MonoBehaviour
 
     public void backtomain()
     {
+        SavePlayerData();
         SceneManager.LoadScene("mianmenu");
     }
 }

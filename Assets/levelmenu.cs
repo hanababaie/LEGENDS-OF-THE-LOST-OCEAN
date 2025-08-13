@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LevelMenu : MonoBehaviour
 {
+
+    public static bool startAtSpawn = false;
     public Button[] levelButtons;
     public Color lockedColor = new Color(0.5f, 0.5f, 0.5f, 0.7f); 
     public Color unlockedColor = Color.white;
@@ -32,8 +34,9 @@ public class LevelMenu : MonoBehaviour
         Debug.Log("Save data reset done!");
     }
 
-    public void OpenLevel(int level)
+    public static void OpenLevel(int level)
     {
+        startAtSpawn = true;
         Debug.Log("OpenLevel called with level: " + level);
         int unlockedLevel = GetUnlockedLevel();
         if (level > unlockedLevel)
@@ -43,6 +46,7 @@ public class LevelMenu : MonoBehaviour
         }
 
         string levelName = "level" + level;
+
         SceneManager.LoadScene(levelName);
     }
 

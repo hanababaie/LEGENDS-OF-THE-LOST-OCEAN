@@ -9,7 +9,9 @@ public class followcamera : MonoBehaviour
     {
         if (target != null)
         {
-            transform.position = target.position + offset; // updating the position
+            Vector3 newPosition = target.position + offset;
+            newPosition.z = -10f;
+            transform.position = newPosition;
         }
     }
 }

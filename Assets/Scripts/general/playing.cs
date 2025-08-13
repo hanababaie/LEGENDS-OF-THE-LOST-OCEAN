@@ -5,6 +5,7 @@ public class play : MonoBehaviour
 {
     public void OnClickContinue()
     {
+        sencemanager.Instance.startAtSpawn = false;
         if (!SaveManager.SaveExists())
         {
             Debug.Log("No save file found. Loading level1.");

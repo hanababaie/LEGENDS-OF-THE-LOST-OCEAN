@@ -10,8 +10,6 @@ using Mirror;
 
 public class playermovement2 : NetworkBehaviour
 {
-
-
     public GameObject boxUI;
     public Rigidbody2D rb;
     public Vector3 startpos;
@@ -80,6 +78,7 @@ public class playermovement2 : NetworkBehaviour
     public bool isLevel3;
 
     public int totalcoins;
+    public Transform spawnPoint;
 
 
 
@@ -143,8 +142,7 @@ public class playermovement2 : NetworkBehaviour
             isLevel3 = true;
         }
 
-        startpos = transform.position;
-
+        
         anim = GetComponent<Animator>();
 
         bulletref = Resources.Load<GameObject>("Bullet"); // take the bullet form resoure folder
@@ -429,10 +427,12 @@ public class playermovement2 : NetworkBehaviour
                 bar.Sethealth(currentHealth);
 
 
-                Transform originalParent = transform.parent;
-                transform.SetParent(null);
-                transform.position = startpos;
-                transform.SetParent(originalParent);
+                if(!isLevel3){
+                    Transform originalParent = transform.parent;
+                    transform.SetParent(null);
+                    transform.position = spawnPoint.position;
+                    transform.SetParent(originalParent);
+                }
 
                 rb.bodyType = RigidbodyType2D.Dynamic;
 
@@ -491,6 +491,7 @@ public class playermovement2 : NetworkBehaviour
 
     public PlayerData GetPlayerData()
     {
+        Vector3 pos = transform.position;
         return new PlayerData
         {
             health = currentHealth,
@@ -500,7 +501,15 @@ public class playermovement2 : NetworkBehaviour
             hasKey2 = finalkey,
             atShip = atship,
             atFinalDoor = atfinaldoor,
-            totalcoins = totalcoins
+            totalcoins = totalcoins,
+
+            maxhealth = maxHealth,
+            maxspeed = movespeed,
+
+            posX = pos.x,
+            posY = pos.y,
+            posZ = pos.z
+
         };
     }
 
@@ -516,16 +525,27 @@ public class playermovement2 : NetworkBehaviour
         atfinaldoor = data.atFinalDoor;
         maxHealth = data.maxhealth > 0 ? data.maxhealth : maxHealth;
         movespeed = data.maxspeed > 0 ? data.maxspeed : movespeed;
+        transform.position = new Vector3(data.posX, data.posY, data.posZ);
+        
+
+        
+        cointext.text = coins.ToString("000");
+        updatelives();
+        bar.Sethealth(currentHealth);
+
+        Debug.Log($"[LoadPlayerData] Health: {currentHealth}, Lives: {currentlives}, Coins: {coins}");
     }
 
     public void ResetLevelStats()
-{
-    currentHealth = maxHealth;
-    currentlives = maxlives;  
-    coins = 0;
-    haskey = false;
-    finalkey = false;
-    atship = false;
-    atfinaldoor = false;
-}
+    {
+        currentHealth = maxHealth;
+        currentlives = maxlives;
+        coins = 0;
+        haskey = false;
+        finalkey = false;
+        atship = false;
+        atfinaldoor = false;
+    }
+
+
 }

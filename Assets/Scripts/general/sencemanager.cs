@@ -1,5 +1,6 @@
+using System.Runtime.Serialization.Formatters;
 using System.Collections;
-using System.IO;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,15 +8,20 @@ public class sencemanager : MonoBehaviour
 {
     public static sencemanager Instance;
 
+    public bool startatspawn = false;
+
     public playermovement1 player1;
     public playermovement2 player2;
+    public ChunkGenerator chunkGenerator;
 
     private bool isGameOver = false;
 
+    public bool startAtSpawn = false;
+
+    public bool isloading = false;
 
     private void Awake()
     {
-        
         if (Instance == null)
         {
             Instance = this;
@@ -28,42 +34,51 @@ public class sencemanager : MonoBehaviour
         }
     }
 
-
-
     private void Update()
     {
         if (isGameOver) return;
-
-        if (player1.currentlives <= 0 || player2.currentlives <= 0)
+        if (player1.isLevel3)
         {
-            GameOver();
+            if (player1.currentHealth <= 0 && player2.currentlives <= 0)
+            {
+                GameOver();
+            }
+        }
+        else
+        {
+            if (player1.currentlives <= 0 || player2.currentlives <= 0)
+            {
+                GameOver();
+            }
         }
 
         CheckLevelProgression();
     }
 
     private void CheckLevelProgression()
-
     {
-
         if ((player1.haskey || player2.haskey) && player1.atship && player2.atship)
         {
+            isloading = true;
+            ClearChunkSequence();
             LevelCompleted(1);
-            ResetLevelFlags();
+            startatspawn = true;
             StartCoroutine(LoadSceneDelayed("level2"));
         }
 
         if (player2.finalkey && player1.atfinaldoor && player2.atfinaldoor)
         {
+            isloading = true;
             LevelCompleted(2);
-            ResetLevelFlags();
+            startatspawn = true;
             StartCoroutine(LoadSceneDelayed("level3"));
         }
     }
 
     private IEnumerator LoadSceneDelayed(string sceneName)
     {
-        yield return new WaitForSeconds(1f); // می‌تونی این رو هم حذف کنی یا کمترش کنی
+        ResetLevelFlags();
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(sceneName);
     }
 
@@ -74,6 +89,7 @@ public class sencemanager : MonoBehaviour
         isGameOver = true;
         player1.ResetLevelStats();
         player2.ResetLevelStats();
+        ClearChunkSequence();
         SaveGame();
         SceneManager.LoadScene("gameover");
     }
@@ -94,7 +110,8 @@ public class sencemanager : MonoBehaviour
             currentScene = SceneManager.GetActiveScene().name,
             isLevel3 = player1.isLevel3 || player2.isLevel3,
             player1Data = player1.GetPlayerData(),
-            player2Data = player2.GetPlayerData()
+            player2Data = player2.GetPlayerData(),
+            chunkSequence = chunkGenerator.GetChunkSequence()  // اضافه کردن ترتیب چانک‌ها
         };
 
         SaveManager.SaveGame(data);
@@ -104,8 +121,46 @@ public class sencemanager : MonoBehaviour
     {
         if (!SaveManager.SaveExists()) return;
         GameData data = SaveManager.LoadGame();
+
+        if (startatspawn || LevelMenu.startAtSpawn)
+        {
+            data.player1Data.posX = player1.spawnPoint.position.x;
+            data.player1Data.posY = player1.spawnPoint.position.y;
+            data.player1Data.posZ = player1.spawnPoint.position.z;
+            data.player2Data.posX = player2.spawnPoint.position.x;
+            data.player2Data.posY = player2.spawnPoint.position.y;
+            data.player2Data.posZ = player2.spawnPoint.position.z;
+            ResetLevelFlags();
+        }
+
         player1.LoadPlayerData(data.player1Data);
         player2.LoadPlayerData(data.player2Data);
+
+        if (chunkGenerator != null)
+        {
+            if (data.chunkSequence != null && data.chunkSequence.Count > 0)
+            {
+                chunkGenerator.SetChunkSequence(data.chunkSequence);
+            }
+            else
+            {
+                chunkGenerator.SetChunkSequence(new System.Collections.Generic.List<int>());
+            }
+        }
+    }
+
+    private void ClearChunkSequence()
+    {
+        if (chunkGenerator != null)
+        {
+            chunkGenerator.ClearChunks();
+
+            GameData data = SaveManager.LoadGame();
+            data.chunkSequence = new System.Collections.Generic.List<int>();
+            SaveManager.SaveGame(data);
+
+            Debug.Log("Chunk sequence cleared after finishing Level 1");
+        }
     }
 
     private void OnEnable()
@@ -122,14 +177,22 @@ public class sencemanager : MonoBehaviour
     {
         player1 = FindObjectOfType<playermovement1>();
         player2 = FindObjectOfType<playermovement2>();
+        chunkGenerator = FindObjectOfType<ChunkGenerator>();
 
-        if (player1 != null && player2 != null)
+        if (player1 != null && player2 != null && chunkGenerator != null)
         {
             LoadGameState();
             ResetLevelFlags();
+
+            if (scene.name == "level1" && chunkGenerator != null)
+            {
+                chunkGenerator.GenerateChunksAtStart(chunkGenerator.startp1);
+            }
+            LevelMenu.startAtSpawn = false;
+            startatspawn = false;
         }
     }
-    
+
     private void ResetLevelFlags()
     {
         if (player1 != null)
@@ -146,5 +209,12 @@ public class sencemanager : MonoBehaviour
             player2.atfinaldoor = false;
             player2.finalkey = false;
         }
+
+        isloading = false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
     }
 }
