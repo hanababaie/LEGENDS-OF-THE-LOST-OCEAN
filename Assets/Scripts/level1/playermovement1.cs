@@ -187,7 +187,6 @@ public class playermovement1 :NetworkBehaviour
         if (currentHealth <= 0) currentHealth = maxHealth;
         if (currentlives <= 0) currentlives = maxlives;
 
-        bar.Setmaxhealth(maxHealth);
         bar.Sethealth(currentHealth);
         updatevives();
         cointext.text = coins.ToString("000");

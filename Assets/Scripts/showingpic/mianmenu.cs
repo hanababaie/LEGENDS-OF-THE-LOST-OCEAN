@@ -7,13 +7,11 @@ public class mianmenu : MonoBehaviour
 
     public float time = 2f;
 
-    void Start()
+    void OnEnable()
     {
-        
-        pic.SetActive(true); // show the pic
-        mainmenu.SetActive(false); // do not show the main menu
-        
-        Invoke("ShowMenu", time); // after a time we show the menu
+        pic.SetActive(true);
+        mainmenu.SetActive(false);
+        Invoke("ShowMenu", time);
     }
 
     void ShowMenu()

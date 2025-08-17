@@ -37,7 +37,8 @@ public class sencemanager : MonoBehaviour
     private void Update()
     {
         if (isGameOver) return;
-        if (player1.isLevel3)
+        if (player1 != null && player2 != null)
+        {if (player1.isLevel3)
         {
             if (player1.currentHealth <= 0 && player2.currentlives <= 0)
             {
@@ -52,11 +53,12 @@ public class sencemanager : MonoBehaviour
             }
         }
 
-        CheckLevelProgression();
+        CheckLevelProgression();}
     }
 
     private void CheckLevelProgression()
     {
+        if (player1 == null || player2 == null) return;
         if ((player1.haskey || player2.haskey) && player1.atship && player2.atship)
         {
             isloading = true;
