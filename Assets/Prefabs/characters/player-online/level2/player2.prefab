@@ -1996,7 +1996,7 @@ MonoBehaviour:
   syncDirection: 1
   syncMode: 0
   syncInterval: 0.05
-  target: {fileID: 5040092387583563389}
+  target: {fileID: 3429421632222477262}
   updateMethod: 0
   syncPosition: 1
   syncRotation: 1
@@ -3500,7 +3500,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 778343981303887290, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+  m_PlayerPrefab: {fileID: 4765728153786839426}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
