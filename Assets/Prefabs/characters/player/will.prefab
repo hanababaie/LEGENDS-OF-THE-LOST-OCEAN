@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 2132495093028447963}
   - component: {fileID: 8571647271481567818}
   - component: {fileID: 4105477360770626450}
-  - component: {fileID: 4061322941448045129}
   - component: {fileID: 9152809850386142401}
+  - component: {fileID: 7180402189379400304}
   m_Layer: 0
   m_Name: will
   m_TagString: player2
@@ -290,7 +290,7 @@ MonoBehaviour:
     m_ActionName: 'jack/jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4061322941448045129}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: playermovement2, Assembly-CSharp
         m_MethodName: onmove
         m_Mode: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
     m_ActionName: 'will/move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4061322941448045129}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: playermovement2, Assembly-CSharp
         m_MethodName: onjump
         m_Mode: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
     m_ActionName: 'jack/attack[/Keyboard/enter]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4061322941448045129}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: playermovement2, Assembly-CSharp
         m_MethodName: onattack
         m_Mode: 0
@@ -349,7 +349,29 @@ MonoBehaviour:
   m_DefaultActionMap: will
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4061322941448045129
+--- !u!95 &9152809850386142401
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7485575032070080105}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b0e4d8a5e7c15549a29e6a30abda6dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7180402189379400304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,13 +380,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7485575032070080105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff66e81ef97e6724e93936317667cf13, type: 3}
+  m_Script: {fileID: 11500000, guid: 364f61a43afbcba4ea6a40a473857e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMethod: 0
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   boxUI: {fileID: 0}
   rb: {fileID: 8571647271481567818}
   startpos: {x: 0, y: 0, z: 0}
@@ -412,28 +430,6 @@ MonoBehaviour:
   finalkey: 0
   atfinaldoor: 0
   playerRoot: {fileID: 0}
---- !u!95 &9152809850386142401
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7485575032070080105}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8b0e4d8a5e7c15549a29e6a30abda6dd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7623051326092097072
 GameObject:
   m_ObjectHideFlags: 0

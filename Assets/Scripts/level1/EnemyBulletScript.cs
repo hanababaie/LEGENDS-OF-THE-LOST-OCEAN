@@ -54,6 +54,22 @@ public class EnemyBulletScript : MonoBehaviour
                     Instantiate(explosionEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
+            var pm3 = collision.GetComponent<p1offline>();
+            if (pm3 != null)
+            {
+                pm3.TakeDamage(1);
+                if (explosionEffect != null)
+                    Instantiate(explosionEffect, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            var pm4 = collision.GetComponent<p2offline>();
+            if (pm4 != null)
+            {
+                pm4.TakeDamage(1);
+                if (explosionEffect != null)
+                    Instantiate(explosionEffect, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
     }
 

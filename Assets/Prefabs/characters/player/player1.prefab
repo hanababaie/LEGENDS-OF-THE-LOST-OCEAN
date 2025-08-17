@@ -245,7 +245,8 @@ PrefabInstance:
       propertyPath: enemylayers.m_Bits
       value: 256
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6863121083116308835, guid: 75a8a2ac7eab33a458edddbcfcf6dd5e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

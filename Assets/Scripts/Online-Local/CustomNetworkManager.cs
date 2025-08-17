@@ -26,7 +26,7 @@ public class CustomNetworkManager : NetworkManager
     public override void OnServerSceneChanged(string sceneName)
     {
         base.OnServerSceneChanged(sceneName);
-
+        
         string justSceneName = Path.GetFileNameWithoutExtension(sceneName);
         Debug.Log("Scene Changed To: " + justSceneName);
 
@@ -39,7 +39,9 @@ public class CustomNetworkManager : NetworkManager
                 Debug.Log("Setup found for scene: " + justSceneName);
                 break;
             }
+            
         }
+        
     }
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
@@ -58,7 +60,7 @@ public class CustomNetworkManager : NetworkManager
         }
 
         PlayerSetup setup = currentPlayerSetups[connectionIndex];
-
+        Debug.Log("Spawning player prefab: " + setup.playerPrefab.name);
         GameObject player = Instantiate(setup.playerPrefab, setup.spawnPoint.position, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, player);
 

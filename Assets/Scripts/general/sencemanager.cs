@@ -10,8 +10,8 @@ public class sencemanager : MonoBehaviour
 
     public bool startatspawn = false;
 
-    public playermovement1 player1;
-    public playermovement2 player2;
+    public p1offline player1;
+    public p2offline player2;
     public ChunkGenerator chunkGenerator;
 
     private bool isGameOver = false;
@@ -175,8 +175,8 @@ public class sencemanager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        player1 = FindObjectOfType<playermovement1>();
-        player2 = FindObjectOfType<playermovement2>();
+        player1 = FindObjectOfType<p1offline>();
+        player2 = FindObjectOfType<p2offline>();
         chunkGenerator = FindObjectOfType<ChunkGenerator>();
 
         if (player1 != null && player2 != null && chunkGenerator != null)

@@ -1,0 +1,562 @@
+using System.Net.Mime;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using Unity.VisualScripting;
+
+public class p2offline : MonoBehaviour
+{
+    public GameObject boxUI;
+    public Rigidbody2D rb;
+    public Vector3 startpos;
+    public float horizontalmovement;
+    public float movespeed = 20;
+    public bool facingright = true;
+
+    public float jumpforce = 10f;
+    private Vector2 movement;
+
+    public Transform groundCheckpos;
+    public Vector2 groundChecksize = new Vector2(0.5f, 0.05f);
+    public LayerMask ground;
+    public bool falling = false;
+    public float fally;
+
+    public int maxjump = 2;
+    private int jumpremaining;
+
+    private bool isclimbing;
+    public float climbspeed = 5f;
+
+    public float dashspeed = 50f;
+    public float dashtime = 0.2f;
+    public float dashcoldown = 8f;
+
+
+    public GameObject bulletref;
+    public Transform FirePoint;
+
+    private Animator anim;
+    public int maxHealth = 2;
+    public int currentHealth;
+    private bool isDead = false;
+
+    public healthbar bar;
+
+    public int maxlives = 3;
+    public int currentlives;
+
+    public Image[] lifeimages;
+    public Color activeColor = Color.white;
+    public Color inactiveColor = new Color(1, 1, 1, 0.3f);
+
+    public int coins = 0;
+
+
+    public TextMeshProUGUI cointext;
+
+    private bool inwater;
+    private float watertime;
+    public GameObject watericon;
+
+    public bool haskey = false;
+    public bool atship = false;
+    public GameObject keyicon;
+
+    public AudioSource audioSource;
+
+    public AudioClip attackSound;
+    public AudioClip deathSound;
+    public AudioClip jumpSound;
+
+    public float verticalmovement;
+
+    public bool isLevel3;
+
+    public int totalcoins;
+    public Transform spawnPoint;
+
+    public GameObject deadsprite; 
+
+
+
+
+
+    public void addcoin(int value)
+    {
+        coins += value;
+        totalcoins += value;
+        cointext.text = coins.ToString("000");
+    }
+
+    public void addhealth(int value)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += value;
+            bar.Sethealth(currentHealth);
+        }
+    }
+
+    public void addlives(int value)
+    {
+        if (currentlives < maxlives)
+        {
+            currentlives += value;
+            updatelives();
+        }
+    }
+
+    public void addspeed(float value)
+    {
+        speed(value);
+    }
+
+    IEnumerator speed(float value)
+    {
+        movespeed += value;
+        yield return new WaitForSeconds(10);
+        movespeed -= value;
+    }
+
+    public void addpower(float value)
+    {
+        power(value);
+    }
+
+    IEnumerator power(float value)
+    {
+        movespeed += value;
+        yield return new WaitForSeconds(10);
+        movespeed -= value;
+    }
+
+
+
+    private void Start()
+    {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "level3")
+        {
+            isLevel3 = true;
+        }
+
+        
+        anim = GetComponent<Animator>();
+
+        bulletref = Resources.Load<GameObject>("Bullet"); // take the bullet form resoure folder
+        if (currentHealth <= 0) currentHealth = maxHealth;
+        if (currentlives <= 0) currentlives = maxlives;
+
+        bar.Setmaxhealth(maxHealth);
+        bar.Sethealth(currentHealth);
+        updatelives();
+        cointext.text = coins.ToString("000");
+    }
+
+    public void onmove(InputAction.CallbackContext context)
+    {
+     
+        if (!isDead)
+        {
+            horizontalmovement = context.ReadValue<Vector2>().x;
+            verticalmovement = context.ReadValue<Vector2>().y;
+        }
+    }
+
+    public void onjump(InputAction.CallbackContext context)
+    {
+     
+        if (isDead) return;
+
+        if (jumpremaining > 0) // check if we still can jump(we can jump 2 times)
+        {
+            if (context.performed)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce); //aply the jump
+                jumpremaining -= 1;
+                anim.SetBool("jump", true);
+                if (audioSource != null && jumpSound != null)
+                {
+                    audioSource.PlayOneShot(jumpSound);
+                }
+
+            }
+            else if (context.canceled)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+                jumpremaining -= 1;
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (!isgrounded())
+        {
+            if (!falling)
+            {
+                fally = transform.position.y;
+                falling = true;
+            }
+        }
+        else
+        {
+            if (falling)
+            {
+                float falldis = fally - transform.position.y;
+                if (falldis > 80f)
+                {
+                    TakeDamage(1);
+                    Debug.Log("demage: " + falldis);
+                }
+                falling = false;
+            }
+        }
+        if (isDead) return;
+
+        if (isLevel3 && !isclimbing)
+        {
+            rb.linearVelocity = new Vector2(horizontalmovement * movespeed, verticalmovement * movespeed);
+        }
+        else if (!isLevel3)
+        {
+            rb.linearVelocity = new Vector2(horizontalmovement * movespeed, rb.linearVelocity.y);
+        }
+
+
+        groundcheck();
+
+
+        if (isLevel3)
+        {
+            Vector2 moveDirection = new Vector2(horizontalmovement, verticalmovement);
+            anim.SetFloat("speed", moveDirection.magnitude); // شدت کلی حرکت
+
+        }
+        if (!isLevel3)
+        {
+            anim.SetFloat("speed", Mathf.Abs(horizontalmovement));
+            anim.SetBool("jump", !isgrounded()); //jump
+        }
+
+        if (horizontalmovement < 0 && !facingright) flip();
+        if (horizontalmovement > 0 && facingright) flip();
+
+        if (isclimbing)
+        {
+            float vertical = Input.GetAxis("Vertical");
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * movespeed);
+        }
+        if (inwater)
+        {
+            watertime += Time.deltaTime;
+
+            if (watertime >= 5f)
+            {
+                TakeDamage(currentHealth);
+                watertime = 0f;
+            }
+        }
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(groundCheckpos.position, groundChecksize);
+    }
+
+    private void groundcheck()
+    {
+        if (Physics2D.OverlapBox(groundCheckpos.position, groundChecksize, 0, ground))
+        {
+            jumpremaining = maxjump; // set the jump to max
+        }
+    }
+
+    private bool isgrounded()
+    {
+        return Physics2D.OverlapBox(groundCheckpos.position, groundChecksize, 0, ground);
+    }
+
+    public void flip()
+    {
+        Vector3 theScale = gameObject.transform.localScale;
+        theScale.x *= -1;
+        gameObject.transform.localScale = theScale;
+        facingright = !facingright;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("movingblock"))
+        {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("movingblock"))
+        {
+            transform.parent = null;
+        }
+    }
+
+    public bool finalkey = false;
+    public bool atfinaldoor = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("latter"))
+        {
+            rb.gravityScale = 0f;
+            isclimbing = true;
+        }
+        if (collision.CompareTag("water"))
+        {
+            watericon.SetActive(true);
+            inwater = true;
+            watertime = 0;
+        }
+        if (collision.CompareTag("key"))
+        {
+            haskey = true;
+            keyicon.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.CompareTag("ship"))
+        {
+            atship = true;
+
+        }
+
+        if (collision.CompareTag("obstecle"))
+        {
+            TakeDamage(1);
+        }
+
+        if (collision.CompareTag("final"))
+        {
+            finalkey = true;
+            keyicon.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("finaldoor") && finalkey)
+        {
+            atfinaldoor = true;
+        }
+
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("latter"))
+        {
+            isclimbing = false;
+            rb.gravityScale = 10f;
+        }
+
+        if (collision.CompareTag("water"))
+        {
+            watericon.SetActive(false);
+            inwater = false;
+            watertime = 0;
+        }
+
+
+    }
+
+    public void onattack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            anim.SetTrigger("attack");
+
+            GameObject bullet = Instantiate(bulletref, FirePoint.position, Quaternion.identity);
+            // insatantion of the bullet in fire point that we set for the player
+
+
+            float direction = transform.localScale.x >= 0 ? 1f : -1f;
+
+            bullet.GetComponent<bullet>().direction = direction; // acessing the bullet script
+
+            Vector3 bulletScale = bullet.transform.localScale; //take the scale of the bullet
+            bulletScale.x = Mathf.Abs(bulletScale.x) * direction; // set in + or - based on the direction
+            bullet.transform.localScale = bulletScale; //scale/update the 
+            // check if the bullet has the right direction
+
+            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());//avoid the coliidition of the bullet and player
+            audioSource.PlayOneShot(attackSound);
+        }
+
+    }
+
+
+    public void TakeDamage(int amount)
+    {
+        if (isDead) return;
+
+        currentHealth -= amount;
+        bar.Sethealth(currentHealth);
+        hurt();
+
+        if (currentHealth <= 0)
+        {
+            currentlives--;
+            updatelives();
+            if (currentlives <= 0)
+            {
+                die();
+            }
+            else
+            {
+                if (audioSource != null && deathSound != null)
+                {
+                    audioSource.PlayOneShot(deathSound);
+                }
+                anim.SetTrigger("die");
+                currentHealth = maxHealth;
+                bar.Sethealth(currentHealth);
+                
+
+
+                if (!isLevel3)
+                {
+                    StartCoroutine(backtospawn(1.5f));
+                }
+
+                rb.bodyType = RigidbodyType2D.Dynamic;
+
+            }
+        }
+    }
+
+    private IEnumerator backtospawn(float delay)
+    {
+        
+        yield return new WaitForSeconds(delay);
+
+        Transform originalParent = transform.parent;
+        transform.SetParent(null);
+        transform.position = spawnPoint.position;
+        transform.SetParent(originalParent);
+        deadsprite.SetActive(false);
+    }
+    public void updatelives()
+    {
+        for (int i = 0; i < lifeimages.Length; i++)
+        {
+            if (i < currentlives)
+            {
+                lifeimages[i].color = activeColor;
+            }
+            else
+            {
+                lifeimages[i].color = inactiveColor;
+            }
+        }
+    }
+    
+
+    private void hurt()
+    {
+        anim.SetTrigger("hurt");
+        // می‌تونی افکت صوتی یا فلش خوردن هم بزاری اینجا
+    }
+
+    private void die()
+    {
+        isDead = true;
+        anim.SetTrigger("die");
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static; // غیر فعال کردن فیزیک
+
+        // اگر بخوای UI یا صحنه restart شه، اون رو هم اینجا اضافه کن
+    }
+
+    public Transform playerRoot;
+
+    public void spawn()
+    {
+        StartCoroutine(RespawnWithDelay(0.5f));
+    }
+
+    private IEnumerator RespawnWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        playerRoot.position = startpos;
+        currentHealth = maxHealth;
+        bar.Sethealth(currentHealth);
+        anim.ResetTrigger("die");
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        gameObject.SetActive(true);
+    }
+
+    public PlayerData GetPlayerData()
+    {
+        Vector3 pos = transform.position;
+        return new PlayerData
+        {
+            health = currentHealth,
+            lives = currentlives,
+            coins = coins,
+            hasKey = haskey,
+            hasKey2 = finalkey,
+            atShip = atship,
+            atFinalDoor = atfinaldoor,
+            totalcoins = totalcoins,
+
+            maxhealth = maxHealth,
+            maxspeed = movespeed,
+
+            posX = pos.x,
+            posY = pos.y,
+            posZ = pos.z
+
+        };
+    }
+
+    public void LoadPlayerData(PlayerData data)
+    {
+        currentHealth = data.health;
+        currentlives = data.lives;
+        coins = data.coins;
+        totalcoins = data.totalcoins;
+        haskey = data.hasKey;
+        finalkey = data.hasKey2;
+        atship = data.atShip;
+        atfinaldoor = data.atFinalDoor;
+        maxHealth = data.maxhealth > 0 ? data.maxhealth : maxHealth;
+        movespeed = data.maxspeed > 0 ? data.maxspeed : movespeed;
+        transform.position = new Vector3(data.posX, data.posY, data.posZ);
+        
+
+        
+        cointext.text = coins.ToString("000");
+        updatelives();
+        bar.Sethealth(currentHealth);
+
+        Debug.Log($"[LoadPlayerData] Health: {currentHealth}, Lives: {currentlives}, Coins: {coins}");
+    }
+
+    public void ResetLevelStats()
+    {
+        currentHealth = maxHealth;
+        currentlives = maxlives;
+        coins = 0;
+        haskey = false;
+        finalkey = false;
+        atship = false;
+        atfinaldoor = false;
+    }
+
+
+}

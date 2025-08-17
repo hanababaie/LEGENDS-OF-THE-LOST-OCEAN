@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using Unity.UI;
+
 using UnityEngine.UI;
 
 public class ShopItemUI : MonoBehaviour

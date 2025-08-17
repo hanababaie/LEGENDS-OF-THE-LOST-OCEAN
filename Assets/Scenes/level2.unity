@@ -1859,17 +1859,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &203757047 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2619712247555888897, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
-  m_PrefabInstance: {fileID: 1289942405}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203757042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff66e81ef97e6724e93936317667cf13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &222047992
 GameObject:
   m_ObjectHideFlags: 0
@@ -5218,8 +5207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf473a7967091f4d98789203bd0abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1: {fileID: 1579366761}
-  p2: {fileID: 203757047}
+  p1: {fileID: 0}
+  p2: {fileID: 0}
   opendoorsound: {fileID: 8300000, guid: dcbb1a0caed1321438f9e6fcecfe35f0, type: 3}
   audioSource: {fileID: 486334937}
   portal: {fileID: 713156221}
@@ -12615,8 +12604,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startatspawn: 0
-  player1: {fileID: 1579366761}
-  player2: {fileID: 203757047}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   chunkGenerator: {fileID: 1772351067}
   startAtSpawn: 0
   isloading: 0
@@ -12807,6 +12796,66 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: bar
+      value: 
+      objectReference: {fileID: 660815391}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: boxUI
+      value: 
+      objectReference: {fileID: 1496552269}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: keyicon
+      value: 
+      objectReference: {fileID: 1066420191}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: cointext
+      value: 
+      objectReference: {fileID: 2063340189}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: FirePoint
+      value: 
+      objectReference: {fileID: 649777508}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ac1db61bfdb348e43b171ba0d1a9a2b4, type: 3}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f4a8d16d60defe64092cfa50d94d4857, type: 3}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: playerRoot
+      value: 
+      objectReference: {fileID: 556824520}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 2107222082}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a9246a6a27abf9a47bff489704efa550, type: 3}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 203757044}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: lifeimages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: 'lifeimages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 919275962}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: 'lifeimages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 750370432}
+    - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
+      propertyPath: 'lifeimages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 813535084}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -16366,17 +16415,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &1579366761 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
-  m_PrefabInstance: {fileID: 1833663015}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579366754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc2c756b574a084cad8e47668448f65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1596318875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24205,6 +24243,86 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: bar
+      value: 
+      objectReference: {fileID: 386526199}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: boxUI
+      value: 
+      objectReference: {fileID: 641489451}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: keyicon
+      value: 
+      objectReference: {fileID: 199967699}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: Keyicon2
+      value: 
+      objectReference: {fileID: 199967699}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: cointext
+      value: 
+      objectReference: {fileID: 1492542388}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: dashicon
+      value: 
+      objectReference: {fileID: 1338156290}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: dashtime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 281952635f6916546a3297e011ff95c9, type: 3}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4255dbf6aabe9064bae0ed64eda36565, type: 3}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: playerRoot
+      value: 
+      objectReference: {fileID: 354662516}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 776076575}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d3afa5668c51254baa92fee932be47f, type: 3}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1579366756}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: dashcoldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: currentHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: enemylayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: lifeimages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: 'lifeimages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 772133746}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: 'lifeimages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1158005651}
+    - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
+      propertyPath: 'lifeimages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1830610355}
     - target: {fileID: 3290888817508834167, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -24220,7 +24338,7 @@ PrefabInstance:
     - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: p2
       value: 
-      objectReference: {fileID: 203757047}
+      objectReference: {fileID: 0}
     - target: {fileID: 4557936744891320286, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: bar
       value: 
@@ -24316,7 +24434,7 @@ PrefabInstance:
     - target: {fileID: 4790762327476436883, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1579366761}
+      objectReference: {fileID: 0}
     - target: {fileID: 4790762327476436883, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -44605,7 +44723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb908f0bd06cf5943836153e5f8f2cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1: {fileID: 1579366761}
+  p1: {fileID: 0}
   audioSource: {fileID: 2028741696}
   breaking: {fileID: 8300000, guid: b01e5e7ecce331b49acbc6c4d3137e79, type: 3}
 --- !u!66 &2028741698

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class BossController : MonoBehaviour
 {
@@ -175,6 +176,16 @@ public class BossController : MonoBehaviour
             if (pm2 != null)
             {
                 pm2.TakeDamage(damage);
+            }
+            p1offline pmp = collision.gameObject.GetComponent<p1offline>();
+            if (pmp != null)
+            {
+                pmp.TakeDamage(damage);
+            }
+            p2offline p2Off = collision.gameObject.GetComponent<p2offline>();
+            if(p2Off != null)
+            {
+                p2Off.TakeDamage(damage);
             }
         }
     }

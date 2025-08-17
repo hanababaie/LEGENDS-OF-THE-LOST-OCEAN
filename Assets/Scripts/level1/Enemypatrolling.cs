@@ -92,6 +92,19 @@ public class Enemypatrolling : MonoBehaviour
                 pm2.TakeDamage(damage);
              
             }
+            // p1offline
+            var p1 = collision.gameObject.GetComponent<p1offline>();
+            if (p1 != null)
+            {
+                p1.TakeDamage(damage);
+            }
+
+            // p2offline
+            var p2 = collision.gameObject.GetComponent<p2offline>();
+            if (p2 != null)
+            {
+                p2.TakeDamage(damage);
+            }
         }
     }
 
