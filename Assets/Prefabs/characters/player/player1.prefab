@@ -237,6 +237,10 @@ PrefabInstance:
       propertyPath: _assetId
       value: 227543839
       objectReference: {fileID: 0}
+    - target: {fileID: 7725435341145518184, guid: 75a8a2ac7eab33a458edddbcfcf6dd5e, type: 3}
+      propertyPath: jumpforce
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 7912140174210007998, guid: 75a8a2ac7eab33a458edddbcfcf6dd5e, type: 3}
       propertyPath: m_Name
       value: jack

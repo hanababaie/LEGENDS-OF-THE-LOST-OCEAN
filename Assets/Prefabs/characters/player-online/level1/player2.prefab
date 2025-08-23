@@ -1146,7 +1146,7 @@ MonoBehaviour:
   horizontalmovement: 0
   movespeed: 30
   facingright: 0
-  jumpforce: 100
+  jumpforce: 190
   groundCheckpos: {fileID: 6253765530418818997}
   groundChecksize: {x: 23.41, y: 5.77}
   ground:
