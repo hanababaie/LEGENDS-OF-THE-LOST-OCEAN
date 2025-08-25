@@ -91,6 +91,7 @@ public class sencemanager : MonoBehaviour
         isGameOver = true;
         player1.ResetLevelStats();
         player2.ResetLevelStats();
+        startatspawn = true;
         ClearChunkSequence();
         SaveGame();
         SceneManager.LoadScene("gameover");
