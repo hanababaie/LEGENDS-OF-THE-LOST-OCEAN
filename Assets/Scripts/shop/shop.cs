@@ -72,7 +72,6 @@ public class shop : MonoBehaviour
         GameData data = new GameData
         {
             lastUnlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1),
-            currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
             isLevel3 = p1.isLevel3 || p2.isLevel3,
             player1Data = playerData1,
             player2Data = playerData2

@@ -114,8 +114,7 @@ public class sencemanager : MonoBehaviour
             isLevel3 = player1.isLevel3 || player2.isLevel3,
             player1Data = player1.GetPlayerData(),
             player2Data = player2.GetPlayerData(),
-            chunkSequence = chunkGenerator.GetChunkSequence()  // اضافه کردن ترتیب چانک‌ها
-        };
+            chunkSequence = chunkGenerator != null ? chunkGenerator.GetChunkSequence() : SaveManager.LoadGame().chunkSequence        };
 
         SaveManager.SaveGame(data);
     }

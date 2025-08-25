@@ -30,7 +30,12 @@ public class play : MonoBehaviour
 
     public void shopopener()
     {
-        
+        if (SaveManager.SaveExists())
+        {
+            GameData data = SaveManager.LoadGame();
+            data.currentScene = SceneManager.GetActiveScene().name;
+            SaveManager.SaveGame(data);
+        }   
         SceneManager.LoadScene("shop");
     }
 }
