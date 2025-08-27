@@ -26,6 +26,11 @@ public class sencemanager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            player1 = FindObjectOfType<p1offline>();
+            player2 = FindObjectOfType<p2offline>();
+            chunkGenerator = FindObjectOfType<ChunkGenerator>();
+
             LoadGameState();
         }
         else
@@ -38,22 +43,24 @@ public class sencemanager : MonoBehaviour
     {
         if (isGameOver) return;
         if (player1 != null && player2 != null)
-        {if (player1.isLevel3)
         {
-            if (player1.currentHealth <= 0 && player2.currentlives <= 0)
+            if (player1.isLevel3)
             {
-                GameOver();
+                if (player1.currentHealth <= 0 && player2.currentlives <= 0)
+                {
+                    GameOver();
+                }
             }
-        }
-        else
-        {
-            if (player1.currentlives <= 0 || player2.currentlives <= 0)
+            else
             {
-                GameOver();
+                if (player1.currentlives <= 0 || player2.currentlives <= 0)
+                {
+                    GameOver();
+                }
             }
-        }
 
-        CheckLevelProgression();}
+            CheckLevelProgression();
+        }
     }
 
     private void CheckLevelProgression()
@@ -114,7 +121,17 @@ public class sencemanager : MonoBehaviour
             isLevel3 = player1.isLevel3 || player2.isLevel3,
             player1Data = player1.GetPlayerData(),
             player2Data = player2.GetPlayerData(),
-            chunkSequence = chunkGenerator != null ? chunkGenerator.GetChunkSequence() : SaveManager.LoadGame().chunkSequence        };
+            chunkSequence = chunkGenerator != null ? chunkGenerator.GetChunkSequence() : SaveManager.LoadGame().chunkSequence,
+
+
+        };
+
+        if (SceneManager.GetActiveScene().name == "level3" && Camera.main != null)
+        {
+            data.cameraX = Camera.main.transform.position.x;
+            data.cameraY = Camera.main.transform.position.y;
+            data.cameraZ = Camera.main.transform.position.z;
+        }
 
         SaveManager.SaveGame(data);
     }
@@ -135,6 +152,19 @@ public class sencemanager : MonoBehaviour
             ResetLevelFlags();
         }
 
+        if ((startatspawn || LevelMenu.startAtSpawn) &&
+    SceneManager.GetActiveScene().name == "level3" && Camera.main != null)
+        {
+            Camera.main.transform.position = new Vector3(4450, -800, -10);
+        }
+        if (!(startatspawn || LevelMenu.startAtSpawn) &&
+    SceneManager.GetActiveScene().name == "level3" && Camera.main != null)
+        {
+            Camera.main.transform.position = new Vector3(data.cameraX, data.cameraY, data.cameraZ);
+        }
+
+
+
         player1.LoadPlayerData(data.player1Data);
         player2.LoadPlayerData(data.player2Data);
 
@@ -149,6 +179,8 @@ public class sencemanager : MonoBehaviour
                 chunkGenerator.SetChunkSequence(new System.Collections.Generic.List<int>());
             }
         }
+
+
     }
 
     private void ClearChunkSequence()
@@ -195,7 +227,7 @@ public class sencemanager : MonoBehaviour
         }
     }
 
-    private void ResetLevelFlags()
+    public void ResetLevelFlags()
     {
         if (player1 != null)
         {
@@ -222,5 +254,51 @@ public class sencemanager : MonoBehaviour
 
 
         SaveGame();
+    }
+
+    public void ResetPlayerPositions()
+    {
+        if (player1 != null && player1.spawnPoint != null)
+        {
+            player1.transform.position = player1.spawnPoint.position;
+        }
+        if (player2 != null && player2.spawnPoint != null)
+        {
+            player2.transform.position = player2.spawnPoint.position;
+        }
+    }
+
+    public void Resetafterfinisfh()
+    {
+        if (player1 != null)
+        {
+            player1.haskey = false;
+            player1.atship = false;
+            player1.atfinaldoor = false;
+            player1.currentHealth = player1.maxHealth;
+            player1.currentlives = player1.maxHealth;
+        }
+
+        if (player2 != null)
+        {
+            player2.haskey = false;
+            player2.atship = false;
+            player2.atfinaldoor = false;
+            player2.finalkey = false;
+            player2.currentHealth = player2.maxHealth;
+            player2.currentlives = player2.maxHealth;
+        }
+
+        isloading = false;
+
+        GameData data = SaveManager.LoadGame();
+        data.currentScene = "level1";  // مرحله ۱
+        data.player1Data.posX = player1.spawnPoint.position.x;
+        data.player1Data.posY = player1.spawnPoint.position.y;
+        data.player1Data.posZ = player1.spawnPoint.position.z;
+        data.player2Data.posX = player2.spawnPoint.position.x;
+        data.player2Data.posY = player2.spawnPoint.position.y;
+        data.player2Data.posZ = player2.spawnPoint.position.z;
+        SaveManager.SaveGame(data);
     }
 }

@@ -16,6 +16,10 @@ public class GameData
     public PlayerData player2Data;
 
     public List<int> chunkSequence;
+
+    public float cameraX;
+    public float cameraY;
+    public float cameraZ;
 }
 [Serializable]
 public class PlayerData

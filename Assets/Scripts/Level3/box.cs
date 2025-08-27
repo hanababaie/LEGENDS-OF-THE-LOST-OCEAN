@@ -1,21 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement; // برای رفتن به منوی اصلی
 
 public class box : MonoBehaviour
 {
-    
     private Animator animator;
-
     private bool isOpened = false;
     private bool isBoxUIActive = false;
 
-   
-
     public GameObject boxUI;
-    
 
     public void Start()
     {
@@ -24,7 +17,7 @@ public class box : MonoBehaviour
 
     void Update()
     {
-        if (isBoxUIActive && Input.GetKeyDown(KeyCode.Escape)) // pressing the  key and close it
+        if (isBoxUIActive && Input.GetKeyDown(KeyCode.Escape)) // بستن با ESC
         {
             CloseBoxUI();
         }
@@ -37,34 +30,27 @@ public class box : MonoBehaviour
             isOpened = true;
             Debug.Log("Box opened!");
 
-            StartCoroutine(OpenBox()); // start the process
+            StartCoroutine(OpenBox());
         }
     }
 
     IEnumerator OpenBox()
     {
         animator.SetTrigger("open");
-        yield return new WaitForSeconds(3f); // showing the open animation
-        
+        yield return new WaitForSeconds(3f);
+
         if (boxUI != null)
         {
             boxUI.SetActive(true);
-            
             isBoxUIActive = true;
         }
 
-        
-        float timer = 0f;
-        while (timer < 8f && isBoxUIActive)
+        if (sencemanager.Instance != null)
         {
-            timer += Time.deltaTime;
-            yield return null;
+            sencemanager.Instance.Resetafterfinisfh();
+            sencemanager.Instance.ResetPlayerPositions();
         }
 
-        // wait for a time to close the ui
-        CloseBoxUI();
-
-        Destroy(gameObject);
     }
 
     void CloseBoxUI()
@@ -76,5 +62,23 @@ public class box : MonoBehaviour
         isBoxUIActive = false;
     }
 
+
+    public void mainmenu()
+    {
+        Time.timeScale = 1f;
+        if (sencemanager.Instance != null)
+        {
+            sencemanager.Instance.SaveGame();
+        }
+        else
+        {
+            Debug.LogWarning("Sencemanager.Instance is null in pausemenu");
+        }
+
+        SceneManager.LoadScene("mianmenu");
+
+        CloseBoxUI();
+    }
     
+
 }

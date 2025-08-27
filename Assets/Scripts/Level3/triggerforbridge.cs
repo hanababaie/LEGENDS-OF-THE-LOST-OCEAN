@@ -14,9 +14,7 @@ public class BridgeTriggerController : MonoBehaviour
     private bool cameramove = false;
     public Vector3 startingpoint = new Vector3(4450,-800,-10);
 
-    public void Start(){
-        maincamera.transform.position = startingpoint;
-    }
+   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,13 +29,22 @@ public class BridgeTriggerController : MonoBehaviour
             {
                 player2Reached = true;
             }
+            
+            if (collision.GetComponent<p1offline>() != null)
+            {
+                player1Reached = true;
+            }
+            else if (collision.GetComponent<p2offline>() != null)
+            {
+                player2Reached = true;
+            }
 
         
             if (player1Reached && player2Reached)
             {
                 if (wallBlock != null)
                 {
-                    wallBlock.SetActive(false); 
+                    wallBlock.SetActive(false);
                 }
 
                 if (maincamera != null)
@@ -52,16 +59,21 @@ public class BridgeTriggerController : MonoBehaviour
     {
         if (cameramove)
         {
-                maincamera.transform.position = Vector3.Lerp(
-                maincamera.transform.position,
-                newpos,
-                Time.deltaTime * movespeed
-            );
+            maincamera.transform.position = Vector3.Lerp(
+            maincamera.transform.position,
+            newpos,
+            Time.deltaTime * movespeed
+        );
             if (Vector3.Distance(maincamera.transform.position, newpos) < 0.1f)
             {
                 maincamera.transform.position = newpos;
                 cameramove = false;
             }
+            if (sencemanager.Instance != null)
+            {
+                sencemanager.Instance.SaveGame();
+            }
         }
+            
     }
 }
