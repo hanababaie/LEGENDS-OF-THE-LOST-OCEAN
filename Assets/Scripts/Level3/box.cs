@@ -44,7 +44,7 @@ public class box : MonoBehaviour
     IEnumerator OpenBox()
     {
         animator.SetTrigger("open");
-        yield return new WaitForSeconds(8f); // showing the open animation
+        yield return new WaitForSeconds(3f); // showing the open animation
         
         if (boxUI != null)
         {
@@ -55,7 +55,7 @@ public class box : MonoBehaviour
 
         
         float timer = 0f;
-        while (timer < 4f && isBoxUIActive)
+        while (timer < 8f && isBoxUIActive)
         {
             timer += Time.deltaTime;
             yield return null;
