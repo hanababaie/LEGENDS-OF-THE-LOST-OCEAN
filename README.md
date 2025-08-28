@@ -22,8 +22,7 @@ Play as **Jack** and **Will**, two treasure pirates who embark on an epic journe
   - Movement: `Arrow Keys`  
   - Jump: `Space`
   - Attack: `Ctrl`
-  - س
-
+    
 
 - **Player 2 (Will)**:  
   - Movement: `WASD`  
