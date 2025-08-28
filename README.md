@@ -1,7 +1,7 @@
 # Legends of the Lost Ocean 🏝️🐚  
 
 **Legends of the Lost Ocean** is a **2D fantasy adventure game** built with **Unity**.  
-Play as **Jack** and **Will**, two treasure hunters who embark on an epic journey through mysterious islands, haunted ships, and dangerous seas to claim the **ultimate hidden treasure**.  
+Play as **Jack** and **Will**, two treasure pirates who embark on an epic journey through mysterious islands, ships with mysterious enemies, and dangerous seas to claim the **ultimate hidden treasure**.  
 
 ---
 
