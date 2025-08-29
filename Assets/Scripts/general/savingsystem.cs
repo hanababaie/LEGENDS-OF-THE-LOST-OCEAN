@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 [Serializable]
 public class GameData
 {
-    public int lastUnlockedLevel = 1;
+    public int lastUnlockedLevel;
     public string currentScene;
     public bool isLevel3;
 

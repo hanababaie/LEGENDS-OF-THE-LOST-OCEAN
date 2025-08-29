@@ -15,7 +15,6 @@ public class LevelMenu : MonoBehaviour
 
     {
 
-
         Debug.Log("UnlockedLevel from PlayerPrefs: " + GetUnlockedLevel());
         int unlockedLevel = GetUnlockedLevel();
 
@@ -62,7 +61,6 @@ public class LevelMenu : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
-    
 
     private void Update()
 {
@@ -79,7 +77,6 @@ private void UnlockAllLevelsKeyboard()
     PlayerPrefs.SetInt("UnlockedLevel", maxLevel);
     PlayerPrefs.Save();
 
-
     for (int i = 0; i < levelButtons.Length; i++)
     {
         levelButtons[i].interactable = true;
@@ -87,4 +84,5 @@ private void UnlockAllLevelsKeyboard()
 
     Debug.Log("All levels unlocked via keyboard!");
 }
+
 }
