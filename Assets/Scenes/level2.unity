@@ -13039,11 +13039,11 @@ PrefabInstance:
     - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
       propertyPath: 'lifeimages.Array.data[1]'
       value: 
-      objectReference: {fileID: 919275962}
+      objectReference: {fileID: 750370432}
     - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
       propertyPath: 'lifeimages.Array.data[2]'
       value: 
-      objectReference: {fileID: 750370432}
+      objectReference: {fileID: 919275962}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -24517,11 +24517,11 @@ PrefabInstance:
     - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: 'lifeimages.Array.data[1]'
       value: 
-      objectReference: {fileID: 772133746}
+      objectReference: {fileID: 1158005651}
     - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: 'lifeimages.Array.data[2]'
       value: 
-      objectReference: {fileID: 1158005651}
+      objectReference: {fileID: 772133746}
     - target: {fileID: 3290888817508834167, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_Layer
       value: 6

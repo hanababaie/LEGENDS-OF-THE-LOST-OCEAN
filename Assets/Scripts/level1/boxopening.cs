@@ -58,12 +58,12 @@ public class boxopening : MonoBehaviour
 
         // find which ui for which player should open
 
-        if (player.TryGetComponent<playermovement1>(out var p1)) // if the player has the playermovement1 script
+        if (player.TryGetComponent<p1offline>(out var p1)) // if the player has the playermovement1 script
         {
             boxUI = p1.boxUI;
         }
 
-        else if (player.TryGetComponent<playermovement2>(out var p2)) // if the player has the playermovement2 script
+        else if (player.TryGetComponent<p2offline>(out var p2)) // if the player has the playermovement2 script
         {
             boxUI = p2.boxUI;
         }

@@ -131,8 +131,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 352bf497603af2147ad60c370a3eb7d8, type: 2}
   - {fileID: 11400000, guid: 514f5ce1d06621240876728d44cf29f9, type: 2}
   - {fileID: 11400000, guid: bd92d5c8b152092479de41610369cb99, type: 2}
-  music: {fileID: -2053908963356563072}
-  open: {fileID: 8300000, guid: 47c25258455234443a7c72b1d61984fc, type: 3}
+  boxUI: {fileID: 0}
 --- !u!61 &8634709106391647175
 BoxCollider2D:
   m_ObjectHideFlags: 0

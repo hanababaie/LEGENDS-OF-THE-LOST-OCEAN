@@ -2754,7 +2754,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 575100285}
   m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3428,7 +3428,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -8460,11 +8460,11 @@ PrefabInstance:
     - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: 'lifeimages.Array.data[1]'
       value: 
-      objectReference: {fileID: 980522736}
+      objectReference: {fileID: 1312388744}
     - target: {fileID: 3121072478751025313, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: 'lifeimages.Array.data[2]'
       value: 
-      objectReference: {fileID: 1312388744}
+      objectReference: {fileID: 980522736}
     - target: {fileID: 3290888817508834167, guid: 4edcbadc6d04bf840846e013cf9a28ef, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -9037,11 +9037,11 @@ PrefabInstance:
     - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
       propertyPath: 'lifeimages.Array.data[1]'
       value: 
-      objectReference: {fileID: 1678531091}
+      objectReference: {fileID: 1636081123}
     - target: {fileID: 9196992988479072056, guid: 2527c87542d3a274487cbb695db71f33, type: 3}
       propertyPath: 'lifeimages.Array.data[2]'
       value: 
-      objectReference: {fileID: 1636081123}
+      objectReference: {fileID: 1678531091}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
