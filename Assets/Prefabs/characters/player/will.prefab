@@ -404,7 +404,7 @@ MonoBehaviour:
   dashcoldown: 8
   bulletref: {fileID: 1363656916886568770, guid: 643413ca19f68104a935ec94818f1579, type: 3}
   FirePoint: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 10
   currentHealth: 0
   bar: {fileID: 0}
   maxlives: 3
