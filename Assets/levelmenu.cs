@@ -8,14 +8,13 @@ public class LevelMenu : MonoBehaviour
 
     public static bool startAtSpawn = false;
     public Button[] levelButtons;
-    public Color lockedColor = new Color(0.5f, 0.5f, 0.5f, 0.7f); 
+    public Color lockedColor = new Color(0.5f, 0.5f, 0.5f, 0.7f);
     public Color unlockedColor = Color.white;
 
     private void Start()
-    
+
     {
-        // SaveManager.DeleteSave();
-        // PlayerPrefs.DeleteAll();
+
 
         Debug.Log("UnlockedLevel from PlayerPrefs: " + GetUnlockedLevel());
         int unlockedLevel = GetUnlockedLevel();
@@ -23,7 +22,7 @@ public class LevelMenu : MonoBehaviour
         for (int i = 0; i < levelButtons.Length; i++)
         {
             levelButtons[i].interactable = (i + 1) <= unlockedLevel;
-        
+
         }
     }
 
@@ -63,4 +62,29 @@ public class LevelMenu : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+    
+
+    private void Update()
+{
+    if (Input.GetKeyDown(KeyCode.H))
+    {
+        UnlockAllLevelsKeyboard();
+    }
+}
+
+private void UnlockAllLevelsKeyboard()
+{
+    int maxLevel = levelButtons.Length;
+
+    PlayerPrefs.SetInt("UnlockedLevel", maxLevel);
+    PlayerPrefs.Save();
+
+
+    for (int i = 0; i < levelButtons.Length; i++)
+    {
+        levelButtons[i].interactable = true;
+    }
+
+    Debug.Log("All levels unlocked via keyboard!");
+}
 }

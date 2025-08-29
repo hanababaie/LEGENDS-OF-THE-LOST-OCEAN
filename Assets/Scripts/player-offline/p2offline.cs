@@ -150,7 +150,6 @@ public class p2offline : MonoBehaviour
         if (currentHealth <= 0) currentHealth = maxHealth;
         if (currentlives <= 0) currentlives = maxlives;
 
-        bar.Setmaxhealth(maxHealth);
         bar.Sethealth(currentHealth);
         updatelives();
         cointext.text = coins.ToString("000");
