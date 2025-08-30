@@ -35,7 +35,7 @@ public class BossController : MonoBehaviour
     public int maxMinions = 5;
     private List<GameObject> activeMinions = new List<GameObject>();
 
-    public GameObject ob;
+    public GameObject[] obs;
 
 
     void Start()
@@ -211,9 +211,22 @@ public class BossController : MonoBehaviour
         if (animator != null)
             animator.SetTrigger("die");
 
-        Destroy(gameObject, 1f);
         DestroyAllEnemies();
-        Destroy(ob);
+
+        // نابودی همه‌ی ob ها
+        foreach (GameObject obj in obs)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
+
+        StartCoroutine(DestroyAfterDelay(2f));
+    }
+
+    IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 
     IEnumerator SpawnMinions()
