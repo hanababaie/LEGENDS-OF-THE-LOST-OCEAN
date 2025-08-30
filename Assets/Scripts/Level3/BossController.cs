@@ -34,8 +34,9 @@ public class BossController : MonoBehaviour
 
     public int maxMinions = 5;
     private List<GameObject> activeMinions = new List<GameObject>();
+    public float targetSwitchInterval = 10f; 
 
-    public GameObject[] obs;
+
 
 
     void Start()
@@ -44,7 +45,6 @@ public class BossController : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         healthUI.UpdateHealthBar(1f);
-        SetRandomTargetSwitchTime();
         SwitchTarget();
     }
 
@@ -55,12 +55,12 @@ public class BossController : MonoBehaviour
         if (isDead) return;
 
         targetSwitchTimer += Time.deltaTime;
-        if (targetSwitchTimer >= targetSwitchTime)
+        if (targetSwitchTimer >= targetSwitchInterval) // هر 5 ثانیه
         {
             SwitchTarget();
-            SetRandomTargetSwitchTime();
             targetSwitchTimer = 0f;
         }
+
 
         if (currentTarget != null)
         {
@@ -76,10 +76,7 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void SetRandomTargetSwitchTime()
-    {
-        targetSwitchTime = 20f;
-    }
+ 
     void SwitchTarget()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -119,8 +116,14 @@ public class BossController : MonoBehaviour
 
     void MoveTowardsTarget()
     {
-        float distance = Vector2.Distance(transform.position, currentTarget.transform.position);
+        if (currentTarget == null) return;
 
+        // حرکت به سمت هدف انتخاب‌شده
+        Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
+        transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+        // وقتی به اندازه کافی نزدیک شد، حمله کنه
+        float distance = Vector2.Distance(transform.position, currentTarget.transform.position);
         if (distance <= 5f)
         {
             if (!isAttacking)
@@ -132,7 +135,6 @@ public class BossController : MonoBehaviour
                     animator.SetBool("isMoving", false);
                 }
             }
-            return;
         }
         else
         {
@@ -142,9 +144,6 @@ public class BossController : MonoBehaviour
                 if (animator != null)
                     animator.SetBool("isMoving", true);
             }
-
-            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
-            transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
     }
 
@@ -201,26 +200,21 @@ public class BossController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Debug.Log("Calling Die() ...");
             Die();
         }
     }
 
     void Die()
     {
+        Debug.Log("Boss Die() executed");
         isDead = true;
         if (animator != null)
             animator.SetTrigger("die");
 
-        DestroyAllEnemies();
+    
 
-        // نابودی همه‌ی ob ها
-        foreach (GameObject obj in obs)
-        {
-            if (obj != null)
-                Destroy(obj);
-        }
-
-        StartCoroutine(DestroyAfterDelay(2f));
+        gameObject.SetActive(false);
     }
 
     IEnumerator DestroyAfterDelay(float delay)
